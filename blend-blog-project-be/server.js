@@ -1,5 +1,7 @@
-const express = require('express');
-require('dotenv').config();
+import express from 'express';
+
+import * as dotenv from "dotenv";
+dotenv.config({ path: __dirname+'/.env' });
 
 const UsersRouter = require('./users/users-routes.js');
 const FavoritesRouter = require('./favorites/favorites-routes.js');
@@ -12,4 +14,4 @@ server.use('/api/users', UsersRouter);
 server.use('/api/favorites', FavoritesRouter);
 server.use('/api/blogposts', BlogPostsRouter);
 
-module.exports = server;
+export default server;
