@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home';
-import FormikForm from './components/SignUp';
+import FormikForm from './components/SignUp.tsx';
+import LogIn from './components/LogIn.tsx';
 import {
   BrowserRouter as Router,
   Switch,
@@ -30,7 +31,8 @@ function App() {
     <div className="App">
       <br  />
       <Switch>
-        <Route path="/" component={FormikForm} />
+        <Route exact path="/" component={FormikForm} />
+        <Route exact path="/login" component={LogIn} />
         <PrivateRoute exact path='/home' component={Home} />
       </Switch>
     </div>
