@@ -29,7 +29,6 @@ function findFavorites(id) {
 
 }
 
-
 function add(users) {
     return db('users')
     .insert(users, "id")

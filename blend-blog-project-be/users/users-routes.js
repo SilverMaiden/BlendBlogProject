@@ -25,7 +25,6 @@ router.get('/:id', (req, res) => {
   });
 });
 
-
 router.get('/:id/favorites', (req, res) => {
   Users.findFavorites(req.params.id)
   .then(favorites => {
@@ -36,7 +35,6 @@ router.get('/:id/favorites', (req, res) => {
   });
 });
 
-
 router.post('/', (req, res) => {
     Users.add(req.body)
     .then(response => {
@@ -45,8 +43,5 @@ router.post('/', (req, res) => {
         res.status(500).json({message: "failed to add new user."})
     })
 })
-
-
-
 
 module.exports = router;

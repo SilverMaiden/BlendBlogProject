@@ -15,7 +15,6 @@ router.get('/', (req, res) => {
   });
 });
 
-
 router.post('/', (req, res) => {
     Favorites.add(req.body)
     .then(response => {
@@ -24,6 +23,5 @@ router.post('/', (req, res) => {
         res.status(500).json({message: error.message})
     })
 })
-
 
 module.exports = router;

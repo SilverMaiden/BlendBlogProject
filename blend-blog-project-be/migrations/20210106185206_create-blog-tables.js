@@ -27,7 +27,6 @@ exports.up = function(knex, Promise) {
 
     })
 
-
     .createTable('favorites', tbl => {
       tbl.increments();
       tbl.integer('blogpost_id')

@@ -20,5 +20,3 @@ function add(blogpost) {
     return db('blogposts')
         .insert(blogpost, "id");
 }
-
-
