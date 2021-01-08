@@ -1,13 +1,21 @@
-const db = require('../../db-config.js');
-module.exports = {
-    find,
-    add
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-function find() {
-    return db('favorites');
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Favorites = void 0;
+const db_config_js_1 = __importDefault(require("../../db-config.js"));
+class Favorites {
+    constructor() {
+        this.thing = '';
+    }
+    find() {
+        return db_config_js_1.default('favorites');
+    }
+    add(favorites) {
+        return db_config_js_1.default('favorites')
+            .insert(favorites, "id");
+    }
 }
-function add(favorites) {
-    return db('favorites')
-        .insert(favorites, "id");
-}
+exports.Favorites = Favorites;
 //# sourceMappingURL=favorites-model.js.map
