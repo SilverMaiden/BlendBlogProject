@@ -10,7 +10,8 @@ const PrivateRoute: React.FunctionComponent<PrivateRouteProps> = ({
   component: Component,
   ...routeProps
 }) => {
-  const { token } = useContext(AppContext);
+  //const { token } = useContext(AppContext);
+  const token = window.localStorage.getItem("token");
   return (
     <Route
       {...routeProps}

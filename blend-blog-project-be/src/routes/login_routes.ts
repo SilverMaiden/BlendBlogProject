@@ -28,6 +28,7 @@ router.post('/', (req: Request, res: Response) => {
            console.log("hi im", user)
            if (password === user.password)/*&& bcrypt.compareSync(password, user.password))*/ {
         const token = signToken(user);
+        window.localStorage.setItem("token", token);
         res.status(200).json({
           id: user.id,
           name: user.name,
