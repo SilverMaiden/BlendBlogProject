@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { withFormik, Form, Field, FormikProps} from 'formik';
+import { withFormik, Form, Field, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
@@ -74,7 +74,8 @@ interface AllProps {
   password: string;
 }
 
-const LogIn = (props:FormikProps<FormValues>) => {
+
+const LogIn = (props: FormikProps<FormValues>) => {
 
   
     const classes = useStyles();
@@ -91,8 +92,9 @@ const LogIn = (props:FormikProps<FormValues>) => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Log in
             </Typography>
+        {/* FORM STARTS HERE */}
             <Form className={classes.form}>
 
             <TextField
@@ -102,6 +104,8 @@ const LogIn = (props:FormikProps<FormValues>) => {
               id="email"
               label="Email Address"
               name="email"
+              onChange={props.handleChange}
+              value={props.values.email}
               autoComplete="email"
               autoFocus
             />
@@ -110,6 +114,8 @@ const LogIn = (props:FormikProps<FormValues>) => {
               required
               fullWidth
               name="password"
+              value={props.values.password}
+              onChange={props.handleChange}
               label="Password"
               type="password"
               id="password"
@@ -139,6 +145,8 @@ const LogIn = (props:FormikProps<FormValues>) => {
               <Copyright />
             </Box>
             </Form>
+          {/* FORM ENDS HERE */}
+
         </div>
         </Grid>
     </Grid>
@@ -149,24 +157,26 @@ const LogIn = (props:FormikProps<FormValues>) => {
 
  // The type of props FormikUserForm receives
  interface FormikUserFormProps {
-   stuff: FormValues;
+   initialEmail?: string;
+   message: string;
 }
 
 const FormikUserForm = withFormik<FormikUserFormProps, FormValues>({
     mapPropsToValues: props => ({
-          email: '',
+          email: props.initialEmail || '',
           password: '',
     })
-    ,validationSchema: Yup.object().shape({
+    , validate: (values: FormValues) =>
+    {
+      Yup.object().shape({
         email: Yup.string().required(),
         password: Yup.string().required(),
 
-    }),
-    handleSubmit({email, password}: FormValues, {resetForm}) {
-        console.log("yaaay it worked!");
-        let values = {email, password}
+    })},
+    handleSubmit(values: FormValues, {resetForm}) {
+        console.log(values);
         axios
-            .post("http://localhost:8000/api/users/", values)
+            .post("http://localhost:8000/api/login/", values)
             .then(res => {
                 //setStatus(res.data);
                 //{console.log(res.data.password)}

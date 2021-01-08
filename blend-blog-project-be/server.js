@@ -3,9 +3,9 @@ import express from 'express';
 import * as dotenv from "dotenv";
 dotenv.config({ path: __dirname+'/.env' });
 
-const UsersRouter = require('./users/users-routes.js');
-const FavoritesRouter = require('./favorites/favorites-routes.js');
-const BlogPostsRouter = require('./blogposts/blogposts-routes.js');
+const UsersRouter = require('./src/routes/users-routes');
+const FavoritesRouter = require('./src/routes/favorites-routes.js');
+const BlogPostsRouter = require('./src/routes/blogposts-routes.js');
 
 const server = express();
 
