@@ -1,21 +1,28 @@
 import * as React from "react";
-//import { useEffect, useState } from "react";
-import * as ReactDOM from "react-dom";
 import axios, { AxiosRequestConfig, AxiosPromise } from 'axios';
 
+// Need to make and test logout button that clears token
 
+const initialState: Array<any> = [];
 
-
-function Home(IState) {
-    const [blogs, setBlogs] = React.useState([])
+function Home(IState: any) {
+    const [blogs, setBlogs] = React.useState(initialState)
     React.useEffect(() => {
         // Axios get request for blogs, for now users
         axios
             .get("http://localhost:8000/api/blogposts")
-            .then(res => setBlogs(res.data))
+            .then(res => setBlogs([...blogs, res.data]))
             .catch(err => console.log(err))
 
     }, []);
+
+    // handleClick for logout button
+
+    const handleClick = (() => {
+      console.log("clicked")
+      window.localStorage.clear();
+      console.log(window.localStorage.getItem("token"))
+    })
     return (
       <div className="Home">
         <header className="Home-header">
@@ -23,8 +30,13 @@ function Home(IState) {
     { blogs.length > 0 && 
         <p>{blogs[0].blogpost_title}</p>
      }
-        {console.log(blogs[0])}
+        {console.log(blogs)}
           <p>
+              <button
+              onClick={handleClick}
+            >
+              Logout
+            </button>
 
           </p>
 

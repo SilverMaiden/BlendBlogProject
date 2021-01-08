@@ -7,6 +7,8 @@ const express_1 = __importDefault(require("express"));
 const login_model_1 = require("../models/login-model");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const secrets_1 = require("../config/secrets");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const router = express_1.default.Router();
 const LogIn = new login_model_1.LogIns();
 router.use((req, res, next) => {
@@ -27,6 +29,9 @@ router.post('/', (req, res) => {
             console.log("hi im", user);
             if (password === user.password) /*&& bcrypt.compareSync(password, user.password))*/ {
                 const token = signToken(user);
+                process.env.JW_TOKEN = token;
+                // tslint:disable-next-line:no-console
+                console.log("hi im", process.env.JW_TOKEN);
                 res.status(200).json({
                     id: user.id,
                     name: user.name,
