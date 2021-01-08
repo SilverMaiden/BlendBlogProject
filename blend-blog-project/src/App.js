@@ -1,29 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
-import Home from './components/Home';
-import FormikForm from './components/SignUp.tsx';
-import LogIn from './components/LogIn.tsx';
+import Home from './components/Home.tsx';
+import FormikSignUpForm from './components/SignUp.tsx';
+import FormikLogInForm from './components/LogIn.tsx';
+import PrivateRoute from './components/PrivateRoute';
+
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
-  Link
+  Route
 } from "react-router-dom";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-<Route
-  {...rest}
-  render={props =>
-    localStorage.getItem("token") ? (
-      <Component {...props} />
-    ) : (
-      <Redirect to="/login" />
-    )
-  }
-/>
-);
-
+//window.localStorage.setItem("token", "");
 
 function App() {
   return (
@@ -31,8 +18,8 @@ function App() {
     <div className="App">
       <br  />
       <Switch>
-        <Route exact path="/" component={FormikForm} />
-        <Route exact path="/login" component={LogIn} />
+        <Route exact path="/" component={FormikSignUpForm} />
+        <Route exact path="/login" component={FormikLogInForm} />
         <PrivateRoute exact path='/home' component={Home} />
       </Switch>
     </div>

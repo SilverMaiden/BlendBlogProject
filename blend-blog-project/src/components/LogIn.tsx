@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory, RouteComponentProps, Redirect } from "react-router-dom";
+import { AppContext } from '../contexts/AppContext';
 import { withFormik, Form, FormikErrors, Field, FormikProps } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+import axiosWithAuth  from 'axios';
+import axios, {AxiosResponse, AxiosRequestConfig}  from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +18,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-//import UserCard from '../UserCard/UserCard';
+import { History } from '@material-ui/icons';
 
 function Copyright() {
     return (
@@ -64,9 +67,6 @@ function Copyright() {
   }));
 
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-interface AllProps {
-  status: any;
-}
 
  // Shape of form values
  interface FormValues {
@@ -74,14 +74,10 @@ interface AllProps {
   password: string;
 }
 
-
 const LogIn = (props: FormikProps<FormValues>) => {
-
-  
     const classes = useStyles();
-    const [users, setUsers] = useState([]);
-
-
+    //const [users, setUsers] = useState([]);
+    //console.log(props)
     return (
         <Grid container component="main" className={classes.root}>
         <CssBaseline />
@@ -153,18 +149,19 @@ const LogIn = (props: FormikProps<FormValues>) => {
     );
 };
 
-
-
  // The type of props FormikUserForm receives
  interface FormikUserFormProps {
    initialEmail?: string;
    message: string;
+   history: any;
+
 }
 
-const FormikUserForm = withFormik<FormikUserFormProps, FormValues>({
+const FormikLogInForm = withFormik<FormikUserFormProps, FormValues, RouteComponentProps>({
     mapPropsToValues: props => ({
           email: props.initialEmail || '',
           password: '',
+          history: props.history || ''
     })
     , validate: (values: FormValues) =>
     {
@@ -175,21 +172,29 @@ const FormikUserForm = withFormik<FormikUserFormProps, FormValues>({
       }
       Yup.object().shape({
         email: Yup.string().required(),
-        password: Yup.string().required(),
-
+        password: Yup.string().required()
     })},
+
     handleSubmit(values: FormValues, {resetForm}) {
-        console.log(values);
-        axios
-            .post("http://localhost:8000/api/login/", values)
-            .then(res => {
-                //setStatus(res.data);
-                //{console.log(res.data.password)}
-                {console.log(res.data)}
-                resetForm();
-            })
-            .catch(err => console.log(err.response));
+      console.log(values)
+      let postData: object = {email: values.email, password: values.password}
+
+        axios.request<void, string>({
+          method: 'post',
+          url: "http://localhost:8000/api/login/",
+          data: postData
+        })
+          .then((res: any) => {
+            {console.log(values)}
+            if (res.status === 200) {
+              window.localStorage.setItem("token", res.data.token)
+              window.history.pushState({}, "welcome", '/home');
+              window.location.reload();
+            }
+            resetForm();
+          })            
+          .catch(err => console.log(err.response));  
     },
 })(LogIn);
 
-export default FormikUserForm;
+export default FormikLogInForm;

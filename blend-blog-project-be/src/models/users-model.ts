@@ -1,6 +1,4 @@
 import db from '../../db-config.js';
-
-
 export class Users {
     // field
     thing:string

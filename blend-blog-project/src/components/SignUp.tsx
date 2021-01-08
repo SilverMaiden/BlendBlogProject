@@ -171,7 +171,7 @@ const SignUp = (props:FormikProps<FormValues>) => {
    stuff: FormValues;
 }
 
-const FormikUserForm = withFormik<FormikUserFormProps, FormValues>({
+const FormikSignUpForm = withFormik<FormikUserFormProps, FormValues>({
     mapPropsToValues: props => ({
           name: '',
           email: '',
@@ -200,4 +200,4 @@ const FormikUserForm = withFormik<FormikUserFormProps, FormValues>({
     },
 })(SignUp);
 
-export default FormikUserForm;
+export default FormikSignUpForm;
