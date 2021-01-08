@@ -18,6 +18,14 @@ export class Users {
             return db('users');
         }
     }
+    // Using findByEmail for Login
+    findByEmail(email: string) {
+        if (email) {
+            return db('users')
+            .where('users.email', email)
+            .first()
+    }
+}
 
     findBlogPosts(id: number) {
         return db('users as u' )

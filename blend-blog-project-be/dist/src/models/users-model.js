@@ -19,6 +19,14 @@ class Users {
             return db_config_js_1.default('users');
         }
     }
+    // Using findByEmail for Login
+    findByEmail(email) {
+        if (email) {
+            return db_config_js_1.default('users')
+                .where('users.email', email)
+                .first();
+        }
+    }
     findBlogPosts(id) {
         return db_config_js_1.default('users as u')
             .join('blogposts as b', 'u.id', 'b.user_id')

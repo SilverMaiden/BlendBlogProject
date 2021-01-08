@@ -26,12 +26,14 @@ const express_1 = __importDefault(require("express"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config({ path: __dirname + '/.env' });
 const UsersRouter = require('./src/routes/users-routes');
-const FavoritesRouter = require('./src/routes/favorites-routes.js');
-const BlogPostsRouter = require('./src/routes/blogposts-routes.js');
+const FavoritesRouter = require('./src/routes/favorites-routes');
+const BlogPostsRouter = require('./src/routes/blogposts-routes');
+const LogInRouter = require('./src/routes/login_routes');
 const server = express_1.default();
 server.use(express_1.default.json());
 server.use('/api/users', UsersRouter);
 server.use('/api/favorites', FavoritesRouter);
 server.use('/api/blogposts', BlogPostsRouter);
+server.use('/api/login', LogInRouter);
 exports.default = server;
 //# sourceMappingURL=server.js.map
