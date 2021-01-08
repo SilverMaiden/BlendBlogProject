@@ -1,14 +1,15 @@
 
 const express = require('express');
 
-const BlogPosts = require('./blogposts-model.js');
+const BlogPosts = require('../models/blogposts-model.js');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
   BlogPosts.find()
-  .then(tasks => {
-    res.json(tasks);
+  .then(blogposts => {
+    res.header("access-control-allow-origin", "*" );
+    res.json(blogposts);
   })
   .catch(err => {
     res.status(500).json({ message: 'Failed to get BlogPosts' });

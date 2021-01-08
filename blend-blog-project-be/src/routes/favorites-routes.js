@@ -1,7 +1,7 @@
 
 const express = require('express');
 
-const Favorites = require('./favorites-model.js');
+const Favorites = require('../models/favorites-model.js');
 
 const router = express.Router();
 

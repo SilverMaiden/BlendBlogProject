@@ -1,0 +1,41 @@
+import db from '../../db-config.js';
+
+
+export class Users {
+    // field
+    thing:string
+    constructor() {
+        this.thing = '';
+    }
+
+
+    find(id?: number) {
+        if (id) {
+            return db('users')
+            .where('users.id', id)
+            .first()
+        } else {
+            return db('users');
+        }
+    }
+
+    findBlogPosts(id: number) {
+        return db('users as u' )
+            .join('blogposts as b', 'u.id', 'b.user_id')
+            .where('u.id', id)
+
+    }
+
+    findFavorites(...args: any[]) {
+        const id = args[0];
+        return db('favorites as f' )
+            .where('f.user_id', id)
+
+    }
+
+    add(users: string) {
+        return db('users')
+        .insert(users, "id")
+        .then(([id]: number[]) => this.find(id));
+    }
+}

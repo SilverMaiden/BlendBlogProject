@@ -4,8 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-// const Users = require('./users-model.js');
-const users_model_js_1 = __importDefault(require("./users-model.js"));
+const users_model_1 = require("../models/users-model");
+const User = new users_model_1.Users();
+// import  * as Users  from "../models/users-model.js";
 const router = express_1.default.Router();
 router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
@@ -13,40 +14,41 @@ router.use((req, res, next) => {
     next();
 });
 router.get('/', (req, res) => {
-    users_model_js_1.default.find()
-        .then(users => {
+    User.find()
+        .then((users) => {
         res.header("access-control-allow-origin", "*");
         res.json(users);
     })
-        .catch(err => {
+        .catch((err) => {
         res.status(500).json({ message: 'Failed to get users' });
     });
 });
 router.get('/:id', (req, res) => {
-    users_model_js_1.default.find(req.params.id)
-        .then(users => {
+    const param = parseInt(req.params.id, 10);
+    User.find(param)
+        .then((users) => {
         res.json(users);
     })
-        .catch(err => {
+        .catch((err) => {
         res.status(500).json({ message: 'Failed to get project' });
     });
 });
 router.get('/:id/favorites', (req, res) => {
-    users_model_js_1.default.findFavorites(req.params.id)
-        .then(favorites => {
+    User.findFavorites(req.params.id)
+        .then((favorites) => {
         res.json(favorites);
     })
-        .catch(err => {
+        .catch((err) => {
         res.status(500).json({ message: 'Failed to get favorites' });
     });
 });
 router.post('/', (req, res) => {
-    users_model_js_1.default.add(req.body)
-        .then(users => {
+    User.add(req.body)
+        .then((users) => {
         res.status(201).json(users);
-    }).catch(error => {
+    }).catch((err) => {
         res.status(500).json({ message: "failed to add new user." });
     });
 });
-exports.default = router;
+module.exports = router;
 //# sourceMappingURL=users-routes.js.map
