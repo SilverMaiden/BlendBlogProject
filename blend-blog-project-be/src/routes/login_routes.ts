@@ -1,6 +1,9 @@
 
 import express, {Request, Response} from 'express';
 import { LogIns } from '../models/login-model';
+import jwt from 'jsonwebtoken';
+import { jwtSecret } from '../config/secrets';
+
 
 const router = express.Router();
 const LogIn = new LogIns();
@@ -24,12 +27,12 @@ router.post('/', (req: Request, res: Response) => {
            // tslint:disable-next-line:no-console
            console.log("hi im", user)
            if (password === user.password)/*&& bcrypt.compareSync(password, user.password))*/ {
-        // const token = signToken(user);
+        const token = signToken(user);
         res.status(200).json({
           id: user.id,
           name: user.name,
-          email: user.email
-          // token
+          email: user.email,
+          token
         });
       } else {
         res.status(401).json({ message: 'Invalid login' });
@@ -46,32 +49,19 @@ router.post('/', (req: Request, res: Response) => {
 
 
 
+// Function to sign token
+function signToken(user: any) {
+  const payload = {
+    id: user.id,
+    email: user.email
+  };
+  const options = {
+    expiresIn: '1d'
+  };
+  return jwt.sign(payload, jwtSecret, options);
+}
 
 
-
-
-
-
-
-
-
-
-/*
-    // tslint:disable-next-line:no-console
-    console.log(email, password)
-    LogIn.findUserByEmail(email)
-    .then((response: object) => {
-        // tslint:disable-next-line:no-console
-        console.log(response)
-        const correct = response;
-        if (password === correct) {
-            res.status(201).json(response);
-            // Set login token here, JWT
-        }
-    }).catch((err: any) => {
-        res.status(500).json({message: err.message})
-    })
-})*/
 
 
 

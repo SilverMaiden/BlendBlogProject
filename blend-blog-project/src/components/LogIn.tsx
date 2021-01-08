@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../contexts/AppContext';
 import { withFormik, Form, FormikErrors, Field, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -15,6 +16,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
 //import UserCard from '../UserCard/UserCard';
 
 function Copyright() {

@@ -1,22 +1,24 @@
 import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import { AppContext } from '../contexts/AppContext';
+import { RouteProps, Route, Redirect } from 'react-router-dom';
 
-
-const PrivateRoute = ({ component, ...rest }: any) => {
+type PrivateRouteProps = {
+  path: RouteProps['path'];
+  component: React.ElementType;
+};
+const PrivateRoute: React.FunctionComponent<PrivateRouteProps> = ({
+  component: Component,
+  ...routeProps
+}) => {
   const { token } = useContext(AppContext);
   return (
-    <>
-  {
-    (token: any) => {
-      if(token) {
-        let newComponent = React.createElement(component, props);
-        return( <newComponent />)
+    <Route
+      {...routeProps}
+      render={(props) =>
+        token !== "" ? <Component /> : <Redirect to={'/login'} />
       }
-      return  <Redirect to={{pathname: '/login'}} />
-    }
-  }
-  </>
-  )
-  }
+    />
+  );
+};
+
 export default PrivateRoute;
