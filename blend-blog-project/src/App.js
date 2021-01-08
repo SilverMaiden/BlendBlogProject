@@ -3,6 +3,8 @@ import './App.css';
 import Home from './components/Home';
 import FormikForm from './components/SignUp.tsx';
 import LogIn from './components/LogIn.tsx';
+import PrivateRoute from './components/PrivateRoute';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,18 +13,6 @@ import {
   Link
 } from "react-router-dom";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-<Route
-  {...rest}
-  render={props =>
-    localStorage.getItem("token") ? (
-      <Component {...props} />
-    ) : (
-      <Redirect to="/login" />
-    )
-  }
-/>
-);
 
 
 function App() {
