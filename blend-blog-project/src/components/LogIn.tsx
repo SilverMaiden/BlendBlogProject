@@ -19,7 +19,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { History } from '@material-ui/icons';
-import { AnyAaaaRecord } from 'dns';
 
 function Copyright() {
     return (
@@ -68,21 +67,11 @@ function Copyright() {
   }));
 
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-interface AllProps {
-  props: any;
-}
+
  // Shape of form values
  interface FormValues {
   email: string;
   password: string;
-}
-
-interface PropsInterface {
-  props: any;
-}
-
-interface AxiosInstance {
-  request<T = any, R = AxiosResponse<T>> (config: AxiosRequestConfig): Promise<R>;
 }
 
 const LogIn = (props: FormikProps<FormValues>) => {
@@ -168,7 +157,7 @@ const LogIn = (props: FormikProps<FormValues>) => {
 
 }
 
-const FormikUserForm = withFormik<FormikUserFormProps, FormValues, RouteComponentProps>({
+const FormikLogInForm = withFormik<FormikUserFormProps, FormValues, RouteComponentProps>({
     mapPropsToValues: props => ({
           email: props.initialEmail || '',
           password: '',
@@ -189,26 +178,23 @@ const FormikUserForm = withFormik<FormikUserFormProps, FormValues, RouteComponen
     handleSubmit(values: FormValues, {resetForm}) {
       console.log(values)
       let postData: object = {email: values.email, password: values.password}
-      //let theHistory: any = values.history;
-        // New TS code, WIP
+
         axios.request<void, string>({
           method: 'post',
           url: "http://localhost:8000/api/login/",
           data: postData
         })
-          .then((res: any) => { // <-- you could leave out the type annotation here, it's inferred
+          .then((res: any) => {
             {console.log(values)}
             if (res.status === 200) {
               window.localStorage.setItem("token", res.data.token)
               window.history.pushState({}, "welcome", '/home');
               window.location.reload();
-              //values.history.pushState("home page", "/home")
             }
-            //{console.log(window.localStorage.getItem("token"))}
             resetForm();
           })            
           .catch(err => console.log(err.response));  
     },
 })(LogIn);
 
-export default FormikUserForm;
+export default FormikLogInForm;

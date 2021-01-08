@@ -1,34 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
 import Home from './components/Home.tsx';
-import FormikForm from './components/SignUp.tsx';
-import FormikUserForm from './components/LogIn.tsx';
-
-import LogIn from './components/LogIn.tsx';
+import FormikSignUpForm from './components/SignUp.tsx';
+import FormikLogInForm from './components/LogIn.tsx';
 import PrivateRoute from './components/PrivateRoute';
-import { useHistory } from "react-router-dom";
-
 
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
-  Link
+  Route
 } from "react-router-dom";
 
-
+//window.localStorage.setItem("token", "");
 
 function App() {
-  const history = useHistory();
   return (
     <Router>
     <div className="App">
       <br  />
       <Switch>
-        <Route exact path="/" component={FormikForm} props={history} />
-        <Route exact path="/login" component={FormikUserForm} props={history} />
-        <PrivateRoute exact path='/home' component={Home} props={history}/>
+        <Route exact path="/" component={FormikSignUpForm} />
+        <Route exact path="/login" component={FormikLogInForm} />
+        <PrivateRoute exact path='/home' component={Home} />
       </Switch>
     </div>
     </Router>
