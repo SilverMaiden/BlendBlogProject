@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { withFormik, Form, Field, FormikProps } from 'formik';
+import { withFormik, Form, FormikErrors, Field, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
@@ -168,6 +168,11 @@ const FormikUserForm = withFormik<FormikUserFormProps, FormValues>({
     })
     , validate: (values: FormValues) =>
     {
+      let errors: FormikErrors<FormValues> = {};
+      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address';
+        return errors;
+      }
       Yup.object().shape({
         email: Yup.string().required(),
         password: Yup.string().required(),
