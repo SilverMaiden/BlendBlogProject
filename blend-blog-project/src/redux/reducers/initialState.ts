@@ -3,7 +3,7 @@
 export const UserInitialState = {
     email: '',
     id: localStorage.getItem('id'),
-    events: { active: '' }, 
+    blogposts: { active: '' }, 
     locations: [],
     registerUserStart: false,
     registerUserError: false,
@@ -14,9 +14,23 @@ export const UserInitialState = {
     tokenPresent: localStorage.getItem('token'), 
   };
 
-  export const BlogInitialState = {
-      // TODO
-  }
+  export const BlogPostsInitialState = {
+        blogposts: [],
+        singleBlogPost: {},
+        allBlogPosts: {},
+        addBlogPostStart: false,
+        addBlogPostError: false,
+        editBlogPostStart: false,
+        editBlogPostError: false,
+        deleteBlogPostStart: true,
+        deleteBlogPostError: false,
+        getBlogPostByUserStart: false,
+        getBlogPostByUserError: false,
+        getSingleBlogPostStart: false,
+        getSingleBlogPostError: false,
+        getAllBlogPostsStart: false,
+        getAllBlogPostsError: false
+    };  
 
   export const FavoritesInitialState = {
       // TODO

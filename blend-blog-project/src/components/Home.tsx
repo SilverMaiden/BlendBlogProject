@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
+import { getAllBlogPosts } from '../redux/actions/blogpostActions';
 import axios, { AxiosRequestConfig, AxiosPromise } from "axios";
 import { AppContext } from "../contexts/AppContext";
 
@@ -13,10 +14,7 @@ function Home() {
   const [blogs, setBlogs] = React.useState([])
   React.useEffect(() => {
     // Axios get request for blogs, for now users
-    axios
-      .get("http://localhost:8000/api/blogposts")
-      .then((res) => {console.log(res.data);setBlogs(res.data)})
-      .catch((err) => console.log(err));
+    getAllBlogPosts()
   }, []);
 
   // handleClick for logout button

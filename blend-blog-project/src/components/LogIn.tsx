@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 //Implement loader if time allows
 //import Loader from 'react-loader-spinner';
 import { Link as DOMLink, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { loginUser } from '../redux/actions/userActions';
 // Maybe move redux content into Formik component
 import {
   Form,
@@ -93,9 +91,7 @@ const LogIn = (props: FormikProps<FormValues>) => {
     getFieldProps,
     ...rest
   } = props;
-  // Todo - update type "any" with correct type.
-  const isLoggingIn = useSelector((state: any) => state.userReducer.loginUserStart);
-  const dispatch = useDispatch();
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
