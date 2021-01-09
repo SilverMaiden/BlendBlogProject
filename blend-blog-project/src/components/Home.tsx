@@ -1,4 +1,5 @@
 import * as React from "react";
+import Blog from "./Blog/Blog";
 import { useSelector, useDispatch, connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { getAllBlogPosts } from '../redux/actions/blogpostActions';
@@ -46,6 +47,7 @@ function Home(props: any) {
           <button onClick={handleLogOut}>Logout</button>
         </p>
       </header>
+      <Blog />
     </div>
   );
 }
