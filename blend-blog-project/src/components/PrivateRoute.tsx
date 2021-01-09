@@ -12,7 +12,9 @@ const PrivateRoute: React.FunctionComponent<PrivateRouteProps> = ({
   component: Component,
   ...routeProps
 }) => {
-  const tokenPresent  = useSelector((state: any) => state.userReducer.tokenPresent)
+
+  // Using this value for now to allow token to remain even if page refreshes/go to another link on site
+  const tokenPresent  = window.localStorage.getItem("token")
   //const { token } = useContext(AppContext);
   //const token = window.localStorage.getItem("token");
   console.log(tokenPresent)

@@ -20,4 +20,9 @@ export class BlogPosts {
         return db('blogposts')
             .insert(blogpost, "id");
     }
+    delete(id: number) {
+        return db('blogposts')
+        .where("blogposts.id", id)
+        .del()
+    }
 }

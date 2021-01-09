@@ -150,7 +150,7 @@ const LogIn = (props: FormikProps<FormValues>) => {
               variant="contained"
               className={classes.submit}
             >
-              Sign Up
+              Log in
             </Button>
             <Grid container>
               <Grid item>

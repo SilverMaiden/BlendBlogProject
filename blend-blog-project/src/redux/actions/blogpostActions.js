@@ -12,7 +12,7 @@ export const addBlogPost = (postInfo, history) => async dispatch => {
 
   try {
         const response = await axiosWithAuth()
-            .post('/', postToSubmit);
+            .post('/blogposts/', postToSubmit);
         dispatch({
             type: ActionTypes.ADD_BLOGPOST_SUCCESS,
             payload: { ...response.data }
@@ -31,7 +31,7 @@ export const addBlogPost = (postInfo, history) => async dispatch => {
 export const editBlogPost = (postInfo, postId) => dispatch => {
   dispatch({ type: ActionTypes.EDIT_BLOGPOST_START });
   axiosWithAuth()
-    .put(`/${postId}`, postInfo)
+    .put(`/blogposts/${postId}`, postInfo)
     .then(response => {
       dispatch({
         type: ActionTypes.EDIT_BLOGPOST_SUCCESS,
@@ -46,7 +46,7 @@ export const editBlogPost = (postInfo, postId) => dispatch => {
 export const deleteBlogPost = (postId, history) => dispatch => {
   dispatch({ type: ActionTypes.DELETE_BLOGPOST_START });
   axiosWithAuth()
-    .delete(`/${postId}`)
+    .delete(`/blogposts/${postId}`)
     .then(response => {
       dispatch({ type: ActionTypes.DELETE_BLOGPOST_SUCCESS, payload: postId });
       //history.push('/blogposts');
@@ -61,7 +61,7 @@ export const deleteBlogPost = (postId, history) => dispatch => {
 export const getBlogPostsByUser = userId => dispatch => {
   dispatch({ type: ActionTypes.GET_BLOGPOSTS_BY_USER_START });
   axiosWithAuth()
-    .get('/')
+    .get('/blogposts/')
     .then(response => {
       const filteredPosts = response.data.filter(
         post => post.user_id === userId
@@ -79,7 +79,7 @@ export const getBlogPostsByUser = userId => dispatch => {
 export const getSingleBlogPost = postId => dispatch => {
   dispatch({ type: ActionTypes.GET_SINGLE_BLOGPOST_START });
   axiosWithAuth()
-    .get(`/${postId}`)
+    .get(`/blogposts/${postId}`)
     .then(response => {
       dispatch({
         type: ActionTypes.GET_SINGLE_BLOGPOST_SUCCESS,

@@ -36,4 +36,14 @@ router.post('/', (req, res) => {
     })
 })
 
+
+router.post('/:id', (req, res) => {
+  BlogPost.add(req.body)
+  .then((response: any) => {
+      res.status(201).json(response);
+  }).catch((err: any) => {
+      res.status(500).json({message: err.message})
+  })
+})
+
 module.exports = router;

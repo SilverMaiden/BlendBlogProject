@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useHistory} from 'react';
 import { logoutUser } from '../../redux/actions/userActions';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -38,15 +38,19 @@ export default function Header(props) {
   const handleLogOut = () => {
     dispatch(logoutUser());
   }
+  //const history = useHistory();
+
 
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">Create New Post +
+      <Button size="small">Home</Button>
+
+        <Button href="/createblogpost" size="small">Create New Post +
         </Button>
         {/* Using this button as a temporary spacer for createpost and mypost buttons*/}
-        <Button disabled={true}/>
         <Button size="small">My Posts</Button>
+
         <Typography
           component="h2"
           variant="h5"
@@ -58,24 +62,10 @@ export default function Header(props) {
           {title}
         </Typography>
 
-
+        <Button disabled={true}/>
         <Button variant="outlined" size="small" onClick={handleLogOut}>
           Log out
         </Button>
-      </Toolbar>
-      <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
-        {sections.map((section) => (
-          <Link
-            color="inherit"
-            noWrap
-            key={section.title}
-            variant="body2"
-            href={section.url}
-            className={classes.toolbarLink}
-          >
-            {section.title}
-          </Link>
-        ))}
       </Toolbar>
     </React.Fragment>
   );
