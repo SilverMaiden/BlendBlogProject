@@ -1,7 +1,7 @@
-import { BlogpostsInitialState } from './initialState';
+import { BlogPostsInitialState } from './initialState';
 import * as ActionTypes from '../actions/actionTypes';
 
-export const blogpostReducer = (state = BlogpostsInitialState, action) => {
+export const blogpostReducer = (state = BlogPostsInitialState, action: any) => {
   switch (action.type) {
     case ActionTypes.ADD_BLOGPOST_START:
       return { ...state, addBlogPostStart: true };
@@ -30,7 +30,7 @@ export const blogpostReducer = (state = BlogpostsInitialState, action) => {
         ...state,
         editBlogPostStart: false,
         singleBlogPost: action.payload,
-        blogposts: state.blogposts.map(blogpost =>
+        blogposts: state.blogposts.map((blogpost: any) =>
           blogpost.id === action.payload.id ? action.payload : blogpost
         )
       };

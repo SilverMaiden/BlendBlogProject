@@ -1,7 +1,7 @@
-import axiosWithAuth from '../../utils/axiosWithAuth';
 import * as ActionTypes from './actionTypes';
+import axiosWithAuth from '../../utils/axiosWithAuth';
 
-export const addBlogPost = (postInfo, history) => dispatch => {
+export const addBlogPost = (postInfo, history) => async dispatch => {
   dispatch({ type: ActionTypes.ADD_BLOGPOST_START });
 
   const postToSubmit = {
@@ -10,23 +10,21 @@ export const addBlogPost = (postInfo, history) => dispatch => {
     user_id: postInfo.user_id,
   };
 
-  return axiosWithAuth()
-    .post('/', postToSubmit)
-    .then(response => {
-      dispatch({
-        type: ActionTypes.ADD_BLOGPOST_SUCCESS,
-        payload: { ...response.data }
-      });
-      //history.push('/');
-      return response;
-    })
-    .catch(err => {
-      dispatch({
-        type: ActionTypes.ADD_BLOGPOST_ERROR,
-        payload: err
-      });
-      return err;
-    });
+  try {
+        const response = await axiosWithAuth()
+            .post('/', postToSubmit);
+        dispatch({
+            type: ActionTypes.ADD_BLOGPOST_SUCCESS,
+            payload: { ...response.data }
+        });
+        return response;
+    } catch (err) {
+        dispatch({
+            type: ActionTypes.ADD_BLOGPOST_ERROR,
+            payload: err
+        });
+        return err;
+    }
 };
 
 
@@ -93,10 +91,10 @@ export const getSingleBlogPost = postId => dispatch => {
     });
 };
 
-export const getAllBlogPosts = dispatch => {
+export const getAllBlogPosts = () => dispatch => {
     dispatch({ type: ActionTypes.GET_ALL_BLOGPOSTS_START });
     axiosWithAuth()
-      .get('/')
+      .get('/blogposts/')
       .then(response => {
         dispatch({
           type: ActionTypes.GET_ALL_BLOGPOSTS_SUCCESS,

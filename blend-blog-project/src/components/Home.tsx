@@ -1,24 +1,33 @@
 import * as React from "react";
+import { useSelector, useDispatch, connect } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import { getAllBlogPosts } from '../redux/actions/blogpostActions';
 import axios, { AxiosRequestConfig, AxiosPromise } from "axios";
 import { AppContext } from "../contexts/AppContext";
 
-
 // Need to make and test logout button that clears token
 
-const initialState: Array<any> = [];
+//const initialState: Array<any> = [];
 
-function Home() {
+function Home(props: any) {
+  const dispatch = useDispatch();/*
+  const mapDispatchToProps = (dispatch: any) => {
+    dispatch(getAllBlogPosts)
+  };  */
 
   const [blogs, setBlogs] = React.useState([])
   React.useEffect(() => {
     // Axios get request for blogs, for now users
-    getAllBlogPosts()
+    dispatch(getAllBlogPosts())
+    //setBlogs(allBlogs)
   }, []);
 
-  // handleClick for logout button
+  // TODO - update typescript any for state
+  //const tokenPresent = useSelector((state: any) => state.userReducer.tokenPresent);
 
+  const allBlogs = useSelector((state: any) => state.blogpostReducer.allBlogPosts);
+  // handleClick for logout button
+  //dispatch(getAllBlogPosts());
   const handleLogOut = () => {
     console.log("clicked");
     window.localStorage.clear();
@@ -30,9 +39,9 @@ function Home() {
     <div className="Home">
       <header className="Home-header">
         This will be the home page with lots of blogs present.
-        {blogs.length > 0 && <p>{blogs[0]["blogpost_title"]}</p>
+        {allBlogs.length > 0 && <p>{allBlogs[0]["blogpost_title"]}</p>
         }
-        {console.log(blogs[0]["blogpost_title"])}
+        {console.log(allBlogs)}
         <p>
           <button onClick={handleLogOut}>Logout</button>
         </p>
@@ -40,5 +49,11 @@ function Home() {
     </div>
   );
 }
-
+// Connecting will allow FormikLogInForm to access loginUser dispatch function
+/*
+const ConnectedLogInForm = connect(
+  null,
+  mapDispatchToProps
+)(Home);
+*/
 export default Home;
