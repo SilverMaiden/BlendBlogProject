@@ -27,7 +27,6 @@ interface FormValues {
     useHistory
   };
   
-
 const FormikLogInForm = withFormik<
   FormikUserFormProps,
   FormValues>({

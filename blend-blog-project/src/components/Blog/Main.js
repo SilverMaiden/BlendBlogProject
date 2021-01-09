@@ -16,18 +16,26 @@ const useStyles = makeStyles((theme) => ({
 export default function Main(props) {
   const classes = useStyles();
   const { posts, title } = props;
+  const thing = 'dsfdfsf'
 
   return (
     <Grid item xs={12} md={8}>
       <Typography variant="h6" gutterBottom>
         {title}
+        {console.log(posts)}
       </Typography>
       <Divider />
-      {posts.map((post) => (
-        <Markdown className={classes.markdown} key={post.substring(0, 40)}>
-          {post}
-        </Markdown>
-      ))}
+      { posts.length > 0 
+      ? posts.map((post) => {
+        return (
+        <>
+        {/*<Markdown className={classes.markdown} key={thing.substring(0, 40)}>*/}
+          {post.blogpost_title}
+      {/*</Markdown>*/}
+      </>
+      )
+
+}) : null}
     </Grid>
   );
 }

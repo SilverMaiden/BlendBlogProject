@@ -3,7 +3,7 @@
 export const UserInitialState = {
     email: '',
     id: localStorage.getItem('id'),
-    blogposts: { active: '' }, 
+    blogposts: [], 
     locations: [],
     registerUserStart: false,
     registerUserError: false,

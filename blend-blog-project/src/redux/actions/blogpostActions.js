@@ -96,6 +96,7 @@ export const getAllBlogPosts = () => dispatch => {
     axiosWithAuth()
       .get('/blogposts/')
       .then(response => {
+        //let responsePayload = [response.data]
         dispatch({
           type: ActionTypes.GET_ALL_BLOGPOSTS_SUCCESS,
           payload: response.data

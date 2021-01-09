@@ -9,6 +9,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 
+const cardImage = "https://source.unsplash.com/random";
+
 const useStyles = makeStyles({
   card: {
     display: 'flex',
@@ -21,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FeaturedPost(props) {
+export default function FeaturedPost(props: any) {
   const classes = useStyles();
   const { post } = props;
 
@@ -32,13 +34,13 @@ export default function FeaturedPost(props) {
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
-                {post.title}
+                {post.blogpost_title}
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
                 {post.date}
               </Typography>
               <Typography variant="subtitle1" paragraph>
-                {post.description}
+                {post.blogpost_content}
               </Typography>
               <Typography variant="subtitle1" color="primary">
                 Continue reading...
@@ -46,7 +48,7 @@ export default function FeaturedPost(props) {
             </CardContent>
           </div>
           <Hidden xsDown>
-            <CardMedia className={classes.cardMedia} image={post.image} title={post.imageTitle} />
+            <CardMedia className={classes.cardMedia} image={cardImage} title={post.imageTitle} />
           </Hidden>
         </Card>
       </CardActionArea>
