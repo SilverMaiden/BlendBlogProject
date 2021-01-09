@@ -20,7 +20,13 @@ class BlogPosts {
     }
     add(blogpost) {
         return db_config_js_1.default('blogposts')
-            .insert(blogpost, "id");
+            .insert(blogpost, "id")
+            .then(([id]) => this.find(id));
+    }
+    delete(id) {
+        return db_config_js_1.default('blogposts')
+            .where("blogposts.id", id)
+            .del();
     }
 }
 exports.BlogPosts = BlogPosts;

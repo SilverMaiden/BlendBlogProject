@@ -35,5 +35,13 @@ router.post('/', (req, res) => {
         res.status(500).json({ message: err.message });
     });
 });
+router.post('/:id', (req, res) => {
+    BlogPost.add(req.body)
+        .then((blogpost) => {
+        res.status(201).json(blogpost);
+    }).catch((err) => {
+        res.status(500).json({ message: err.message });
+    });
+});
 module.exports = router;
 //# sourceMappingURL=blogposts-routes.js.map

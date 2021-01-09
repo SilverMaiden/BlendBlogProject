@@ -68,7 +68,6 @@ export default function NewPostForm() {
             id="content"
             name="content"
             label="content"
-            id="filled-textarea"
             multiline
             variant="filled"
             fullWidth

@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
     return knex.schema
     .createTable('users', tbl => {
-      tbl.increments();
+      tbl.increments()
       tbl.string('name', 128)
         .notNullable();
       tbl.string('email', 128)
@@ -13,10 +13,9 @@ exports.up = function(knex, Promise) {
     })
 
     .createTable('blogposts', tbl => {
-      tbl.increments();
+      tbl.increments()
       tbl.string('blogpost_title', 128)
         .notNullable()
-        .unique();
       tbl.string('blogpost_content', 128)
         .notNullable();
       tbl.integer('user_id')
@@ -28,7 +27,7 @@ exports.up = function(knex, Promise) {
     })
 
     .createTable('favorites', tbl => {
-      tbl.increments();
+      tbl.increments()
       tbl.integer('blogpost_id')
         .unsigned()
         .notNullable()

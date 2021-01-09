@@ -39,8 +39,8 @@ router.post('/', (req, res) => {
 
 router.post('/:id', (req, res) => {
   BlogPost.add(req.body)
-  .then((response: any) => {
-      res.status(201).json(response);
+  .then((blogpost: any) => {
+      res.status(201).json(blogpost);
   }).catch((err: any) => {
       res.status(500).json({message: err.message})
   })

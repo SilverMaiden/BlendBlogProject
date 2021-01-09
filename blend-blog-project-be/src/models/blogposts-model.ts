@@ -18,7 +18,9 @@ export class BlogPosts {
 
     add(blogpost: string) {
         return db('blogposts')
-            .insert(blogpost, "id");
+        .insert(blogpost, "id")
+        .then(([id]: number[]) => this.find(id));
+
     }
     delete(id: number) {
         return db('blogposts')
