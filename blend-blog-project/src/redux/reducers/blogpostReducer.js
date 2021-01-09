@@ -1,7 +1,7 @@
 import { BlogpostsInitialState } from './initialState';
 import * as ActionTypes from '../actions/actionTypes';
 
-export const eventReducer = (state = BlogpostsInitialState, action) => {
+export const blogpostReducer = (state = BlogpostsInitialState, action) => {
   switch (action.type) {
     case ActionTypes.ADD_BLOGPOST_START:
       return { ...state, addBlogPostStart: true };
