@@ -1,4 +1,6 @@
 import LogIn from '../LogIn';
+import { loginUser } from '../../redux/actions/userActions';
+
 import {
   withFormik
 } from "formik";
@@ -6,14 +8,13 @@ import * as Yup from "yup";
 //import axios from "axios";
 
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, connect, useDispatch } from 'react-redux';
 //Implement loader if time allows
 //import Loader from 'react-loader-spinner';
 import { Link as DOMLink, useHistory } from 'react-router-dom';
 // PropTypes vs Typescript?
-import PropTypes from 'prop-types';
-
-import { loginUser } from '../../redux/actions/userActions';
+import PropTypes from 'prop-types';;
+//import { connect } from "redux";
 
 //axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*"; - switching to redux actions and dispatchers
 // The type of props FormikUserForm receives
@@ -27,8 +28,10 @@ interface FormValues {
     password: string;
   }
 
-// Defining dispatch methods
-
+  const mapDispatchToProps = {
+    loginUser,
+  };
+  
 
 const FormikLogInForm = withFormik<
   FormikUserFormProps,
@@ -42,11 +45,18 @@ const FormikLogInForm = withFormik<
     email: Yup.string().required("Email is required").email("Invalid Email"),
     password: Yup.string().required("Password Required"),
   }),
-  handleSubmit(values: FormValues, { resetForm }) {
+  handleSubmit(values: FormValues, { props }: any) {
     let postData: object = { email: values.email, password: values.password };
-    console.log(values)
-    //dispatch(loginUser(postData, history));
+    //console.log(props.history)
+    //let loginUserFunction = props.loginUser;
+    props.loginUser(postData, window.history);
   }
 })(LogIn);
 
-export default FormikLogInForm;
+// Connecting will allow FormikLogInForm to access loginUser dispatch function
+const ConnectedLogInForm = connect(
+  null,
+  mapDispatchToProps
+)(FormikLogInForm);
+
+export default ConnectedLogInForm;

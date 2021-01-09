@@ -13,9 +13,9 @@ export const loginUser = (userInfo, history) => dispatch => {
         type: ActionTypes.LOGIN_USER_SUCCESS,
         payload: response.data
       });
-      if (history.location.pathname === '/') {
-        history.push('/home');
-      }
+      console.log(window.history)
+      window.history.pushState({}, "welcome", "/home");
+      window.location.reload();
     })
     .catch(err => {
       dispatch({ type: ActionTypes.LOGIN_USER_ERROR, payload: err });

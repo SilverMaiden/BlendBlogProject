@@ -23,6 +23,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
+const helmet_1 = __importDefault(require("helmet"));
+const morgan_1 = __importDefault(require("morgan"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config({ path: __dirname + '/.env' });
 const UsersRouter = require('./src/routes/users-routes');
@@ -30,10 +33,15 @@ const FavoritesRouter = require('./src/routes/favorites-routes');
 const BlogPostsRouter = require('./src/routes/blogposts-routes');
 const LogInRouter = require('./src/routes/login_routes');
 const server = express_1.default();
+// Middleware
 server.use(express_1.default.json());
-server.use('/api/users', UsersRouter);
-server.use('/api/favorites', FavoritesRouter);
-server.use('/api/blogposts', BlogPostsRouter);
-server.use('/api/login', LogInRouter);
+server.use(helmet_1.default());
+server.use(morgan_1.default('tiny'));
+server.use(cors_1.default());
+server.use(express_1.default.json());
+server.use('/api/users/', UsersRouter);
+server.use('/api/favorites/', FavoritesRouter);
+server.use('/api/blogposts/', BlogPostsRouter);
+server.use('/api/login/', LogInRouter);
 exports.default = server;
 //# sourceMappingURL=server.js.map

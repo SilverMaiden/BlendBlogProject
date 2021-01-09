@@ -17,10 +17,10 @@ import reportWebVitals from './reportWebVitals';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = compose;
 const store = createStore(
-  rootReducer
-  //composeEnhancers(applyMiddleware(thunk, logger))
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk, logger))
 );
 
 
