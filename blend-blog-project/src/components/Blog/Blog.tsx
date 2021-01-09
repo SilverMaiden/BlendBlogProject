@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {useSelector} from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import AppBar from '@material-ui/core/AppBar';
+import SearchBar from "material-ui-search-bar";
 import Container from '@material-ui/core/Container';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import FacebookIcon from '@material-ui/icons/Facebook';
@@ -23,16 +23,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const sections = [
-  { title: 'Technology', url: '#' },
-  { title: 'Design', url: '#' },
-  { title: 'Culture', url: '#' },
-  { title: 'Business', url: '#' },
-  { title: 'Politics', url: '#' },
-  { title: 'Opinion', url: '#' },
-  { title: 'Science', url: '#' },
-  { title: 'Health', url: '#' },
-  { title: 'Style', url: '#' },
-  { title: 'Travel', url: '#' },
+  { title: '', url: '/#' },
+  { title: '', url: '/#' }
 ];
 
 const mainFeaturedPost = {
@@ -54,9 +46,18 @@ export default function Blog() {
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Blog" sections={sections} />
+        <Header title="" sections={sections} />
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
+          <Container maxWidth="sm">
+          <SearchBar
+          //value={this.state.value}
+          //onChange={(newValue) => this.setState({ value: newValue })}
+          //onRequestSearch={() => doSomethingWith(this.state.value)}
+  />
+  </Container>
+  <br />
+
           <Grid container spacing={4} >
             {console.log(blogposts)}
             {blogposts.length > 0 

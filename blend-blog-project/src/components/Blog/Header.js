@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
+
 import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -32,14 +34,6 @@ export default function Header(props) {
   const { sections, title } = props;
 
   const dispatch = useDispatch();
-  // Need to switch this to use Redux dispatch and actions
-  /*const handleLogOut = () => {
-    console.log("clicked");
-    window.localStorage.clear();
-    console.log(window.localStorage.getItem("token"));
-    window.history.pushState({}, "logged out", "/login");
-    window.location.reload();
-  };*/
 
   const handleLogOut = () => {
     dispatch(logoutUser());
@@ -48,7 +42,11 @@ export default function Header(props) {
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-        <Button size="small">Subscribe</Button>
+        <Button size="small">Create New Post +
+        </Button>
+        {/* Using this button as a temporary spacer for createpost and mypost buttons*/}
+        <Button disabled={true}/>
+        <Button size="small">My Posts</Button>
         <Typography
           component="h2"
           variant="h5"
@@ -59,9 +57,8 @@ export default function Header(props) {
         >
           {title}
         </Typography>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
+
+
         <Button variant="outlined" size="small" onClick={handleLogOut}>
           Log out
         </Button>
