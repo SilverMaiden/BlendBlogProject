@@ -1,4 +1,6 @@
 import React from 'react';
+import { logoutUser } from '../../redux/actions/userActions';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -28,14 +30,20 @@ const useStyles = makeStyles((theme) => ({
 export default function Header(props) {
   const classes = useStyles();
   const { sections, title } = props;
+
+  const dispatch = useDispatch();
   // Need to switch this to use Redux dispatch and actions
-  const handleLogOut = () => {
+  /*const handleLogOut = () => {
     console.log("clicked");
     window.localStorage.clear();
     console.log(window.localStorage.getItem("token"));
     window.history.pushState({}, "logged out", "/login");
     window.location.reload();
-  };
+  };*/
+
+  const handleLogout = () => {
+    dispatch(logoutUser);
+  }
 
   return (
     <React.Fragment>

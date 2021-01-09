@@ -42,7 +42,6 @@ function Home(props: any) {
         This will be the home page with lots of blogs present.
         {allBlogs.length > 0 && <p>{allBlogs[0]["blogpost_title"]}</p>
         }
-        {console.log(allBlogs)}
         <p>
           <button onClick={handleLogOut}>Logout</button>
         </p>

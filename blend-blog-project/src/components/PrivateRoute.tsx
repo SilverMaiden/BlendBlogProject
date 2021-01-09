@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import { RouteProps, Route, Redirect } from 'react-router-dom';
 import dotenv from "dotenv";
 dotenv.config();
@@ -11,14 +12,15 @@ const PrivateRoute: React.FunctionComponent<PrivateRouteProps> = ({
   component: Component,
   ...routeProps
 }) => {
+  const tokenPresent  = useSelector((state: any) => state.userReducer.tokenPresent)
   //const { token } = useContext(AppContext);
-  const token = window.localStorage.getItem("token");
-  console.log(token)
+  //const token = window.localStorage.getItem("token");
+  console.log(tokenPresent)
   return (
     <Route
       {...routeProps}
       render={(props) =>
-        token ? <Component props={props} /> : <Redirect to={'/login'} />
+        tokenPresent ? <Component props={props} /> : <Redirect to={'/login'} />
       }
     />
   );

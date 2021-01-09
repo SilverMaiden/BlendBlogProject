@@ -13,10 +13,12 @@ export const loginUser = (userInfo, history) => dispatch => {
         type: ActionTypes.LOGIN_USER_SUCCESS,
         payload: response.data
       });
-      console.log(window.history)
-      window.history.pushState({}, "welcome", "/home");
-      window.location.reload();
-    })
+      //console.log(window.history)
+      if (history.location.pathname === '/login') {
+        history.push("/home");
+        //console.log(history)
+      }
+      })
     .catch(err => {
       dispatch({ type: ActionTypes.LOGIN_USER_ERROR, payload: err });
     });

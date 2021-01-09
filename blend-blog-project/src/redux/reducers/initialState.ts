@@ -11,7 +11,7 @@ export const UserInitialState = {
     loginUserError: false,
     logoutUserStart: false,
     logoutUserError: false,
-    tokenPresent: localStorage.getItem('token'), 
+    tokenPresent: false, 
   };
 
   export const BlogPostsInitialState = {
