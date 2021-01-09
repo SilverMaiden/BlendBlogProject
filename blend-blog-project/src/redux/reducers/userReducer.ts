@@ -2,7 +2,8 @@
 import { UserInitialState } from './initialState';
 import * as ActionTypes from '../actions/actionTypes';
 
-export const userReducer = (state = UserInitialState, action) => {
+// Need to replace any type with correct type
+export const userReducer = (state = UserInitialState, action: any) => {
   switch (action.type) {
     case ActionTypes.REGISTER_USER_START:
       return { ...state, registerUserStart: true };
