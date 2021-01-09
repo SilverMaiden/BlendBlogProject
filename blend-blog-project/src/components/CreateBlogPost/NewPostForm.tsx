@@ -6,6 +6,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  Form,
+  FormikProps,
+} from "formik";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,9 +45,23 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-export default function NewPostForm() {
-    const classes = useStyles();
+// Shape of form values
+interface FormValues {
+  title: string;
+  content: string;
+}
 
+export default function NewPostForm(props: FormikProps<FormValues>) {
+    const classes = useStyles();
+    const {
+      errors,
+      touched,
+      isSubmitting,
+      getFieldHelpers,
+      getFieldProps,
+      ...rest
+    } = props;
+  
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

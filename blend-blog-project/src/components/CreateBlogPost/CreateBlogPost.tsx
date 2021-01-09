@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Form from "@material-ui/core/FormGroup";
-
+import FormikNewPostForm from './FormikNewPostForm'
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
@@ -46,7 +46,7 @@ export default function CreateBlogPost(props: any) {
       <Container maxWidth="lg">
       <Header />
         <MainFeaturedPost post={mainFeaturedPost} />
-        <NewPostForm />
+        <FormikNewPostForm />
 
 
 

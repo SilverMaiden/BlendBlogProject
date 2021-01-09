@@ -1,4 +1,6 @@
-import React, {useHistory} from 'react';
+import React from 'react';
+
+import {useHistory} from 'react-router-dom';
 import { logoutUser } from '../../redux/actions/userActions';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -34,11 +36,12 @@ export default function Header(props) {
   const { sections, title } = props;
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleLogOut = () => {
-    dispatch(logoutUser());
+    dispatch(logoutUser(history));
+
   }
-  //const history = useHistory();
 
 
   return (

@@ -1,5 +1,5 @@
 import NewPostForm from './NewPostForm';
-import { loginUser } from '../../redux/actions/userActions';
+import { addBlogPost } from '../../redux/actions/blogpostActions';
 import {
   withFormik
 } from "formik";
@@ -13,44 +13,43 @@ import PropTypes from 'prop-types';;
 
 // The type of props FormikUserForm receives
 interface FormikUserFormProps {
-  initialEmail?: string;
-  message: string;
+  initialTitle?: string;
 }
 // Shape of form values
-interface FormValues {
+interface NewPostFormValues {
     title: string;
     content: string;
   }
 
   const mapDispatchToProps = {
-    loginUser,
+    addBlogPost,
     useHistory
   };
   
 const FormikNewPostForm = withFormik<
   FormikUserFormProps,
-  FormValues>({
+  NewPostFormValues>({
   
   mapPropsToValues: (props) => ({
-    email: props.initialEmail || "",
-    password: "",
+    title: props.initialTitle || "",
+    content: "",
   }),
   validationSchema: Yup.object().shape({
-    email: Yup.string().required("Email is required").email("Invalid Email"),
-    password: Yup.string().required("Password Required"),
+    title: Yup.string().required("Title is required"),
+    content: Yup.string().required("Content Required"),
   }),
-  handleSubmit(values: FormValues, { props }: any) {
-    let postData: object = { email: values.email, password: values.password};
+  handleSubmit(values: NewPostFormValues, { props }: any) {
+    let postData: object = { blogpost_title: values.title, blogpost_content: values.content};
     console.log(props.history)
     props.loginUser(postData, props.history)
 
   }
-})(LogIn);
+})(NewPostForm);
 
 // Connecting will allow FormikLogInForm to access loginUser dispatch function
 const ConnectedLogInForm = connect(
   null,
   mapDispatchToProps
-)(FormikLogInForm);
+)(FormikNewPostForm);
 
 export default ConnectedLogInForm;

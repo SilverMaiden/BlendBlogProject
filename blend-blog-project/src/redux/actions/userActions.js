@@ -60,11 +60,13 @@ export const registerUserAction = (infoNeeded, history) => dispatch => {
     });
 };
 
-export const logoutUser = () => dispatch => {
+export const logoutUser = (history) => dispatch => {
   dispatch({ type: ActionTypes.LOGOUT_USER_START });
   if (localStorage.getItem('token')) {
     localStorage.removeItem('token');
     dispatch({ type: ActionTypes.LOGOUT_USER_SUCCESS });
+    history.push("/login");
+
   } else {
     dispatch({
       type: ActionTypes.LOGOUT_USER_ERROR,
