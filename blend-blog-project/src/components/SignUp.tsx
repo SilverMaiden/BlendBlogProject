@@ -15,7 +15,6 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-//import UserCard from '../UserCard/UserCard';
 function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
@@ -63,9 +62,9 @@ function Copyright() {
   }));
 
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-interface AllProps {
-  status: any;
-}
+
+// "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+
 
  // Shape of form values
  interface FormValues {
@@ -76,11 +75,7 @@ interface AllProps {
 }
 
 const SignUp = (props:FormikProps<FormValues>) => {
-
-  
-    const classes = useStyles();
-    const [users, setUsers] = useState([]);
-
+  const classes = useStyles();
 
     return (
         <Grid container component="main" className={classes.root}>
