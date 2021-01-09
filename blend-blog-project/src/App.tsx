@@ -3,7 +3,7 @@ import './App.css';
 import Home from './components/Home';
 import CreateBlogPost from './components/CreateBlogPost/CreateBlogPost';
 import FormikSignUpForm from './components/SignUp';
-import FormikLogInForm from './components/forms/FormikLogInForm';
+import FormikLogInForm from './components/LogIn/FormikLogInForm';
 import PrivateRoute from './components/PrivateRoute';
 
 import {

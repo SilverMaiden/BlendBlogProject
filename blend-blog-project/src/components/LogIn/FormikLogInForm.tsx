@@ -1,4 +1,4 @@
-import LogIn from '../LogIn';
+import LogIn from './LogIn';
 import { loginUser } from '../../redux/actions/userActions';
 import {
   withFormik
