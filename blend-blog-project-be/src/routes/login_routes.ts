@@ -24,7 +24,10 @@ router.post('/', (req: Request, res: Response) => {
     LogIn.findBy({ email })
     .first()
     .then(user => {
-      if (user) {
+      // const user = response;
+      // tslint:disable-next-line:no-console
+      // console.log(response === false)
+      if (user !== undefined) {
            // tslint:disable-next-line:no-console
            console.log("hi im", user)
            if (password === user.password)/*&& bcrypt.compareSync(password, user.password))*/ {
@@ -40,11 +43,12 @@ router.post('/', (req: Request, res: Response) => {
           token
         });
       } else {
-        res.status(401).json({ message: 'Invalid login' });
+        res.status(401).json({message: "Incorrect password."})
       }
     } else {
-        res.status(401).json({message: 'Invalid email'})
-    }})
+      res.status(401).json({message: "No user exists with this email."})
+    }
+  })
     .catch(err => {
       // tslint:disable-next-line:no-console
       console.log(err);
