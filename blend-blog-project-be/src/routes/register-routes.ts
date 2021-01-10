@@ -18,9 +18,22 @@ router.use((req: Request, res: Response, next) => {
 in router-model.ts that does everything we need.*/
 
 router.post('/', (req: Request, res: Response) => {
-    Register.addUser(req.body)
     // TODO - Passwords are not currently being hashed, and are therefore extremely insecure.
     // Add bcrypt to hash password before adding it to DB
+
+    const newUser = req.body;
+    // Checks should be happening on the front end too through form validation,
+    // but also need to occur on the backend before being entered into the DB.
+    if (!newUser.name || !newUser.email || !newUser.password) {
+        res.status(400).json({ message: 'Request is missing required values.' });
+      }
+    
+      // Using bcrypt to hash users password
+      const passwordHash = bcrypt.hashSync(newUser.password, 10);
+      newUser.password = passwordHash;
+
+    Register.addUser(req.body)
+
     .then((users: any) => {
         res.status(201).json(users);
     }).catch((err: any) => {
