@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -29,7 +30,8 @@ export default function FeaturedPost(props: any) {
 
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="#">
+      <Link to={`/blog/${post.id}`} style={{textDecoration:"none"}}>
+      <CardActionArea component="a" >
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
@@ -42,7 +44,7 @@ export default function FeaturedPost(props: any) {
               <Typography variant="subtitle1" paragraph>
                 {post.blogpost_content}
               </Typography>
-              <Typography variant="subtitle1" color="primary">
+             <Typography variant="subtitle1" color="primary">
                 Continue reading...
               </Typography>
             </CardContent>
@@ -52,6 +54,7 @@ export default function FeaturedPost(props: any) {
           </Hidden>
         </Card>
       </CardActionArea>
+      </Link>
     </Grid>
   );
 }

@@ -46,7 +46,7 @@ export default function Header(props) {
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
-      <Button size="small">Home</Button>
+      <Link to="/home"><Button size="small">Home</Button></Link>
 
   <Link to="/createblogpost"><Button size="small">Create New Post +
         </Button></Link>
