@@ -16,9 +16,10 @@ export class BlogPosts {
         }
     }
 
-    add(blogpost: string) {
+    add(blogpost: any) {
+        console.log(blogpost)
         return db('blogposts')
-        .insert(blogpost, "id")
+        .insert(blogpost, "id", )
         .then(([id]: number[]) => this.find(id));
 
     }

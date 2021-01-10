@@ -37,7 +37,7 @@ const mainFeaturedPost = {
 };
 
 
-export default function Blog() {
+export default function Blog(props: any) {
   const classes = useStyles();
   let blogposts = useSelector((state: any) => state.blogpostReducer.allBlogPosts);
 

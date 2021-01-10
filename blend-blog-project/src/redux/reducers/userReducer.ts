@@ -13,7 +13,8 @@ export const userReducer = (state = UserInitialState, action: any) => {
         ...state,
         registerUserStart: false,
         id: action.payload.id,
-        email: action.payload.email
+        email: action.payload.email,
+        password: action.payload.password
       };
 
     case ActionTypes.REGISTER_USER_ERROR:

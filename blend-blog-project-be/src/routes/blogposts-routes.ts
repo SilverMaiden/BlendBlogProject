@@ -1,9 +1,18 @@
 
 import express, {Request, Response} from 'express';
 import { BlogPosts} from '../models/blogposts-model';
-const router = express.Router();
 
 const BlogPost = new BlogPosts();
+
+
+const router = express.Router();
+
+router.use((req: Request, res: Response, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "access-control-allow-origin, content-type, Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 router.get('/', (req: Request, res: Response) => {
   BlogPost.find()
@@ -27,7 +36,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req: Request, res: Response) => {
     BlogPost.add(req.body)
     .then((response: any) => {
         res.status(201).json(response);

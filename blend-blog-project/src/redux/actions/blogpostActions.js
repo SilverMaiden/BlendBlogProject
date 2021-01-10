@@ -5,9 +5,9 @@ export const addBlogPost = (postInfo, history) => async dispatch => {
   dispatch({ type: ActionTypes.ADD_BLOGPOST_START });
 
   const postToSubmit = {
-    blogpost_title: postInfo.name,
-    date: postInfo.date,
+    blogpost_title: postInfo.blogpost_title,
     user_id: postInfo.user_id,
+    blogpost_content: postInfo.blogpost_content
   };
 
   try {

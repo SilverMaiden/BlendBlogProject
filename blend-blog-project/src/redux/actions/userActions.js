@@ -13,16 +13,20 @@ export const loginUser = (userInfo, history) => dispatch => {
         type: ActionTypes.LOGIN_USER_SUCCESS,
         payload: response.data
       });
-      //console.log(window.history)
+      console.log(response.data)
+      window.localStorage.setItem("id", response.data.id)
       if (history.location.pathname === '/login') {
         history.push("/home");
         //console.log(history)
       }
-      })
-    .catch(err => {
+      //dispatch action here to get user info in store
+      dispatch(getUser(response.data.id))
+    }).catch(err => {
       dispatch({ type: ActionTypes.LOGIN_USER_ERROR, payload: err });
     });
 };
+
+
 
 export const registerUserAction = (infoNeeded, history) => dispatch => {
   dispatch({ type: ActionTypes.REGISTER_USER_START });
@@ -79,7 +83,7 @@ export const logoutUser = (history) => dispatch => {
 export const getUser = id => dispatch => {
   dispatch({ type: ActionTypes.GET_USER_START });
   axiosWithAuth()
-    .get(`/user/${id}`)
+    .get(`/users/${id}`)
     .then(response => {
       dispatch({ type: ActionTypes.GET_USER_SUCCESS, payload: response.data });
     })

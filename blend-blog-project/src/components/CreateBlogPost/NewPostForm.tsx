@@ -1,9 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -51,6 +49,7 @@ interface FormValues {
   content: string;
 }
 
+
 export default function NewPostForm(props: FormikProps<FormValues>) {
     const classes = useStyles();
     const {
@@ -61,12 +60,14 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
       getFieldProps,
       ...rest
     } = props;
-  
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Create New Post
       </Typography>
+    {/* FORM STARTS HERE */}
+    <Form className={classes.form}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
         </Grid>
@@ -76,6 +77,7 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
             id="title"
             name="title"
             label="title"
+            onChange={props.handleChange}
             style ={{width: '50%'}}
             autoComplete="Blog Title"
           />
@@ -86,6 +88,7 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
             id="content"
             name="content"
             label="content"
+            onChange={props.handleChange}
             multiline
             variant="filled"
             fullWidth
@@ -104,6 +107,7 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
             </Button>
         </Grid>
       </Grid>
+      </Form>
     </React.Fragment>
   );
 }

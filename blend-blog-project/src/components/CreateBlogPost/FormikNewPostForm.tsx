@@ -39,9 +39,10 @@ const FormikNewPostForm = withFormik<
     content: Yup.string().required("Content Required"),
   }),
   handleSubmit(values: NewPostFormValues, { props }: any) {
-    let postData: object = { blogpost_title: values.title, blogpost_content: values.content};
-    console.log(props.history)
-    props.loginUser(postData, props.history)
+    let userId = window.localStorage.getItem("id");
+    let postData: object = { blogpost_title: values.title, blogpost_content: values.content, user_id: userId};
+    console.log(postData)
+    props.addBlogPost(postData, props.history)
 
   }
 })(NewPostForm);
