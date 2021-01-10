@@ -9,6 +9,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import EditIcon from '@material-ui/icons/Edit';
 
 const cardImage = "https://source.unsplash.com/random";
 
@@ -35,6 +37,9 @@ export default function FeaturedPost(props: any) {
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
+            <Link to={`/blog/edit/${post.id}`}><EditIcon /></Link>
+            <DeleteOutlineIcon />
+
               <Typography component="h2" variant="h5">
                 {post.blogpost_title}
               </Typography>

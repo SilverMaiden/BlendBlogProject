@@ -28,7 +28,7 @@ export const loginUser = (userInfo, history) => dispatch => {
 
 
 
-export const registerUserAction = (infoNeeded, history) => dispatch => {
+export const registerUser = (infoNeeded, history) => dispatch => {
   dispatch({ type: ActionTypes.REGISTER_USER_START });
   axiosWithAuth()
     .post('/register/', infoNeeded)

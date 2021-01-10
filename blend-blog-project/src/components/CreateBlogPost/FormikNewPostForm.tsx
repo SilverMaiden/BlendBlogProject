@@ -43,7 +43,6 @@ const FormikNewPostForm = withFormik<
     let postData: object = { blogpost_title: values.title, blogpost_content: values.content, user_id: userId};
     console.log(postData)
     props.addBlogPost(postData, props.history)
-
   }
 })(NewPostForm);
 

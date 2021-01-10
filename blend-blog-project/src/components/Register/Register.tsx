@@ -74,7 +74,7 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
   confirmPassword: string;
 }
 
-const SignUp = (props:FormikProps<FormValues>) => {
+const Register = (props:FormikProps<FormValues>) => {
   const classes = useStyles();
 
     return (
