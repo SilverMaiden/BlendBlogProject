@@ -30,9 +30,14 @@ const FeaturedPost = (props: any) => {
   const classes = useStyles();
   const { post } = props;
 
+  const state = {
+    pathname: `/blog/${post.id}`,
+    blogpost: post
+  }
+
   return (
     <Grid item xs={12} md={6}>
-      <Link to={`/blog/${post.id}`} style={{ textDecoration: "none" }}>
+      <Link to={state} style={{ textDecoration: "none" }}>
         <CardActionArea component="a">
           <Card className={classes.card}>
             <div className={classes.cardDetails}>

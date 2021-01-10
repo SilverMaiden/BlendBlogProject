@@ -5,10 +5,13 @@ import FormikNewPostForm from "../CreateBlogPost/FormikNewPostForm";
 import Footer from "./Footer";
 import MainFeaturedPost from "./MainFeaturedPost";
 import Container from "@material-ui/core/Container";
+import Grid from "@material-ui/core/Grid";
+
 
 const BlogPost = (props: any) => {
-  const mainFeaturedPost = {
-    title: "Title of a longer featured blog post",
+  const userPost = props.location.blogpost;
+  const post = {
+    title: userPost.blogpost_title,
     description:
       "Multiple lines of text what's most interesting in this post's contents.",
     image:
@@ -20,11 +23,15 @@ const BlogPost = (props: any) => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="lg">
-        <Header />
-        <MainFeaturedPost post={mainFeaturedPost} />
-        <FormikNewPostForm />
-      </Container>
+      <main>
+          <MainFeaturedPost post={post} />
+          <br />
+          <Container>
+            {console.log(props)}
+            {userPost.blogpost_content}
+            </Container>
+
+        </main>
       <Footer
         title="Footer"
         description="Something here to give the footer a purpose!"
