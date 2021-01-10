@@ -23,6 +23,7 @@
     "homepage": "https://github.com/SilverMaiden/node-db-challenge#readme",
     "dependencies": {
         "@types/jsonwebtoken": "^8.5.0",
+        "bcrypt": "^5.0.0",
         "cors": "^2.8.5",
         "dom": "0.0.3",
         "dotenv": "^8.2.0",
