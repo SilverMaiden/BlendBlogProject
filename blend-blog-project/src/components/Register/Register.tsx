@@ -13,6 +13,8 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -61,8 +63,6 @@ const useStyles = makeStyles((theme) => ({
 
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
-// "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-
 // Shape of form values
 interface FormValues {
   name: string;
@@ -95,51 +95,70 @@ const Register = (props: FormikProps<FormValues>) => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          {/* FORM STARTS HERE */}
           <Form className={classes.form}>
+            {/* Name Text Field */}
             <TextField
               margin="normal"
               required
               fullWidth
               id="name"
-              label="Full Name"
-              name="name"
+              label="Name"
+              onChange={props.handleChange}
+              value={props.values.name}
               autoComplete="name"
               autoFocus
+              error={Boolean(errors.name && touched.name)}
             />
+            {/* Email Text Field  */}
             <TextField
               margin="normal"
               required
               fullWidth
               id="email"
               label="Email Address"
-              name="email"
+              onChange={props.handleChange}
+              value={props.values.email}
               autoComplete="email"
               autoFocus
+              error={Boolean(errors.email && touched.email)}
             />
+            {/* Password Text Field */}
             <TextField
               margin="normal"
               required
               fullWidth
+              error={Boolean(errors.password && touched.password)}
               name="password"
+              value={props.values.password}
+              onChange={props.handleChange}
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
             />
+            {touched.password && errors.password ? (
+              <div>{errors.password}</div>
+            ) : null}
+
+            {/* Confirm Password Text Field */}
             <TextField
               margin="normal"
               required
               fullWidth
+              error={Boolean(errors.password && touched.password)}
               name="confirmPassword"
-              label="Confirm Password"
+              value={props.values.confirmPassword}
+              onChange={props.handleChange}
+              label="ConfirmPassword"
               type="password"
               id="confirmPassword"
-              //autoComplete="current-password"
+              autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+            {touched.password && errors.password ? (
+              <div>{errors.confirmPassword}</div>
+            ) : null}
+
             <Button
               type="submit"
               fullWidth
@@ -159,6 +178,7 @@ const Register = (props: FormikProps<FormValues>) => {
               <Copyright />
             </Box>
           </Form>
+          {/* FORM ENDS HERE */}
         </div>
       </Grid>
     </Grid>

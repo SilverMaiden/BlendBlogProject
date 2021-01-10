@@ -26,10 +26,10 @@ const mapDispatchToProps = {
   useHistory,
 };
 
-const FormikLogInForm = withFormik<FormikUserFormProps, FormValues>({
+const FormikRegisterForm = withFormik<FormikUserFormProps, FormValues>({
   mapPropsToValues: (props) => ({
     name: "",
-    email: props.initialEmail || "",
+    email: "",
     password: "",
     confirmPassword: "",
   }),
@@ -39,6 +39,7 @@ const FormikLogInForm = withFormik<FormikUserFormProps, FormValues>({
       .min(3, "Seems a little short..."),
     email: Yup.string().required("Email is required").email("Invalid Email"),
     password: Yup.string().required("Password Required"),
+    confirmPassword: Yup.string().required("Please confirm your password.")
   }),
   handleSubmit(values: FormValues, { props }: any) {
     let postData: object = {
@@ -46,12 +47,12 @@ const FormikLogInForm = withFormik<FormikUserFormProps, FormValues>({
       email: values.email,
       password: values.password,
     };
-    console.log(props.history);
+    //console.log(props.history);
     props.registerUser(postData, props.history);
   },
 })(Register);
 
 // Connecting will allow FormikLogInForm to access loginUser dispatch function
-const ConnectedLogInForm = connect(null, mapDispatchToProps)(FormikLogInForm);
+const ConnectedRegisterForm = connect(null, mapDispatchToProps)(FormikRegisterForm);
 
-export default ConnectedLogInForm;
+export default ConnectedRegisterForm;

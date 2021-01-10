@@ -74,11 +74,6 @@ interface FormValues {
 
 const LogIn = (props: FormikProps<FormValues>) => {
   const classes = useStyles();
-  const [fields, setFields] = useState({
-    email: "",
-    password: "",
-    valid: true,
-  });
 
   const {
     errors,
@@ -119,7 +114,7 @@ const LogIn = (props: FormikProps<FormValues>) => {
             />
             {/* Shows error message to users if given invalid email */}
             {touched.email && errors.email ? <div>{errors.email}</div> : null}
-            {/* Email Text Field */}
+            {/* Password Text Field */}
             <TextField
               margin="normal"
               required
@@ -137,10 +132,6 @@ const LogIn = (props: FormikProps<FormValues>) => {
               <div>{errors.password}</div>
             ) : null}
 
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
