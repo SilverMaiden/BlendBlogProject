@@ -27,7 +27,7 @@ router.post('/', (req: Request, res: Response) => {
     if (!newUser.name || !newUser.email || !newUser.password) {
         res.status(400).json({ message: 'Request is missing required values.' });
       }
-    
+
       // Using bcrypt to hash users password
     const passwordHash = bcrypt.hashSync(newUser.password, 10);
     newUser.password = passwordHash;
@@ -38,7 +38,7 @@ router.post('/', (req: Request, res: Response) => {
     .first()
     .then(user => {
       if (user) {
-        // There is an account registerd with this email already 
+        // There is an account registerd with this email already
         res.status(409).json({ message: `User with email ${user.email} already exists` });
       } else {
             Register.addUser(newUser)

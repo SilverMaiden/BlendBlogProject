@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const login_model_1 = require("../models/login-model");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const secrets_1 = require("../config/secrets");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const router = express_1.default.Router();
@@ -30,7 +31,9 @@ router.post('/', (req, res) => {
         if (user !== undefined) {
             // tslint:disable-next-line:no-console
             console.log("hi im", user);
-            if (password === user.password) /*&& bcrypt.compareSync(password, user.password))*/ {
+            // Can now uncomment this line using bcrypt to compare the hashed version of the password
+            // with the user input
+            if (password && bcrypt_1.default.compareSync(password, user.password)) {
                 const token = signToken(user);
                 process.env.JW_TOKEN = token;
                 // tslint:disable-next-line:no-console
