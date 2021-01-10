@@ -30,7 +30,7 @@ const ViewUserPosts = (props: any) => {
         <Header />
         <MainFeaturedPost post={mainFeaturedPost} />
         <Grid container spacing={4}>
-          {console.log(userPosts)}
+          {console.log(id)}
 
           {userPosts.map((post: any) => (
             <FeaturedPost key={post.id} post={post} />

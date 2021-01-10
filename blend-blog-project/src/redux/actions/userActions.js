@@ -67,6 +67,7 @@ export const logoutUser = (history) => (dispatch) => {
   dispatch({ type: ActionTypes.LOGOUT_USER_START });
   if (localStorage.getItem("token")) {
     localStorage.removeItem("token");
+    localStorage.removeItem("id");
     dispatch({ type: ActionTypes.LOGOUT_USER_SUCCESS });
     history.push("/login");
   } else {
