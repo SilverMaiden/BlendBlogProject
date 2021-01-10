@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux';
-import { userReducer } from './userReducer.ts';
-import { blogpostReducer } from './blogpostReducer.ts'
+import { combineReducers } from "redux";
+import { userReducer } from "./userReducer.ts";
+import { blogpostReducer } from "./blogpostReducer.ts";
 
 // rootReducer will eventually be a combination of reducers for users and blogs.
 const rootReducer = combineReducers({
   userReducer,
-  blogpostReducer
+  blogpostReducer,
 });
 
 export default rootReducer;

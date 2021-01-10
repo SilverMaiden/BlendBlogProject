@@ -27,5 +27,8 @@
     "src",
     "node_modules/**/*.d.ts",
     "node_modules/@types/**/*.d.ts"
+  ],
+  "extends": [
+    "tslint-config-prettier"
   ]
 }

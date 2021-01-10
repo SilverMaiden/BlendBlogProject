@@ -1,38 +1,31 @@
-import {useState, useEffect} from "react";
-import './App.css';
-import Home from './components/Home';
-import CreateBlogPost from './components/CreateBlogPost/CreateBlogPost';
-import ViewUserPosts from './components/ViewUserPosts'
-import FormikSignUpForm from './components/Register/Register';
-import BlogPost from './components/Blog/BlogPost';
-import FormikLogInForm from './components/LogIn/FormikLogInForm';
-import PrivateRoute from './components/PrivateRoute';
+import { useState, useEffect } from "react";
+import "./App.css";
+import Home from "./components/Home";
+import CreateBlogPost from "./components/CreateBlogPost/CreateBlogPost";
+import ViewUserPosts from "./components/ViewUserPosts";
+import FormikSignUpForm from "./components/Register/Register";
+import BlogPost from "./components/Blog/BlogPost";
+import FormikLogInForm from "./components/LogIn/FormikLogInForm";
+import PrivateRoute from "./components/PrivateRoute";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const App = () => {
-
   return (
-      <Router>
+    <Router>
       <div className="App">
-        <br  />
+        <br />
         <Switch>
           <Route exact path="/" component={FormikSignUpForm} />
           <Route exact path="/login" component={FormikLogInForm} />
-          <PrivateRoute path='/home' component={Home} />
-          <PrivateRoute path='/createblogpost' component={CreateBlogPost} />
-          <PrivateRoute path='/myposts' component={ViewUserPosts} />
+          <PrivateRoute path="/home" component={Home} />
+          <PrivateRoute path="/createblogpost" component={CreateBlogPost} />
+          <PrivateRoute path="/myposts" component={ViewUserPosts} />
           <Route exact path="/blog/:id" component={BlogPost} />
-
-
         </Switch>
       </div>
-      </Router>
+    </Router>
   );
-}
+};
 
 export default App;
