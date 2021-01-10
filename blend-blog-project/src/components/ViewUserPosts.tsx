@@ -33,7 +33,7 @@ const ViewUserPosts = (props: any) => {
           {console.log(userPosts)}
 
           {userPosts.map((post: any) => (
-            <FeaturedPost key={post.blogpost_title} post={post} />
+            <FeaturedPost key={post.id} post={post} />
           ))}
         </Grid>
       </Container>

@@ -39,7 +39,7 @@ const FormikRegisterForm = withFormik<FormikUserFormProps, FormValues>({
       .min(3, "Seems a little short..."),
     email: Yup.string().required("Email is required").email("Invalid Email"),
     password: Yup.string().required("Password Required"),
-    confirmPassword: Yup.string().required("Please confirm your password.")
+    confirmPassword: Yup.string().required("Please confirm your password."),
   }),
   handleSubmit(values: FormValues, { props }: any) {
     let postData: object = {
@@ -53,6 +53,9 @@ const FormikRegisterForm = withFormik<FormikUserFormProps, FormValues>({
 })(Register);
 
 // Connecting will allow FormikLogInForm to access loginUser dispatch function
-const ConnectedRegisterForm = connect(null, mapDispatchToProps)(FormikRegisterForm);
+const ConnectedRegisterForm = connect(
+  null,
+  mapDispatchToProps
+)(FormikRegisterForm);
 
 export default ConnectedRegisterForm;

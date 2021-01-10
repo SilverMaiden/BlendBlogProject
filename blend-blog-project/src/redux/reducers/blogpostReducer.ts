@@ -68,7 +68,7 @@ export const blogpostReducer = (state = BlogPostsInitialState, action: any) => {
       return {
         ...state,
         getBlogPostsByUserStart: false,
-        blogposts: [...state.blogposts, ...action.payload],
+        blogposts: [...action.payload],
       };
 
     case ActionTypes.GET_BLOGPOSTS_BY_USER_ERROR:
