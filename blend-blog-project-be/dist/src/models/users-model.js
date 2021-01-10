@@ -28,9 +28,8 @@ class Users {
         }
     }
     findBlogPosts(id) {
-        return db_config_js_1.default('users as u')
-            .join('blogposts as b', 'u.id', 'b.user_id')
-            .where('u.id', id);
+        return db_config_js_1.default('blogposts')
+            .where('blogposts.user_id', id);
     }
     findFavorites(...args) {
         const id = args[0];

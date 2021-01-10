@@ -25,11 +25,9 @@ export class Users {
     }
 }
 
-    findBlogPosts(id: number) {
-        return db('users as u' )
-            .join('blogposts as b', 'u.id', 'b.user_id')
-            .where('u.id', id)
-
+    findBlogPosts(id: any) {
+        return db('blogposts' )
+            .where('blogposts.user_id', id)
     }
 
     findFavorites(...args: any[]) {

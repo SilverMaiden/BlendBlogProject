@@ -1,5 +1,10 @@
-import React, { useState, useContext } from "react";
-//import { AppContext } from "../contexts/AppContext";
+import React, { useState } from 'react';
+//Implement loader if time allows
+//import Loader from 'react-loader-spinner';
+import { Link as DOMLink, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+// Maybe move redux content into Formik component
 import {
   Form,
   FormikProps,
@@ -145,7 +150,7 @@ const LogIn = (props: FormikProps<FormValues>) => {
               variant="contained"
               className={classes.submit}
             >
-              Sign Up
+              Log in
             </Button>
             <Grid container>
               <Grid item>

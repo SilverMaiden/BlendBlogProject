@@ -5,8 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const blogposts_model_1 = require("../models/blogposts-model");
-const router = express_1.default.Router();
 const BlogPost = new blogposts_model_1.BlogPosts();
+const router = express_1.default.Router();
+router.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "access-control-allow-origin, content-type, Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 router.get('/', (req, res) => {
     BlogPost.find()
         .then((blogposts) => {
@@ -31,6 +36,14 @@ router.post('/', (req, res) => {
     BlogPost.add(req.body)
         .then((response) => {
         res.status(201).json(response);
+    }).catch((err) => {
+        res.status(500).json({ message: err.message });
+    });
+});
+router.post('/:id', (req, res) => {
+    BlogPost.add(req.body)
+        .then((blogpost) => {
+        res.status(201).json(blogpost);
     }).catch((err) => {
         res.status(500).json({ message: err.message });
     });

@@ -12,8 +12,7 @@ exports.up = function (knex, Promise) {
         .createTable('blogposts', tbl => {
         tbl.increments();
         tbl.string('blogpost_title', 128)
-            .notNullable()
-            .unique();
+            .notNullable();
         tbl.string('blogpost_content', 128)
             .notNullable();
         tbl.integer('user_id')

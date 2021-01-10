@@ -42,6 +42,15 @@ router.get('/:id/favorites', (req, res) => {
         res.status(500).json({ message: 'Failed to get favorites' });
     });
 });
+router.get('/:id/myposts', (req, res) => {
+    User.findBlogPosts(req.params.id)
+        .then((blogposts) => {
+        res.json(blogposts);
+    })
+        .catch((err) => {
+        res.status(500).json({ message: 'Failed to get blogposts' });
+    });
+});
 router.post('/', (req, res) => {
     User.add(req.body)
         .then((users) => {
