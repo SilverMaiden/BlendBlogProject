@@ -51,13 +51,5 @@ router.get('/:id/myposts', (req, res) => {
         res.status(500).json({ message: 'Failed to get blogposts' });
     });
 });
-router.post('/', (req, res) => {
-    User.add(req.body)
-        .then((users) => {
-        res.status(201).json(users);
-    }).catch((err) => {
-        res.status(500).json({ message: "failed to add new user." });
-    });
-});
 module.exports = router;
 //# sourceMappingURL=users-routes.js.map

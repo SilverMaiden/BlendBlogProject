@@ -120,7 +120,7 @@ const Register = (props: FormikProps<FormValues>) => {
               value={props.values.email}
               autoComplete="email"
               autoFocus
-              error={Boolean(errors.email && touched.email)}
+              error={Boolean(errors.email)}
             />
             {/* Password Text Field */}
             <TextField
@@ -136,7 +136,7 @@ const Register = (props: FormikProps<FormValues>) => {
               id="password"
               autoComplete="current-password"
             />
-            {touched.password && errors.password ? (
+            { errors.password ? (
               <div>{errors.password}</div>
             ) : null}
 
