@@ -56,14 +56,4 @@ router.get('/:id/myposts', (req: Request, res: Response) => {
   });
 });
 
-
-router.post('/', (req: Request, res: Response) => {
-    User.add(req.body)
-    .then((users: any) => {
-        res.status(201).json(users);
-    }).catch((err: any) => {
-        res.status(500).json({message: "failed to add new user."})
-    })
-})
-
 module.exports = router;

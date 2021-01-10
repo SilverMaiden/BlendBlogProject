@@ -21,11 +21,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react"
   },
   "include": [
     "src",
     "node_modules/**/*.d.ts",
     "node_modules/@types/**/*.d.ts"
+  ],
+  "extends": [
+    "tslint-config-prettier"
   ]
 }

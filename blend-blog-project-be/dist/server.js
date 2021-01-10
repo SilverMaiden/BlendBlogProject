@@ -32,6 +32,7 @@ const UsersRouter = require('./src/routes/users-routes');
 const FavoritesRouter = require('./src/routes/favorites-routes');
 const BlogPostsRouter = require('./src/routes/blogposts-routes');
 const LogInRouter = require('./src/routes/login_routes');
+const RegisterRouter = require('./src/routes/register-routes');
 const server = express_1.default();
 // Middleware
 server.use(express_1.default.json());
@@ -39,6 +40,7 @@ server.use(helmet_1.default());
 server.use(morgan_1.default('tiny'));
 server.use(cors_1.default());
 server.use(express_1.default.json());
+server.use('/api/register/', RegisterRouter);
 server.use('/api/users/', UsersRouter);
 server.use('/api/favorites/', FavoritesRouter);
 server.use('/api/blogposts/', BlogPostsRouter);

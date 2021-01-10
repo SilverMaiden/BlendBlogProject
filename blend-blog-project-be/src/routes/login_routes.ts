@@ -3,6 +3,7 @@ import express, {Request, Response} from 'express';
 import { LogIns } from '../models/login-model';
 import jwt from 'jsonwebtoken';
 import { jwtSecret } from '../config/secrets';
+import bcrypt from 'bcrypt';
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -30,7 +31,9 @@ router.post('/', (req: Request, res: Response) => {
       if (user !== undefined) {
            // tslint:disable-next-line:no-console
            console.log("hi im", user)
-           if (password === user.password)/*&& bcrypt.compareSync(password, user.password))*/ {
+           // Can now uncomment this line using bcrypt to compare the hashed version of the password
+           // with the user input
+           if (password && bcrypt.compareSync(password, user.password)) {
         const token = signToken(user);
 
         process.env.JW_TOKEN = token;

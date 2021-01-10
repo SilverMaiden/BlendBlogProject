@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-import { UserInitialState } from './initialState';
-import * as ActionTypes from '../actions/actionTypes';
+import { UserInitialState } from "./initialState";
+import * as ActionTypes from "../actions/actionTypes";
 
 // Need to replace any type with correct type
 export const userReducer = (state = UserInitialState, action: any) => {
@@ -14,7 +14,7 @@ export const userReducer = (state = UserInitialState, action: any) => {
         registerUserStart: false,
         id: action.payload.id,
         email: action.payload.email,
-        password: action.payload.password
+        password: action.payload.password,
       };
 
     case ActionTypes.REGISTER_USER_ERROR:
@@ -43,11 +43,11 @@ export const userReducer = (state = UserInitialState, action: any) => {
 
     case ActionTypes.LOGOUT_USER_ERROR:
       return { ...state, logoutUserStart: false, logoutUserError: true };
-    
+
     case ActionTypes.GET_USER_START:
       return {
         ...state,
-        getUserStart: true
+        getUserStart: true,
       };
 
     case ActionTypes.GET_USER_SUCCESS:
@@ -61,7 +61,7 @@ export const userReducer = (state = UserInitialState, action: any) => {
     case ActionTypes.GET_USER_ERROR:
       return {
         ...state,
-        getUserError: true
+        getUserError: true,
       };
 
     default:

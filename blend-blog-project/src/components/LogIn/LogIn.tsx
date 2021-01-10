@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 //Implement loader if time allows
 //import Loader from 'react-loader-spinner';
-import { Link as DOMLink, useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { Link as DOMLink, useHistory } from "react-router-dom";
+import PropTypes from "prop-types";
 
 // Maybe move redux content into Formik component
-import {
-  Form,
-  FormikProps,
-} from "formik";
+import { Form, FormikProps } from "formik";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -77,11 +74,6 @@ interface FormValues {
 
 const LogIn = (props: FormikProps<FormValues>) => {
   const classes = useStyles();
-  const [fields, setFields] = useState({
-    email: "",
-    password: "",
-    valid: true,
-  });
 
   const {
     errors,
@@ -122,7 +114,7 @@ const LogIn = (props: FormikProps<FormValues>) => {
             />
             {/* Shows error message to users if given invalid email */}
             {touched.email && errors.email ? <div>{errors.email}</div> : null}
-            {/* Email Text Field */}
+            {/* Password Text Field */}
             <TextField
               margin="normal"
               required
@@ -140,10 +132,6 @@ const LogIn = (props: FormikProps<FormValues>) => {
               <div>{errors.password}</div>
             ) : null}
 
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
