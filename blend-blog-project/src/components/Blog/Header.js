@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useHistory} from 'react-router-dom';
+import {useHistory, Link} from 'react-router-dom';
 import { logoutUser } from '../../redux/actions/userActions';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Icon from '@material-ui/core/Icon';
 import SearchIcon from '@material-ui/icons/Search';
 import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -49,10 +48,10 @@ export default function Header(props) {
       <Toolbar className={classes.toolbar}>
       <Button size="small">Home</Button>
 
-        <Button href="/createblogpost" size="small">Create New Post +
-        </Button>
+  <Link to="/createblogpost"><Button size="small">Create New Post +
+        </Button></Link>
         {/* Using this button as a temporary spacer for createpost and mypost buttons*/}
-        <Button size="small">My Posts</Button>
+        <Link to="/myposts"><Button size="small">My Posts</Button></Link>
 
         <Typography
           component="h2"
@@ -64,7 +63,6 @@ export default function Header(props) {
         >
           {title}
         </Typography>
-
         <Button disabled={true}/>
         <Button variant="outlined" size="small" onClick={handleLogOut}>
           Log out

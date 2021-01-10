@@ -16,8 +16,8 @@ export class BlogPosts {
         }
     }
 
+
     add(blogpost: any) {
-        console.log(blogpost)
         return db('blogposts')
         .insert(blogpost, "id", )
         .then(([id]: number[]) => this.find(id));

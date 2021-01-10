@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import './App.css';
 import Home from './components/Home';
 import CreateBlogPost from './components/CreateBlogPost/CreateBlogPost';
+import ViewUserPosts from './components/ViewUserPosts'
 import FormikSignUpForm from './components/SignUp';
 import FormikLogInForm from './components/LogIn/FormikLogInForm';
 import PrivateRoute from './components/PrivateRoute';
@@ -23,6 +24,8 @@ const App = () => {
           <Route exact path="/login" component={FormikLogInForm} />
           <PrivateRoute path='/home' component={Home} />
           <PrivateRoute path='/createblogpost' component={CreateBlogPost} />
+          <PrivateRoute path='/myposts' component={ViewUserPosts} />
+
 
         </Switch>
       </div>
