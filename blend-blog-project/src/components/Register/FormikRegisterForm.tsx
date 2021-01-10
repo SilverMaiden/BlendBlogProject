@@ -44,9 +44,9 @@ const FormikLogInForm = withFormik<
     password: Yup.string().required("Password Required"),
   }),
   handleSubmit(values: FormValues, { props }: any) {
-    let postData: object = { email: values.email, password: values.password};
+    let postData: object = { name: values.name, email: values.email, password: values.password};
     console.log(props.history)
-    props.loginUser(postData, props.history)
+    props.registerUser(postData, props.history)
 
   }
 })(Register);

@@ -6,7 +6,7 @@ import Footer from './Footer';
 import MainFeaturedPost from './MainFeaturedPost';
 import Container from '@material-ui/core/Container';
 
-export default function BlogPost(props: any) {
+const BlogPost = (props: any) => {
 
   const mainFeaturedPost = {
     title: 'Title of a longer featured blog post',
@@ -32,3 +32,4 @@ export default function BlogPost(props: any) {
   );
 }
 
+export default BlogPost;

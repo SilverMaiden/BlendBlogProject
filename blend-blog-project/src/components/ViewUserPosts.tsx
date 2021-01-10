@@ -9,7 +9,7 @@ import FeaturedPost from './Blog/FeaturedPost';
 import Grid from '@material-ui/core/Grid';
 
 
-export default function ViewUserPosts(props: any) {
+const ViewUserPosts = (props: any) => {
 
   const mainFeaturedPost = {
     title: 'View Your Blog Posts',
@@ -47,3 +47,4 @@ export default function ViewUserPosts(props: any) {
   );
 }
 
+export default ViewUserPosts; 

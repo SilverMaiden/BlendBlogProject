@@ -37,7 +37,7 @@ const mainFeaturedPost = {
 };
 
 
-export default function Blog(props: any) {
+const Blog = (props: any) => {
   const classes = useStyles();
   let blogposts = useSelector((state: any) => state.blogpostReducer.allBlogPosts);
 
@@ -71,3 +71,5 @@ export default function Blog(props: any) {
     </React.Fragment>
   );
 }
+
+export default Blog;

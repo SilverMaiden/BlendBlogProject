@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { withFormik, Form, Field, FormikProps} from 'formik';
-import * as Yup from 'yup';
+import { Form, FormikProps} from 'formik';
 import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -74,8 +72,17 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
   confirmPassword: string;
 }
 
-const Register = (props:FormikProps<FormValues>) => {
+const Register = (props: FormikProps<FormValues>) => {
   const classes = useStyles();
+
+  const {
+    errors,
+    touched,
+    isSubmitting,
+    getFieldHelpers,
+    getFieldProps,
+    ...rest
+  } = props;
 
     return (
         <Grid container component="main" className={classes.root}>
@@ -160,39 +167,4 @@ const Register = (props:FormikProps<FormValues>) => {
 };
 
 
-
- // The type of props FormikUserForm receives
- interface FormikUserFormProps {
-   stuff: FormValues;
-}
-
-const FormikSignUpForm = withFormik<FormikUserFormProps, FormValues>({
-    mapPropsToValues: props => ({
-          name: '',
-          email: '',
-          password: '',
-          confirmPassword: ''
-    })
-    ,validationSchema: Yup.object().shape({
-        name: Yup.string().required('you silly!'),
-        email: Yup.string().required(),
-        password: Yup.string().required(),
-        confirmPassword: Yup.string().required()
-
-    }),
-    handleSubmit({name, email, password, confirmPassword}: FormValues, {resetForm}) {
-        console.log("yaaay it worked!");
-        let values = {name, email, password, confirmPassword}
-        axios
-            .post("http://localhost:8000/api/users/", values)
-            .then(res => {
-                //setStatus(res.data);
-                //{console.log(res.data.password)}
-                {console.log(res.data)}
-                resetForm();
-            })
-            .catch(err => console.log(err.response));
-    },
-})(SignUp);
-
-export default FormikSignUpForm;
+export default Register;
