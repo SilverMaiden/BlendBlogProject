@@ -29,17 +29,29 @@ router.post('/', (req: Request, res: Response) => {
       }
     
       // Using bcrypt to hash users password
-      const passwordHash = bcrypt.hashSync(newUser.password, 10);
-      newUser.password = passwordHash;
+    const passwordHash = bcrypt.hashSync(newUser.password, 10);
+    newUser.password = passwordHash;
 
-    Register.addUser(req.body)
+    // Not currently checking for duplicate email
 
-    .then((users: any) => {
-        res.status(201).json(users);
-    }).catch((err: any) => {
-        res.status(500).json({message: "failed to add new user."})
-    })
-})
+    Register.findBy({email: newUser.email})
+    .first()
+    .then(user => {
+      if (user) {
+        // There is an account registerd with this email already 
+        res.status(409).json({ message: `User with email ${user.email} already exists` });
+      } else {
+            Register.addUser(newUser)
+            .then((users: any) => {
+                res.status(201).json(users);
+            }).catch((err: any) => {
+                res.status(500).json({message: "failed to add new user."})
+            })
+        }
+    }).catch(err => {
+        res.status(500).json({ err });
+    });
+});
 
 module.exports = router;
 
