@@ -60,10 +60,6 @@ const FeaturedPost = (props: any) => {
       ],
     });
   };
-  const handleSingleBlogClick = () => {
-    dispatch(getSingleBlogPost(post.id))
-  }
-
   
 
   return (

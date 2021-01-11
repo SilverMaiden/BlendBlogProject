@@ -54,10 +54,11 @@ interface SingleBlogPost {
   id: number;
 }
 
+
+
 export default function EditPostForm(props: FormikProps<FormValues>) {
   const classes = useStyles();
   const currentPost = useSelector((state: any) => state.blogpostReducer.singleBlogPost);
-  const initialValue = currentPost;
   console.log(currentPost)
   const {
     errors,
@@ -70,7 +71,8 @@ export default function EditPostForm(props: FormikProps<FormValues>) {
     ...rest
   } = props;
   useEffect(() => {
-    console.log(props)
+    getFieldProps("title").value=currentPost.blogpost_title
+    setFieldValue("title", currentPost.blogpost_title)
   },[])
   return (
     <React.Fragment>

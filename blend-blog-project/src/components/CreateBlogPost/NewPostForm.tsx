@@ -52,9 +52,6 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
   const {
     errors,
     touched,
-    isSubmitting,
-    getFieldHelpers,
-    getFieldProps,
     ...rest
   } = props;
 

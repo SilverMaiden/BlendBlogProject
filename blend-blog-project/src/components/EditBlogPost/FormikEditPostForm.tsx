@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { connect } from "react-redux";
 //Implement loader if time allows
 //import Loader from 'react-loader-spinner';
-import { Link as DOMLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 // PropTypes vs Typescript?
 import PropTypes from "prop-types";
 
@@ -13,6 +13,8 @@ import PropTypes from "prop-types";
 interface FormikUserFormProps {
   blogpost_title?: string;
   blogpost_content?: string;
+  blogpost?: any;
+
 }
 // Shape of form values
 interface NewPostFormValues {
@@ -28,8 +30,9 @@ const mapDispatchToProps = {
 const FormikEditPostForm = withFormik<FormikUserFormProps, NewPostFormValues>({
   mapPropsToValues: (props) => ({
     title: props.blogpost_title || "",
-    content: props.blogpost_content || ""
+    content: props.blogpost_content || "",
   }),
+  enableReinitialize: true,
   validationSchema: Yup.object().shape({
     title: Yup.string().required("Title is required"),
     content: Yup.string().required("Content Required"),

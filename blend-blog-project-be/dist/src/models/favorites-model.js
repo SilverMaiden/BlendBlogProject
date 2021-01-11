@@ -16,6 +16,11 @@ class Favorites {
         return db_config_js_1.default('favorites')
             .insert(favorites, "id");
     }
+    delete(id) {
+        return db_config_js_1.default('favorites')
+            .where("favorite.id", id)
+            .del();
+    }
 }
 exports.Favorites = Favorites;
 //# sourceMappingURL=favorites-model.js.map

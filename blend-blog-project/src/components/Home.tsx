@@ -1,13 +1,14 @@
 import * as React from "react";
 import Blog from "./Blog/Blog";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import {
   getAllBlogPosts,
   getBlogPostsByUser,
 } from "../redux/actions/blogpostActions";
 import { getUser } from "../redux/actions/userActions";
 
-function Home(props: any) {
+const Home = (props: any) => {
   const dispatch = useDispatch(); /*
   const mapDispatchToProps = (dispatch: any) => {
     dispatch(getAllBlogPosts)
@@ -33,6 +34,10 @@ function Home(props: any) {
       <Blog props={user} />
     </div>
   );
+}
+
+Home.PropTypes = {
+  user: PropTypes.object
 }
 
 export default Home;

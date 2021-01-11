@@ -6,7 +6,7 @@ import Footer from "../Blog/Footer";
 import MainFeaturedPost from "../Blog/MainFeaturedPost";
 import Container from "@material-ui/core/Container";
 
-export default function CreateBlogPost(props: any) {
+export default function CreateBlogPost() {
   const mainFeaturedPost = {
     title: "Title of a longer featured blog post",
     description:

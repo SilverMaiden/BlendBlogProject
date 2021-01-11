@@ -23,7 +23,7 @@ const ViewUserPosts = (props: any) => {
  /* useEffect(() => {
     dispatch()
   })*/
-  let id = window.localStorage.getItem("id");
+  //let id = window.localStorage.getItem("id");
   let userPosts = useSelector((state: any) => state.blogpostReducer.blogposts);
 
   return (

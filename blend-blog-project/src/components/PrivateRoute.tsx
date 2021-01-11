@@ -4,7 +4,7 @@ import { RouteProps, Route, Redirect } from "react-router-dom";
 import dotenv from "dotenv";
 dotenv.config();
 
-type PrivateRouteProps = {
+interface PrivateRouteProps {
   path: RouteProps["path"];
   component: React.ElementType;
 };
