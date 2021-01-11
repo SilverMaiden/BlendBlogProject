@@ -48,6 +48,34 @@ export const editBlogPost = (postInfo, history) => (dispatch) => {
     });
 };
 
+export const getFilteredBlogPosts = (value, history) => (dispatch) => {
+  dispatch({ type: ActionTypes.GET_FILTERED_BLOGPOSTS_START });
+  console.log(history)
+
+  // Action for search has not been created yet
+  // Need to go into action types and create GET_FILTERED_BLOGPOSTS
+  // Also need to create reducers for this 
+  // Steps:
+  // 1. Dispatch search term to this action
+  // 2. This action makes an axiosWithAuth request to the endpoint
+  //    with /searchterm
+  // 3. return search filtered results
+
+  axiosWithAuth()
+    .get(`/blogposts/${value.searchterm}`)
+    .then((response) => {
+      dispatch({
+        type: ActionTypes.GET_FILTERED_BLOGPOSTS_SUCCESS,
+        payload: response.data,
+      });
+      history.push(`/${value.searchTerm}`)
+    })
+    .catch((err) => {
+      dispatch({ type: ActionTypes.GET_FILTERD_BLOGPOSTS_ERROR, payload: err });
+    });
+};
+
+
 export const deleteBlogPost = (postId, history) => (dispatch) => {
   dispatch({ type: ActionTypes.DELETE_BLOGPOST_START });
   axiosWithAuth()

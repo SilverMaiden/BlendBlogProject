@@ -22,6 +22,16 @@ router.get('/', (req, res) => {
         res.status(500).json({ message: 'Failed to get BlogPost' });
     });
 });
+router.get('/:searchterm', (req, res) => {
+    BlogPost.findBy(req.params.searchterm)
+        .then((blogposts) => {
+        res.header("access-control-allow-origin", "*");
+        res.json(blogposts);
+    })
+        .catch((err) => {
+        res.status(500).json({ message: 'Failed to get filtered BlogPost' });
+    });
+});
 router.get('/:id', (req, res) => {
     const id = parseInt(req.params.id, 10);
     BlogPost.find(id)

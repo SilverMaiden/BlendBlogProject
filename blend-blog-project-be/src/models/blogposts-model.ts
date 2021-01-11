@@ -16,6 +16,11 @@ export class BlogPosts {
         }
     }
 
+    findBy(filter: any) {
+        return db('blogposts').where(filter);
+  }
+
+
     edit(blogpost: any) {
         return db('blogposts')
         .where('blogposts.id', blogpost.id)
