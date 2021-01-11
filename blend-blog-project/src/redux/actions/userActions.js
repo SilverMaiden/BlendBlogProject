@@ -42,12 +42,13 @@ export const registerUser = (infoNeeded, history) => (dispatch) => {
       dispatch({ type: ActionTypes.LOGIN_USER_START });
       axiosWithAuth()
         .post("/login/", infoNeeded)
-        .then((response2) => {
-          localStorage.setItem("token", response2.data.token);
+        .then((response) => {
+          localStorage.setItem("token", response.data.token);
           dispatch({
             type: ActionTypes.LOGIN_USER_SUCCESS,
-            payload: response2.data,
+            payload: response.data,
           });
+          localStorage.setItem("id", response.data.id)
           if (history.location.pathname === "/") {
             history.push("/home");
           }

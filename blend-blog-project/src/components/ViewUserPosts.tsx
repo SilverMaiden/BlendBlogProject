@@ -20,7 +20,10 @@ const ViewUserPosts = (props: any) => {
   // May need to possible dispatch an action to get all user blogs...?
   //Or just filter through all blogs in state, makes more sense.
 
-  let id = window.localStorage.getItem("id");
+ /* useEffect(() => {
+    dispatch()
+  })*/
+  //let id = window.localStorage.getItem("id");
   let userPosts = useSelector((state: any) => state.blogpostReducer.blogposts);
 
   return (
@@ -30,7 +33,7 @@ const ViewUserPosts = (props: any) => {
         <Header />
         <MainFeaturedPost post={mainFeaturedPost} />
         <Grid container spacing={4}>
-          {console.log(id)}
+          {console.log(userPosts.id)}
 
           {userPosts.map((post: any) => (
             <FeaturedPost key={post.id} post={post} />

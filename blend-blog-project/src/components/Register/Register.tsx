@@ -136,9 +136,7 @@ const Register = (props: FormikProps<FormValues>) => {
               id="password"
               autoComplete="current-password"
             />
-            { errors.password ? (
-              <div>{errors.password}</div>
-            ) : null}
+            {errors.password ? <div>{errors.password}</div> : null}
 
             {/* Confirm Password Text Field */}
             <TextField

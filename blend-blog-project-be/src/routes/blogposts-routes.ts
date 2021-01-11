@@ -29,8 +29,8 @@ router.get('/:id', (req, res) => {
   const id = parseInt(req.params.id, 10)
   BlogPost.find(id)
   .first()
-  .then((tasks: any) => {
-    res.json(tasks);
+  .then((response: any) => {
+    res.json(response);
   })
   .catch((err: any) => {
     res.status(500).json({ message: 'Failed to get BlogPost' });
@@ -46,8 +46,7 @@ router.post('/', (req: Request, res: Response) => {
     })
 })
 
-
-router.post('/:id', (req, res) => {
+router.post('/:id', (req: Request, res: Response) => {
   BlogPost.add(req.body)
   .then((blogpost: any) => {
       res.status(201).json(blogpost);
@@ -55,5 +54,32 @@ router.post('/:id', (req, res) => {
       res.status(500).json({message: err.message})
   })
 })
+
+router.put('/:id', (req: Request, res: Response) => {
+  BlogPost.edit(req.body)
+  .then((blogpost: any) => {
+      res.status(201).json(blogpost);
+  }).catch((err: any) => {
+      res.status(500).json({message: err.message})
+  })
+})
+
+
+router.delete('/:id', (req: Request, res: Response) => {
+    // tslint:disable-next-line:no-console
+    const id = parseInt(req.params.id, 10)
+    BlogPost.deleteFavorite(id)
+    .then(() => {
+      BlogPost.delete(id)
+      .then(() => {
+        res.status(201).json();
+      }).catch((err: any) => {
+        res.status(500).json({message: err.message})
+      })
+    }).
+    catch((err: any) => {
+        res.status(500).json({message: err.message})
+    })
+  });
 
 module.exports = router;

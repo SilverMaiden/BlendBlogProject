@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MainFeaturedPost = (props) => {
+const MainFeaturedPost = (props: any) => {
   const classes = useStyles();
   const { post } = props;
 

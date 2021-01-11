@@ -18,14 +18,31 @@ class BlogPosts {
             return db_config_js_1.default('blogposts');
         }
     }
+    edit(blogpost) {
+        return db_config_js_1.default('blogposts')
+            .where('blogposts.id', blogpost.id)
+            .update(blogpost)
+            .then(() => {
+            return this.find(blogpost.id);
+        });
+    }
     add(blogpost) {
         return db_config_js_1.default('blogposts')
             .insert(blogpost, "id")
             .then(([id]) => this.find(id));
     }
     delete(id) {
+        // tslint:disable-next-line:no-console
+        console.log(id);
         return db_config_js_1.default('blogposts')
-            .where("blogposts.id", id)
+            .where('blogposts.id', id)
+            .del();
+    }
+    deleteFavorite(id) {
+        // tslint:disable-next-line:no-console
+        console.log(id);
+        return db_config_js_1.default('favorites')
+            .where('favorites.blogpost_id', id)
             .del();
     }
 }

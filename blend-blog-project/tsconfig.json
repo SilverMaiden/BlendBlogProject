@@ -1,10 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "ES2015",
+      "ES2016",
+      "ES2017",
+      "ES2018",
+      "ES2019",
+      "ES2020",
+      "ESNext"
     ],
     "noImplicitAny": true,
     "noImplicitThis": true,
@@ -21,14 +28,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "include": [
     "src",
     "node_modules/**/*.d.ts",
     "node_modules/@types/**/*.d.ts"
   ],
-  "extends": [
-    "tslint-config-prettier"
-  ]
+
 }

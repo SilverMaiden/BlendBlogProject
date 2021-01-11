@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -46,20 +47,36 @@ interface FormValues {
   title: string;
   content: string;
 }
+interface SingleBlogPost {
+  blogpost_title: string;
+  blogpost_content: string;
+  user_id: number;
+  id: number;
+}
 
-export default function NewPostForm(props: FormikProps<FormValues>) {
+export default function EditPostForm(props: FormikProps<FormValues>) {
   const classes = useStyles();
+  const currentPost = useSelector((state: any) => state.blogpostReducer.singleBlogPost);
+  //console.log(currentPost)
   const {
     errors,
     touched,
+    isSubmitting,
+    getFieldHelpers,
+    getFieldProps,
+    setFieldValue,
+    setFieldTouched,
     ...rest
   } = props;
-  console.log(props)
-
+  useEffect(() => {
+    getFieldProps("title").value=currentPost.blogpost_title
+    setFieldValue("title", currentPost.blogpost_title)
+  },[])
+  //console.log(props)
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Create New Post
+        Edit Post
       </Typography>
       {/* FORM STARTS HERE */}
       <Form className={classes.form}>
@@ -70,7 +87,9 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
               required
               id="title"
               name="title"
+              key="title"
               label="title"
+              value={props.values.title}
               onChange={props.handleChange}
               style={{ width: "50%" }}
               autoComplete="Blog Title"
@@ -82,6 +101,7 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
               id="content"
               name="content"
               label="content"
+              value={props.values.content}
               onChange={props.handleChange}
               multiline
               variant="filled"
