@@ -54,12 +54,10 @@ interface SingleBlogPost {
   id: number;
 }
 
-
-
 export default function EditPostForm(props: FormikProps<FormValues>) {
   const classes = useStyles();
   const currentPost = useSelector((state: any) => state.blogpostReducer.singleBlogPost);
-  console.log(currentPost)
+  //console.log(currentPost)
   const {
     errors,
     touched,
@@ -74,6 +72,7 @@ export default function EditPostForm(props: FormikProps<FormValues>) {
     getFieldProps("title").value=currentPost.blogpost_title
     setFieldValue("title", currentPost.blogpost_title)
   },[])
+  //console.log(props)
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -90,6 +89,7 @@ export default function EditPostForm(props: FormikProps<FormValues>) {
               name="title"
               key="title"
               label="title"
+              value={props.values.title}
               onChange={props.handleChange}
               style={{ width: "50%" }}
               autoComplete="Blog Title"
@@ -101,6 +101,7 @@ export default function EditPostForm(props: FormikProps<FormValues>) {
               id="content"
               name="content"
               label="content"
+              value={props.values.content}
               onChange={props.handleChange}
               multiline
               variant="filled"
@@ -110,7 +111,6 @@ export default function EditPostForm(props: FormikProps<FormValues>) {
             />
           </Grid>
           <Grid item xs={12}>
-            <Link to="/myposts">
               <Button
                 type="submit"
                 fullWidth
@@ -119,7 +119,6 @@ export default function EditPostForm(props: FormikProps<FormValues>) {
               >
                 Submit Post
               </Button>
-            </Link>
           </Grid>
         </Grid>
       </Form>

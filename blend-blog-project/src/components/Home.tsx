@@ -36,8 +36,5 @@ const Home = (props: any) => {
   );
 }
 
-Home.PropTypes = {
-  user: PropTypes.object
-}
 
 export default Home;

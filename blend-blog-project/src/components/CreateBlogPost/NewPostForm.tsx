@@ -54,6 +54,7 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
     touched,
     ...rest
   } = props;
+  console.log(props)
 
   return (
     <React.Fragment>

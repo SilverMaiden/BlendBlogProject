@@ -9,6 +9,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { getSingleBlogPost } from "../../redux/actions/blogpostActions";
 import ConnectedEditPostForm from '../EditBlogPost/FormikEditPostForm';
+import FormikEditPostForm from '../EditBlogPost/FormikEditPostForm';
 import EditIcon from "@material-ui/icons/Edit";
 import { deleteBlogPost } from "../../redux/actions/blogpostActions";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
@@ -78,7 +79,7 @@ const BlogPost = () => {
     if (editMode) {
       return (
         <Container>
-        <ConnectedEditPostForm />
+        <FormikEditPostForm />
         </Container>
 
         
@@ -86,7 +87,7 @@ const BlogPost = () => {
     } else {
       return (
         <Container>
-        <h1>{post.title}</h1>
+        <h1>{userPost.blogpost_title}</h1>
         <br />
         {console.log(userPost)}
         <p>{userPost.blogpost_content}</p>
@@ -99,6 +100,7 @@ const BlogPost = () => {
     <React.Fragment>
       <CssBaseline />
       <main>
+        <Header />
         <MainFeaturedPost post={post} />
         <br />
         <EditIcon onClick={toggleEditMode}/>

@@ -48,6 +48,7 @@ export const registerUser = (infoNeeded, history) => (dispatch) => {
             type: ActionTypes.LOGIN_USER_SUCCESS,
             payload: response.data,
           });
+          localStorage.setItem("id", response.data.id)
           if (history.location.pathname === "/") {
             history.push("/home");
           }

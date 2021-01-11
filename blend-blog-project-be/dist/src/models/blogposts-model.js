@@ -18,6 +18,14 @@ class BlogPosts {
             return db_config_js_1.default('blogposts');
         }
     }
+    edit(blogpost) {
+        return db_config_js_1.default('blogposts')
+            .where('blogposts.id', blogpost.id)
+            .update(blogpost)
+            .then(() => {
+            return this.find(blogpost.id);
+        });
+    }
     add(blogpost) {
         return db_config_js_1.default('blogposts')
             .insert(blogpost, "id")

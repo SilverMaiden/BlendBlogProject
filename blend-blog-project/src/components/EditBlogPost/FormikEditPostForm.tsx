@@ -11,15 +11,15 @@ import PropTypes from "prop-types";
 
 // The type of props FormikUserForm receives
 interface FormikUserFormProps {
-  blogpost_title?: string;
-  blogpost_content?: string;
+  title?: string;
+  content?: string;
   blogpost?: any;
-
 }
 // Shape of form values
 interface NewPostFormValues {
   title: string;
   content: string;
+  id: number;
 }
 
 const mapDispatchToProps = {
@@ -27,10 +27,13 @@ const mapDispatchToProps = {
   useHistory,
 };
 
-const FormikEditPostForm = withFormik<FormikUserFormProps, NewPostFormValues>({
-  mapPropsToValues: (props) => ({
-    title: props.blogpost_title || "",
-    content: props.blogpost_content || "",
+const mapStateToProps = ((state: any) => ({currentPost: state.blogpostReducer.singleBlogPost}))
+
+const FormikEditPostForm = withFormik({
+  mapPropsToValues: (props: any) => ({
+    title: props.currentPost.blogpost_title,
+    content: props.currentPost.blogpost_content,
+    id: props.currentPost.id
   }),
   enableReinitialize: true,
   validationSchema: Yup.object().shape({
@@ -40,19 +43,22 @@ const FormikEditPostForm = withFormik<FormikUserFormProps, NewPostFormValues>({
   handleSubmit(values: NewPostFormValues, { props }: any) {
     console.log(props)
     let userId = window.localStorage.getItem("id");
+    console.log(props)
     let postData: object = {
       blogpost_title: values.title,
       blogpost_content: values.content,
-      user_id: userId,
+      id: values.id
     };
+    console.log(props.editBlogPost);
     console.log(props);
-    props.editBlogPost(postData, props.history);
+
+    props.editBlogPost(postData, props.history) ;
   },
 })(EditPostForm);
 
 // Connecting will allow FormikLogInForm to access loginUser dispatch function
 const ConnectedEditPostForm = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(FormikEditPostForm);
 

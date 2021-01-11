@@ -16,6 +16,15 @@ export class BlogPosts {
         }
     }
 
+    edit(blogpost: any) {
+        return db('blogposts')
+        .where('blogposts.id', blogpost.id)
+        .update(blogpost)
+        .then(() => {
+            return this.find(blogpost.id)
+        })
+    }
+
     add(blogpost: any) {
         return db('blogposts')
         .insert(blogpost, "id", )

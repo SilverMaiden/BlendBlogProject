@@ -15,19 +15,22 @@ interface FormikUserFormProps {
 }
 // Shape of form values
 interface NewPostFormValues {
-  title: string;
-  content: string;
+  title: string,
+  content: string
 }
 
 const mapDispatchToProps = {
   addBlogPost,
   useHistory,
 };
+const mapStateToProps = ((state: any) => ({user_id: state.userReducer.id}))
+
 
 const FormikNewPostForm = withFormik<FormikUserFormProps, NewPostFormValues>({
-  mapPropsToValues: (props) => ({
-    title: props.initialTitle || "",
-    content: "",
+  mapPropsToValues: (props: any) => ({
+    user_id: props.user_id,
+    title: props.title,
+    content: props.content
   }),
   validationSchema: Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -38,7 +41,7 @@ const FormikNewPostForm = withFormik<FormikUserFormProps, NewPostFormValues>({
     let postData: object = {
       blogpost_title: values.title,
       blogpost_content: values.content,
-      user_id: userId,
+      user_id: props.user_id,
     };
     console.log(props.history);
     props.addBlogPost(postData, props.history);
@@ -47,7 +50,7 @@ const FormikNewPostForm = withFormik<FormikUserFormProps, NewPostFormValues>({
 
 // Connecting will allow FormikLogInForm to access loginUser dispatch function
 const ConnectedNewPostForm = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(FormikNewPostForm);
 

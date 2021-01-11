@@ -41,26 +41,6 @@ const FeaturedPost = (props: any) => {
     editMode: false
   };
 
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const handleDelete = () => {
-    //Going to use react-confirm-alert
-    confirmAlert({
-      title: "Confirm to delete",
-      message: `Are you sure you want to delete this post? There's no getting it back.`,
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => dispatch(deleteBlogPost(post.id, history)),
-        },
-        {
-          label: "No",
-          onClick: () => alert("Click No"),
-        },
-      ],
-    });
-  };
-  
 
   return (
     <Grid item xs={12} md={6}>

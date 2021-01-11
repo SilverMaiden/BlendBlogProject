@@ -1,5 +1,6 @@
 import * as ActionTypes from "./actionTypes";
 import axiosWithAuth from "../../utils/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 
 export const addBlogPost = (postInfo, history) => async (dispatch) => {
   dispatch({ type: ActionTypes.ADD_BLOGPOST_START });
@@ -29,15 +30,18 @@ export const addBlogPost = (postInfo, history) => async (dispatch) => {
     });
 };
 
-export const editBlogPost = (postInfo, postId) => (dispatch) => {
+export const editBlogPost = (postInfo, history) => (dispatch) => {
   dispatch({ type: ActionTypes.EDIT_BLOGPOST_START });
+  console.log(history)
+
   axiosWithAuth()
-    .put(`/blogposts/${postId}`, postInfo)
+    .put(`/blogposts/${postInfo.id}`, postInfo)
     .then((response) => {
       dispatch({
         type: ActionTypes.EDIT_BLOGPOST_SUCCESS,
         payload: response.data,
       });
+      history.push('/myposts')
     })
     .catch((err) => {
       dispatch({ type: ActionTypes.EDIT_BLOGPOST_ERROR, payload: err });

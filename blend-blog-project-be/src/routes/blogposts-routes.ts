@@ -55,6 +55,16 @@ router.post('/:id', (req: Request, res: Response) => {
   })
 })
 
+router.put('/:id', (req: Request, res: Response) => {
+  BlogPost.edit(req.body)
+  .then((blogpost: any) => {
+      res.status(201).json(blogpost);
+  }).catch((err: any) => {
+      res.status(500).json({message: err.message})
+  })
+})
+
+
 router.delete('/:id', (req: Request, res: Response) => {
     // tslint:disable-next-line:no-console
     const id = parseInt(req.params.id, 10)
