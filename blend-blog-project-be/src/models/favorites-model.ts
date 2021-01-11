@@ -10,9 +10,9 @@ export class Favorites {
         return db('favorites');
     }
 
-    findByUser(id: number) {
+    findByUser(userId: number, blogpostId: number) {
         return db('favorites')
-        .where('favorites.user_id', id)
+        .where('favorites.user_id', userId && 'favorites.blogpost_id', blogpostId)
     }
 
     add(favorites: string) {
