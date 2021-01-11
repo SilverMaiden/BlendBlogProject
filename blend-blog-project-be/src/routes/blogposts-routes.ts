@@ -28,6 +28,7 @@ router.get('/', (req: Request, res: Response) => {
 router.get('/:id', (req, res) => {
   const id = parseInt(req.params.id, 10)
   BlogPost.find(id)
+  .first()
   .then((tasks: any) => {
     res.json(tasks);
   })
