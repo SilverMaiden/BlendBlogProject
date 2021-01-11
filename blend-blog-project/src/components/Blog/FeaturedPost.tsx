@@ -15,7 +15,8 @@ import Hidden from "@material-ui/core/Hidden";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch } from "react-redux";
-import { deleteBlogPost } from "../../redux/actions/blogpostActions";
+import { deleteBlogPost, getSingleBlogPost } from "../../redux/actions/blogpostActions";
+import { findAllByDisplayValue } from "@testing-library/react";
 const cardImage = "https://source.unsplash.com/random";
 
 const useStyles = makeStyles({
@@ -37,6 +38,7 @@ const FeaturedPost = (props: any) => {
   const state = {
     pathname: `/blog/${post.id}`,
     blogpost: post,
+    editMode: false
   };
 
   const dispatch = useDispatch();
@@ -58,6 +60,11 @@ const FeaturedPost = (props: any) => {
       ],
     });
   };
+  const handleSingleBlogClick = () => {
+    dispatch(getSingleBlogPost(post.id))
+  }
+
+  
 
   return (
     <Grid item xs={12} md={6}>
@@ -66,12 +73,6 @@ const FeaturedPost = (props: any) => {
           <Card className={classes.card}>
             <div className={classes.cardDetails}>
               <CardContent>
-                <Link to={`/blog/edit/${post.id}`}>
-                  <EditIcon />
-                  {console.log(typeof post.id)}
-                </Link>
-                <DeleteOutlineIcon onClick={handleDelete} />
-
                 <Typography component="h2" variant="h5">
                   {post.blogpost_title}
                 </Typography>

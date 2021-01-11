@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -46,22 +47,35 @@ interface FormValues {
   title: string;
   content: string;
 }
+interface SingleBlogPost {
+  blogpost_title: string;
+  blogpost_content: string;
+  user_id: number;
+  id: number;
+}
 
-export default function NewPostForm(props: FormikProps<FormValues>) {
+export default function EditPostForm(props: FormikProps<FormValues>) {
   const classes = useStyles();
+  const currentPost = useSelector((state: any) => state.blogpostReducer.singleBlogPost);
+  const initialValue = currentPost;
+  console.log(currentPost)
   const {
     errors,
     touched,
     isSubmitting,
     getFieldHelpers,
     getFieldProps,
+    setFieldValue,
+    setFieldTouched,
     ...rest
   } = props;
-
+  useEffect(() => {
+    console.log(props)
+  },[])
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Create New Post
+        Edit Post
       </Typography>
       {/* FORM STARTS HERE */}
       <Form className={classes.form}>
@@ -72,6 +86,7 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
               required
               id="title"
               name="title"
+              key="title"
               label="title"
               onChange={props.handleChange}
               style={{ width: "50%" }}
@@ -93,6 +108,7 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
             />
           </Grid>
           <Grid item xs={12}>
+            <Link to="/myposts">
               <Button
                 type="submit"
                 fullWidth
@@ -101,6 +117,7 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
               >
                 Submit Post
               </Button>
+            </Link>
           </Grid>
         </Grid>
       </Form>

@@ -26,8 +26,8 @@ router.get('/:id', (req, res) => {
     const id = parseInt(req.params.id, 10);
     BlogPost.find(id)
         .first()
-        .then((tasks) => {
-        res.json(tasks);
+        .then((response) => {
+        res.json(response);
     })
         .catch((err) => {
         res.status(500).json({ message: 'Failed to get BlogPost' });

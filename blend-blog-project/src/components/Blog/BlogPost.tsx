@@ -1,42 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import Header from "./Header";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import FormikNewPostForm from "../CreateBlogPost/FormikNewPostForm";
 import Footer from "./Footer";
 import MainFeaturedPost from "./MainFeaturedPost";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import { getSingleBlogPost } from "../../redux/actions/blogpostActions";
-import { getUser } from "../../redux/actions/userActions";
+import ConnectedEditPostForm from '../EditBlogPost/FormikEditPostForm';
+import EditIcon from "@material-ui/icons/Edit";
+import { deleteBlogPost } from "../../redux/actions/blogpostActions";
+import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+
 
 interface SingleBlogPost {
   blogpost_title: string;
   blogpost_content: string;
   user_id: number;
-}
-
-interface Author {
   id: number;
-  name: string;
-  email: string;
 }
 
 const BlogPost = () => {
-  const userPost: SingleBlogPost = useSelector(
-    (state: any) => state.blogpostReducer.singleBlogPost
-  );
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [editMode, setEditMode] = useState(false);
 
   const url: string = window.location.pathname;
-  const postId = parseInt(url.substring(url.lastIndexOf("/") + 1));
+  const postId: number = parseInt(url.substring(url.lastIndexOf("/") + 1));
 
-  console.log(postId);
+  const userPost: SingleBlogPost = useSelector((state: any) => state.blogpostReducer.singleBlogPost);
 
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getSingleBlogPost(postId));
-    //dispatch(getUser(userPost.user_id));
   }, []);
+
   const post = {
     title: userPost.blogpost_title,
     description: "",
@@ -46,25 +46,54 @@ const BlogPost = () => {
     linkText: "Continue reading…",
   };
 
-  //Single blog needs to get data not from props and instead from the redux store
-  // on page load for data persistence.
+  //Function for edit mode - if it's in edit mode, render a form. If not, render the viewing
+  //component.
+  const handleDelete = () => {
+    //Going to use react-confirm-alert
+    confirmAlert({
+      title: "Confirm to delete",
+      message: `Are you sure you want to delete this post? There's no getting it back.`,
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => dispatch(deleteBlogPost(postId, history)),
+        },
+        {
+          label: "No",
+          onClick: () => null,
+        },
+      ],
+    });
+  };
 
-  /* Potential steps to take:
-  Use the useSelector hook from react-redux to get all user blogs from the store
-  Filter through and find the blogpost with the blogpost id in the url?
-  Probably fine while number of blogposts are small, but this approach wouldn't scale.
-  --UPDATE: I specifically made an action and value called "singleBlogPost" in the store for 
-  this exact purpose.
+  const toggleEditMode = () => {
+    if (editMode) {
+      setEditMode(false)
+    } else {
+      setEditMode(true)
+    }
+  }
 
-  Dispatch an action specifically for getting single post? Use loader while data isn't present? 
-  ^^ For this approach, need to think about accessing values while data isn't present
-  and how to update local state.
+  const selectActiveComponent = () => {
+    if (editMode) {
+      return (
+        <Container>
+        <ConnectedEditPostForm />
+        </Container>
 
-  1. Blogpost page loads
-  2. On page load, dispatch action to redux store for single blogpost
-  3. While dispatch is taking place, show some sort of loading signal
-  4. When data is present, render the blogpost component.  
-  */
+        
+      )
+    } else {
+      return (
+        <Container>
+        <h1>{post.title}</h1>
+        <br />
+        {console.log(userPost)}
+        <p>{userPost.blogpost_content}</p>
+      </Container>
+      )
+    }
+  }
 
   return (
     <React.Fragment>
@@ -72,12 +101,10 @@ const BlogPost = () => {
       <main>
         <MainFeaturedPost post={post} />
         <br />
-        <Container>
-          <h1>{post.title}</h1>
-          <br />
+        <EditIcon onClick={toggleEditMode}/>
+        <DeleteOutlineIcon onClick={handleDelete} />
+        {selectActiveComponent()}
 
-          <p>{userPost.blogpost_content}</p>
-        </Container>
       </main>
       <Footer
         title="Footer"

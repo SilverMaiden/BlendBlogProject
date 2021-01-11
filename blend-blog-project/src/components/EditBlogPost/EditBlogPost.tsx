@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "../Blog/Header";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import ConnectedNewPostForm from "./FormikNewPostForm";
+import ConnectedEditPostForm from "./FormikEditPostForm";
 import Footer from "../Blog/Footer";
 import MainFeaturedPost from "../Blog/MainFeaturedPost";
 import Container from "@material-ui/core/Container";
 
-export default function CreateBlogPost(props: any) {
+export default function EditBlogPost(props: any) {
   const mainFeaturedPost = {
-    title: "Title of a longer featured blog post",
+    title: "EDIT POST",
     description:
       "Multiple lines of text what's most interesting in this post's contents.",
     image:
@@ -23,7 +23,7 @@ export default function CreateBlogPost(props: any) {
       <Container maxWidth="lg">
         <Header />
         <MainFeaturedPost post={mainFeaturedPost} />
-        <ConnectedNewPostForm />
+        <ConnectedEditPostForm />
       </Container>
       <Footer
         title="Footer"
