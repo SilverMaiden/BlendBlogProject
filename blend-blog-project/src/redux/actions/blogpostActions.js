@@ -10,20 +10,23 @@ export const addBlogPost = (postInfo, history) => async (dispatch) => {
     blogpost_content: postInfo.blogpost_content,
   };
 
-  try {
-    const response = await axiosWithAuth().post("/blogposts/", postToSubmit);
-    dispatch({
-      type: ActionTypes.ADD_BLOGPOST_SUCCESS,
-      payload: { ...response.data },
-    });
-    return response;
-  } catch (err) {
-    dispatch({
-      type: ActionTypes.ADD_BLOGPOST_ERROR,
-      payload: err,
-    });
-    return err;
-  }
+    axiosWithAuth()
+    .post("/blogposts/", postToSubmit)
+    .then((response) => {
+      dispatch({
+        type: ActionTypes.ADD_BLOGPOST_SUCCESS,
+        payload: { ...response.data },
+      });
+      //history.push('/myposts/')
+      return response;
+    }).catch((err) => {
+      dispatch({
+        type: ActionTypes.ADD_BLOGPOST_ERROR,
+        payload: err,
+      });
+      return err;
+
+    })
 };
 
 export const editBlogPost = (postInfo, postId) => (dispatch) => {
@@ -44,10 +47,10 @@ export const editBlogPost = (postInfo, postId) => (dispatch) => {
 export const deleteBlogPost = (postId, history) => (dispatch) => {
   dispatch({ type: ActionTypes.DELETE_BLOGPOST_START });
   axiosWithAuth()
-    .delete(`/blogposts/${postId}`)
+    .delete(`/blogposts/${postId}/`)
     .then((response) => {
       dispatch({ type: ActionTypes.DELETE_BLOGPOST_SUCCESS, payload: postId });
-      //history.push('/blogposts');
+      history.push('/home');
     })
     .catch((err) => {
       dispatch({ type: ActionTypes.DELETE_BLOGPOST_ERROR, payload: err });

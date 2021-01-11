@@ -5,6 +5,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Form, FormikProps } from "formik";
+import {Link} from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -92,14 +94,14 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button
+            <Link to="/myposts"><Button
               type="submit"
               fullWidth
               variant="contained"
               className={classes.submit}
             >
               Submit Post
-            </Button>
+            </Button></Link>
           </Grid>
         </Grid>
       </Form>

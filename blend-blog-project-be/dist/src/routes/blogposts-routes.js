@@ -49,5 +49,21 @@ router.post('/:id', (req, res) => {
         res.status(500).json({ message: err.message });
     });
 });
+router.delete('/:id', (req, res) => {
+    // tslint:disable-next-line:no-console
+    const id = parseInt(req.params.id, 10);
+    BlogPost.deleteFavorite(id)
+        .then(() => {
+        BlogPost.delete(id)
+            .then(() => {
+            res.status(201).json();
+        }).catch((err) => {
+            res.status(500).json({ message: err.message });
+        });
+    }).
+        catch((err) => {
+        res.status(500).json({ message: err.message });
+    });
+});
 module.exports = router;
 //# sourceMappingURL=blogposts-routes.js.map

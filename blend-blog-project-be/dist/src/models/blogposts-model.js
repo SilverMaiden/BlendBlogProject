@@ -24,8 +24,17 @@ class BlogPosts {
             .then(([id]) => this.find(id));
     }
     delete(id) {
+        // tslint:disable-next-line:no-console
+        console.log(id);
         return db_config_js_1.default('blogposts')
-            .where("blogposts.id", id)
+            .where('blogposts.id', id)
+            .del();
+    }
+    deleteFavorite(id) {
+        // tslint:disable-next-line:no-console
+        console.log(id);
+        return db_config_js_1.default('favorites')
+            .where('favorites.blogpost_id', id)
             .del();
     }
 }
