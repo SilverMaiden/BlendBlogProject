@@ -10,7 +10,7 @@ export const addBlogPost = (postInfo, history) => async (dispatch) => {
     blogpost_content: postInfo.blogpost_content,
   };
 
-    axiosWithAuth()
+  axiosWithAuth()
     .post("/blogposts/", postToSubmit)
     .then((response) => {
       dispatch({
@@ -19,14 +19,14 @@ export const addBlogPost = (postInfo, history) => async (dispatch) => {
       });
       //history.push('/myposts/')
       return response;
-    }).catch((err) => {
+    })
+    .catch((err) => {
       dispatch({
         type: ActionTypes.ADD_BLOGPOST_ERROR,
         payload: err,
       });
       return err;
-
-    })
+    });
 };
 
 export const editBlogPost = (postInfo, postId) => (dispatch) => {
@@ -50,7 +50,7 @@ export const deleteBlogPost = (postId, history) => (dispatch) => {
     .delete(`/blogposts/${postId}/`)
     .then((response) => {
       dispatch({ type: ActionTypes.DELETE_BLOGPOST_SUCCESS, payload: postId });
-      history.push('/home');
+      history.push("/home");
     })
     .catch((err) => {
       dispatch({ type: ActionTypes.DELETE_BLOGPOST_ERROR, payload: err });

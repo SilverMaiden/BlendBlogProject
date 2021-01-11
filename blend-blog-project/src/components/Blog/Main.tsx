@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import Markdown from "./Markdown";
 
 const useStyles = makeStyles((theme) => ({
   markdown: {
@@ -13,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Main = (props) => {
+const Main = (props: any) => {
   const classes = useStyles();
   const { posts, title } = props;
   const thing = "dsfdfsf";
@@ -26,7 +25,7 @@ const Main = (props) => {
       </Typography>
       <Divider />
       {posts.length > 0
-        ? posts.map((post) => {
+        ? posts.map((post: any) => {
             return (
               <>
                 {/*<Markdown className={classes.markdown} key={thing.substring(0, 40)}>*/}

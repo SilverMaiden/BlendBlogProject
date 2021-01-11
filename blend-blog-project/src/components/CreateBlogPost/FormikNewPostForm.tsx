@@ -46,6 +46,9 @@ const FormikNewPostForm = withFormik<FormikUserFormProps, NewPostFormValues>({
 })(NewPostForm);
 
 // Connecting will allow FormikLogInForm to access loginUser dispatch function
-const ConnectedLogInForm = connect(null, mapDispatchToProps)(FormikNewPostForm);
+const ConnectedNewPostForm = connect(
+  null,
+  mapDispatchToProps
+)(FormikNewPostForm);
 
-export default ConnectedLogInForm;
+export default ConnectedNewPostForm;

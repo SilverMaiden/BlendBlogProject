@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Blog/Header";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormikNewPostForm from "./FormikNewPostForm";
+import ConnectedNewPostForm from "./FormikNewPostForm";
 import Footer from "../Blog/Footer";
 import MainFeaturedPost from "../Blog/MainFeaturedPost";
 import Container from "@material-ui/core/Container";
@@ -23,7 +24,7 @@ export default function CreateBlogPost(props: any) {
       <Container maxWidth="lg">
         <Header />
         <MainFeaturedPost post={mainFeaturedPost} />
-        <FormikNewPostForm />
+        {/*<ConnectedNewPostForm />*/}
       </Container>
       <Footer
         title="Footer"

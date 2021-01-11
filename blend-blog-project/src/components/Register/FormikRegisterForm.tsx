@@ -25,7 +25,9 @@ const mapDispatchToProps = {
   registerUser,
   useHistory,
 };
-const regexStrongPassword = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+const regexStrongPassword = new RegExp(
+  "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+);
 
 const FormikRegisterForm = withFormik<FormikUserFormProps, FormValues>({
   mapPropsToValues: (props) => ({
@@ -35,15 +37,17 @@ const FormikRegisterForm = withFormik<FormikUserFormProps, FormValues>({
     confirmPassword: "",
   }),
   validationSchema: Yup.object().shape({
-    name: Yup.string()
-      .required("Name is required"),
+    name: Yup.string().required("Name is required"),
     email: Yup.string().required("Email is required").email("Invalid Email"),
-    password: Yup.string().required("Password Required")
-    .matches(regexStrongPassword)
-    .typeError("Must be a min of 8 character and contain at least 1 uppercase character, 1 numeric character, 1 special character, "),
+    password: Yup.string()
+      .required("Password Required")
+      .matches(regexStrongPassword)
+      .typeError(
+        "Must be a min of 8 character and contain at least 1 uppercase character, 1 numeric character, 1 special character, "
+      ),
     confirmPassword: Yup.string()
-    .required("Please confirm your password")
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required("Please confirm your password")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
   }),
   handleSubmit(values: FormValues, { props }: any) {
     let postData: object = {
