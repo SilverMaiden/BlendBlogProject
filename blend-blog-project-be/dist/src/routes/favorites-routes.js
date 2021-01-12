@@ -19,8 +19,8 @@ router.get('/', (req, res) => {
 });
 router.post('/', (req, res) => {
     // tslint:disable-next-line:no-console
-    console.log(req.body.userId, req.body.blogpostId);
-    Favorite.findByUser(req.body.userId, req.body.blogpostId)
+    console.log(req.body.userId, req.body.blogpostId, req.body);
+    Favorite.findByUser(req.body.user_id, req.body.blogpost_id)
         .first()
         .then((post) => {
         if (post) {
@@ -30,10 +30,8 @@ router.post('/', (req, res) => {
             res.status(409).json({ message: `Blog with with id ${post.blogpostId} is already in this users favorites.` });
         }
         else {
-            const data = { user_id: req.body.userId, blogpost_id: req.body.blogpostId };
             // tslint:disable-next-line:no-console
-            console.log("post is not already in favorites/no relation already exists: ", data);
-            Favorite.add(data)
+            Favorite.add(req.body)
                 .then((response) => {
                 // tslint:disable-next-line:no-console
                 console.log("response is ", response);
@@ -46,14 +44,20 @@ router.post('/', (req, res) => {
         res.status(500).json({ message: "failed to add new favorite." });
     });
 });
-router.delete('/:id', (req, res) => {
+router.delete('/:user_id/:blogpost_id', (req, res) => {
     // tslint:disable-next-line:no-console
-    const id = parseInt(req.params.id, 10);
-    Favorite.delete(id)
-        .then(() => {
-        res.status(201).json();
-    }).catch((err) => {
-        res.status(500).json({ message: err.message });
+    console.log(req.body);
+    const userId = parseInt(req.params.user_id, 10);
+    const blogpostId = parseInt(req.params.blogpost_id, 10);
+    Favorite.findByUser(userId, blogpostId)
+        .first()
+        .then((favorite) => {
+        Favorite.delete(favorite.id)
+            .then(() => {
+            res.status(201).json();
+        }).catch((err) => {
+            res.status(500).json({ message: err.message });
+        });
     });
 });
 module.exports = router;

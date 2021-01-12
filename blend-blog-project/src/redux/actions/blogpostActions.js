@@ -51,12 +51,13 @@ export const editBlogPost = (postInfo, history) => (dispatch) => {
 
 
 
-  export const getFavorites = () => (dispatch) => {
+  export const getFavorites = (userId) => (dispatch) => {
     dispatch({ type: ActionTypes.GET_FAVORITES_START });
     axiosWithAuth()
       .get("/favorites")
       .then((response) => {
         //let responsePayload = [response.data]
+
         dispatch({
           type: ActionTypes.GET_FAVORITES_SUCCESS,
           payload: response.data,
@@ -67,12 +68,12 @@ export const editBlogPost = (postInfo, history) => (dispatch) => {
       });
   };
 
-export const addFavorite = (postInfo, history) => async (dispatch) => {
+export const addFavorite = (userId, blogpostId, history) => async (dispatch) => {
     dispatch({ type: ActionTypes.ADD_FAVORITE_START });
   
     const postToSubmit = {
-      blogpost_id: postInfo.blogpost_id,
-      user_id: postInfo.user_id,
+      blogpost_id: blogpostId,
+      user_id: userId,
     };
   
     axiosWithAuth()
@@ -95,10 +96,10 @@ export const addFavorite = (postInfo, history) => async (dispatch) => {
   };
 
 
-export const deleteFavorite = (favoriteId, history) => (dispatch) => {
+export const deleteFavorite = (userId, postId, history) => (dispatch) => {
   dispatch({ type: ActionTypes.DELETE_FAVORITE_START });
   axiosWithAuth()
-    .delete(`/favorites/${favoriteId}/`)
+    .delete(`/favorites/${userId}/${postId}/`)
     .then((response) => {
       dispatch({ type: ActionTypes.DELETE_FAVORITE_SUCCESS, payload: postId });
       //history.push("/home");

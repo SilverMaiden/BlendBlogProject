@@ -62,11 +62,10 @@ const FeaturedPost = (props: any) => {
   }
   const toggleFavorites = () => {
     // Pass the current users id, along with the blog post id
-    let userAndBlogpostIds = {userId: userId, blogpostId: post.id}
     if (favorite) {
-      dispatch(deleteFavorite(userAndBlogpostIds));
+      dispatch(deleteFavorite(userId, post.id, history));
     } else {
-      dispatch(addFavorite(userAndBlogpostIds));
+      dispatch(addFavorite(userId, post.id, history));
       
     }
     setFavorite(!favorite);
