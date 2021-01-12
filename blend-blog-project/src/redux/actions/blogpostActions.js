@@ -30,6 +30,7 @@ export const addBlogPost = (postInfo, history) => async (dispatch) => {
     });
 };
 
+
 export const editBlogPost = (postInfo, history) => (dispatch) => {
   dispatch({ type: ActionTypes.EDIT_BLOGPOST_START });
   console.log(history)
@@ -47,6 +48,67 @@ export const editBlogPost = (postInfo, history) => (dispatch) => {
       dispatch({ type: ActionTypes.EDIT_BLOGPOST_ERROR, payload: err });
     });
   };
+
+
+
+  export const getFavorites = () => (dispatch) => {
+    dispatch({ type: ActionTypes.GET_FAVORITES_START });
+    axiosWithAuth()
+      .get("/favorites")
+      .then((response) => {
+        //let responsePayload = [response.data]
+        dispatch({
+          type: ActionTypes.GET_FAVORITES_SUCCESS,
+          payload: response.data,
+        });
+      })
+      .catch((err) => {
+        dispatch({ type: ActionTypes.GET_FAVORITES_ERROR, payload: err });
+      });
+  };
+
+export const addFavorite = (postInfo, history) => async (dispatch) => {
+    dispatch({ type: ActionTypes.ADD_FAVORITE_START });
+  
+    const postToSubmit = {
+      blogpost_id: postInfo.blogpost_id,
+      user_id: postInfo.user_id,
+    };
+  
+    axiosWithAuth()
+      .post("/favorites", postToSubmit)
+      .then((response) => {
+        dispatch({
+          type: ActionTypes.ADD_FAVORITE_SUCCESS,
+          payload: { ...response.data },
+        });
+        //history.push('/myposts/')
+        return response;
+      })
+      .catch((err) => {
+        dispatch({
+          type: ActionTypes.ADD_FAVORITE_ERROR,
+          payload: err,
+        });
+        return err;
+      });
+  };
+
+
+export const deleteFavorite = (favoriteId, history) => (dispatch) => {
+  dispatch({ type: ActionTypes.DELETE_FAVORITE_START });
+  axiosWithAuth()
+    .delete(`/favorites/${favoriteId}/`)
+    .then((response) => {
+      dispatch({ type: ActionTypes.DELETE_FAVORITE_SUCCESS, payload: postId });
+      //history.push("/home");
+    })
+    .catch((err) => {
+      dispatch({ type: ActionTypes.DELETE_FAVORITE_ERROR, payload: err });
+    });
+};
+
+  
 
 export const getFilteredBlogPosts = (value, history) => (dispatch) => {
   dispatch({ type: ActionTypes.GET_FILTERED_BLOGPOSTS_START });

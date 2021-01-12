@@ -24,7 +24,7 @@ const Favorites = (props: any) => {
     dispatch()
   })*/
   //let id = window.localStorage.getItem("id");
-  let userFavorites = useSelector((state: any) => state.userReducer.favorites);
+  let userFavorites = useSelector((state: any) => state.blogpostReducer.favorites);
 
   return (
     <React.Fragment>
@@ -33,7 +33,7 @@ const Favorites = (props: any) => {
         <Header />
         <MainFeaturedPost post={mainFeaturedPost} />
         <Grid container spacing={4}>
-          {console.log(userFavorites.id)}
+          {console.log(userFavorites)}
 
           {userFavorites.map((post: any) => (
             <FeaturedPost key={post.id} post={post} />

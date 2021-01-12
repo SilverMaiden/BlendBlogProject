@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 import {
   getAllBlogPosts,
   getBlogPostsByUser,
-  getFilteredBlogPosts
+  getFilteredBlogPosts,
+  getFavorites
 } from "../redux/actions/blogpostActions";
 import { getUser } from "../redux/actions/userActions";
 
@@ -22,6 +23,7 @@ const Home = (props: any) => {
   React.useEffect(() => {
     // Axios get request for blogs, for now users
     dispatch(getFilteredBlogPosts("", history));
+    dispatch(getFavorites);
     if (string_id) {
       let id = parseInt(string_id, 10);
       dispatch(getBlogPostsByUser(id));

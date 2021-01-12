@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {useSelector} from "react-redux";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,7 +19,12 @@ import StarIcon from '@material-ui/icons/Star';
 import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch } from "react-redux"; // -- Will need this for favoriting posts
 import { findAllByDisplayValue } from "@testing-library/react";
+import {addFavorite, deleteFavorite} from "../../redux/actions/blogpostActions";
+
 const cardImage = "https://source.unsplash.com/random";
+
+
+const defaultFavoriteVal: boolean = false;
 
 const useStyles = makeStyles({
   card: {
@@ -33,9 +39,13 @@ const useStyles = makeStyles({
 });
 
 const FeaturedPost = (props: any) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const classes = useStyles();
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(defaultFavoriteVal);
   const { post } = props;
+  let userFavorites = useSelector((state: any) => state.blogpostReducer.favorites);
+  let userId = useSelector((state:any) => state.userReducer.id)
 
   const state = {
     pathname: `/blog/${post.id}`,
@@ -51,13 +61,22 @@ const FeaturedPost = (props: any) => {
     }
   }
   const toggleFavorites = () => {
+    // Pass the current users id, along with the blog post id
+    let userAndBlogpostIds = {userId: userId, blogpostId: post.id}
+    if (favorite) {
+      dispatch(deleteFavorite(userAndBlogpostIds));
+    } else {
+      dispatch(addFavorite(userAndBlogpostIds));
+      
+    }
     setFavorite(!favorite);
+
   }
 
   return (
     <Grid item xs={12} md={6}>
-            {isInFavorites()}
-
+      {console.log(userId)}
+      {isInFavorites()}
       <Link to={state} style={{ textDecoration: "none" }}>
         <CardActionArea component="a">
           <Card className={classes.card}>
