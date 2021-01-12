@@ -26,11 +26,28 @@ router.get('/', (req: Request, res: Response) => {
 });
 
 
-router.get('/:searchterm', (req: Request, res: Response) => {
-  BlogPost.findBy(req.params.searchterm)
+
+// SEARCH FILTER ROUTER
+router.get('/search/:searchterm', (req: Request, res: Response) => {
+  // tslint:disable-next-line:no-console
+  const searchTerm = req.params.searchterm;
+  BlogPost.find()
   .then((blogposts: any) => {
+    if (blogposts !== undefined) {
+    const filteredData = blogposts.filter((post: any) => {
+    // tslint:disable-next-line:no-console
+      console.log(searchTerm)
+      return (post.blogpost_title.toLowerCase().includes(searchTerm)
+      || post.blogpost_content.toLowerCase().includes(searchTerm))
+    })
+    // tslint:disable-next-line:no-console
+    console.log(filteredData, blogposts)
     res.header("access-control-allow-origin", "*");
-    res.json(blogposts);
+    res.json(filteredData);}
+    else {
+      res.header("access-control-allow-origin", "*");
+      res.json(blogposts);
+    }
   })
   .catch((err: any) => {
     res.status(500).json({ message: 'Failed to get filtered BlogPost' });

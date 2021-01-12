@@ -28,19 +28,20 @@ interface Author {
   name: string;
 }
 
-const BlogPost = () => {
+const BlogPost = (props: any) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [editMode, setEditMode] = useState(false);
 
   const url: string = window.location.pathname;
   const postId: number = parseInt(url.substring(url.lastIndexOf("/") + 1));
-
+  console.log(postId)
   const userPost: SingleBlogPost = useSelector((state: any) => state.blogpostReducer.singleBlogPost);
   //const user: Author = useSelector((state))
   useEffect(() => {
+    console.log(postId)
     dispatch(getSingleBlogPost(postId));
-    dispatch(getUser(userPost.user_id));
+    //dispatch(getUser(userPost.user_id));
   }, []);
 
   const post = {

@@ -19,7 +19,8 @@ class BlogPosts {
         }
     }
     findBy(filter) {
-        return db_config_js_1.default('blogposts').where(filter);
+        return db_config_js_1.default('blogposts').where(filter)
+            .limit(10);
     }
     edit(blogpost) {
         return db_config_js_1.default('blogposts')

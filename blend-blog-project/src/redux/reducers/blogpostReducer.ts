@@ -58,6 +58,29 @@ export const blogpostReducer = (state = BlogPostsInitialState, action: any) => {
         deleteBlogPostError: true,
       };
 
+
+    case ActionTypes.GET_FILTERED_BLOGPOSTS_START:
+      return {
+        ...state,
+        getFilteredBlogPostsStart: true,
+      };
+
+
+    case ActionTypes.GET_FILTERED_BLOGPOSTS_SUCCESS:
+      return {
+        ...state,
+        getFilteredBlogPostsStart: false,
+        filteredBlogPosts: [...action.payload],
+      };
+
+    case ActionTypes.GET_FILTERED_BLOGPOSTS_ERROR:
+        return {
+          ...state,
+          getFilteredBlogPostsError: true,
+          getFilteredBlogPostsStart: false,
+        };
+  
+
     case ActionTypes.GET_BLOGPOSTS_BY_USER_START:
       return {
         ...state,

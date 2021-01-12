@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
       tbl.increments()
       tbl.string('blogpost_title', 128)
         .notNullable()
-      tbl.string('blogpost_content', 500)
+      tbl.string('blogpost_content', 10000)
         .notNullable();
       tbl.integer('user_id')
         .unsigned()

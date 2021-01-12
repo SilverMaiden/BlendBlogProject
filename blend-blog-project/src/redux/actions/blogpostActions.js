@@ -46,11 +46,24 @@ export const editBlogPost = (postInfo, history) => (dispatch) => {
     .catch((err) => {
       dispatch({ type: ActionTypes.EDIT_BLOGPOST_ERROR, payload: err });
     });
-};
+  };
 
 export const getFilteredBlogPosts = (value, history) => (dispatch) => {
   dispatch({ type: ActionTypes.GET_FILTERED_BLOGPOSTS_START });
   console.log(history)
+  if (value.length === 0) {
+    console.log("HII")
+    axiosWithAuth()
+    .get('/blogposts')
+    .then((response) => {
+      dispatch({
+        type: ActionTypes.GET_FILTERED_BLOGPOSTS_SUCCESS,
+        payload: response.data
+      })
+    }).catch((err) => {
+      dispatch({type: ActionTypes.GET_FILTERED_BLOGPOSTS_ERROR})
+    }) 
+  } else {
 
   // Action for search has not been created yet
   // Need to go into action types and create GET_FILTERED_BLOGPOSTS
@@ -62,17 +75,18 @@ export const getFilteredBlogPosts = (value, history) => (dispatch) => {
   // 3. return search filtered results
 
   axiosWithAuth()
-    .get(`/blogposts/${value.searchterm}`)
+    .get(`/blogposts/search/${value}`)
     .then((response) => {
       dispatch({
         type: ActionTypes.GET_FILTERED_BLOGPOSTS_SUCCESS,
         payload: response.data,
       });
-      history.push(`/${value.searchTerm}`)
+      //history.push(`/${value.searchTerm}`)
     })
     .catch((err) => {
-      dispatch({ type: ActionTypes.GET_FILTERD_BLOGPOSTS_ERROR, payload: err });
+      dispatch({ type: ActionTypes.GET_FILTERED_BLOGPOSTS_ERROR, payload: err });
     });
+  }
 };
 
 
@@ -114,6 +128,7 @@ export const getSingleBlogPost = (postId) => (dispatch) => {
   axiosWithAuth()
     .get(`/blogposts/${postId}`)
     .then((response) => {
+      console.log(response.data)
       dispatch({
         type: ActionTypes.GET_SINGLE_BLOGPOST_SUCCESS,
         payload: response.data,

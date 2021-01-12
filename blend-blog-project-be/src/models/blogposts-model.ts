@@ -1,5 +1,5 @@
 
-import db from '../../db-config.js';
+import db, { limit } from '../../db-config.js';
 export class BlogPosts {
     // field
     thing:string
@@ -12,12 +12,13 @@ export class BlogPosts {
             return db('blogposts')
             .where('blogposts.id', id)
         } else {
-            return db('blogposts');
+            return db('blogposts')
         }
     }
 
     findBy(filter: any) {
-        return db('blogposts').where(filter);
+        return db('blogposts').where(filter)
+        .limit(10);
   }
 
 

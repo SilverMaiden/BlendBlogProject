@@ -1,22 +1,27 @@
 import * as React from "react";
 import Blog from "./Blog/Blog";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import {
   getAllBlogPosts,
   getBlogPostsByUser,
+  getFilteredBlogPosts
 } from "../redux/actions/blogpostActions";
 import { getUser } from "../redux/actions/userActions";
+
+
 
 const Home = (props: any) => {
   const dispatch = useDispatch(); /*
   const mapDispatchToProps = (dispatch: any) => {
     dispatch(getAllBlogPosts)
   };  */
+  let history = useHistory();
   let string_id = window.localStorage.getItem("id");
   React.useEffect(() => {
     // Axios get request for blogs, for now users
-    dispatch(getAllBlogPosts());
+    dispatch(getFilteredBlogPosts("", history));
     if (string_id) {
       let id = parseInt(string_id, 10);
       dispatch(getBlogPostsByUser(id));
