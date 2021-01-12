@@ -47,6 +47,9 @@ interface FormValues {
   content: string;
 }
 
+
+
+
 export default function NewPostForm(props: FormikProps<FormValues>) {
   const classes = useStyles();
   const {

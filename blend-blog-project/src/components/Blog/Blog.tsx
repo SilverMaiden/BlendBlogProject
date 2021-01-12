@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import SearchBar from "material-ui-search-bar";
 import Container from "@material-ui/core/Container";
-import GitHubIcon from "@material-ui/icons/GitHub";
-import FacebookIcon from "@material-ui/icons/Facebook";
-import TwitterIcon from "@material-ui/icons/Twitter";
 import Header from "./Header";
 import MainFeaturedPost from "./MainFeaturedPost";
 import FeaturedPost from "./FeaturedPost";
+import {getFilteredBlogPosts} from '../../redux/actions/blogpostActions';
 
 import Footer from "./Footer";
 
@@ -19,11 +18,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
   },
 }));
-
-const sections = [
-  { title: "", url: "/#" },
-  { title: "", url: "/#" },
-];
 
 const mainFeaturedPost = {
   title: "Title of a longer featured blog post",
@@ -37,22 +31,37 @@ const mainFeaturedPost = {
 
 const Blog = (props: any) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory()
   let blogposts = useSelector(
-    (state: any) => state.blogpostReducer.allBlogPosts
+    (state: any) => state.blogpostReducer.filteredBlogPosts
   );
+
+  const [searchFilter, setSearchFilter] = useState("");
+  //const [formVal, setFormVal]
+
+  const handleSearch = () => {
+    dispatch(getFilteredBlogPosts(searchFilter, history));
+  }
 
   return (
     <React.Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="" sections={sections} />
+        <Header/>
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Container maxWidth="sm">
             <SearchBar
-            //value={this.state.value}
-            //onChange={(newValue) => this.setState({ value: newValue })}
-            //onRequestSearch={() => doSomethingWith(this.state.value)}
+            value={searchFilter}
+            onChange={((value: any) => {
+              console.log(value)
+              setSearchFilter(value)
+              console.log(searchFilter)
+              handleSearch()
+            })
+          }
+            
             />
           </Container>
           <br />

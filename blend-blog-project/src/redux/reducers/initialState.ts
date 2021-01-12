@@ -16,6 +16,7 @@ export const UserInitialState = {
 export const BlogPostsInitialState = {
   blogposts: [],
   singleBlogPost: {},
+  filteredBlogPosts: [],
   allBlogPosts: {},
   addBlogPostStart: false,
   addBlogPostError: false,

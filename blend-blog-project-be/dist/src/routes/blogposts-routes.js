@@ -22,6 +22,33 @@ router.get('/', (req, res) => {
         res.status(500).json({ message: 'Failed to get BlogPost' });
     });
 });
+// SEARCH FILTER ROUTER
+router.get('/search/:searchterm', (req, res) => {
+    // tslint:disable-next-line:no-console
+    const searchTerm = req.params.searchterm;
+    BlogPost.find()
+        .then((blogposts) => {
+        if (blogposts !== undefined) {
+            const filteredData = blogposts.filter((post) => {
+                // tslint:disable-next-line:no-console
+                console.log(searchTerm);
+                return (post.blogpost_title.toLowerCase().includes(searchTerm)
+                    || post.blogpost_content.toLowerCase().includes(searchTerm));
+            });
+            // tslint:disable-next-line:no-console
+            console.log(filteredData, blogposts);
+            res.header("access-control-allow-origin", "*");
+            res.json(filteredData);
+        }
+        else {
+            res.header("access-control-allow-origin", "*");
+            res.json(blogposts);
+        }
+    })
+        .catch((err) => {
+        res.status(500).json({ message: 'Failed to get filtered BlogPost' });
+    });
+});
 router.get('/:id', (req, res) => {
     const id = parseInt(req.params.id, 10);
     BlogPost.find(id)

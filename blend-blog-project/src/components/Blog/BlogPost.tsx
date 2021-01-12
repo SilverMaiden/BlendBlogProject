@@ -6,9 +6,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Footer from "./Footer";
 import MainFeaturedPost from "./MainFeaturedPost";
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 import { getSingleBlogPost } from "../../redux/actions/blogpostActions";
-import ConnectedEditPostForm from '../EditBlogPost/FormikEditPostForm';
+import { getUser } from '../../redux/actions/userActions';
 import FormikEditPostForm from '../EditBlogPost/FormikEditPostForm';
 import EditIcon from "@material-ui/icons/Edit";
 import { deleteBlogPost } from "../../redux/actions/blogpostActions";
@@ -24,18 +23,25 @@ interface SingleBlogPost {
   id: number;
 }
 
-const BlogPost = () => {
+interface Author {
+  id: number;
+  name: string;
+}
+
+const BlogPost = (props: any) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [editMode, setEditMode] = useState(false);
 
   const url: string = window.location.pathname;
   const postId: number = parseInt(url.substring(url.lastIndexOf("/") + 1));
-
+  console.log(postId)
   const userPost: SingleBlogPost = useSelector((state: any) => state.blogpostReducer.singleBlogPost);
-
+  //const user: Author = useSelector((state))
   useEffect(() => {
+    console.log(postId)
     dispatch(getSingleBlogPost(postId));
+    //dispatch(getUser(userPost.user_id));
   }, []);
 
   const post = {
