@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
@@ -16,8 +16,7 @@ import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import StarIcon from '@material-ui/icons/Star';
 import EditIcon from "@material-ui/icons/Edit";
-import { useDispatch } from "react-redux";
-import { deleteBlogPost, getSingleBlogPost } from "../../redux/actions/blogpostActions";
+import { useDispatch } from "react-redux"; // -- Will need this for favoriting posts
 import { findAllByDisplayValue } from "@testing-library/react";
 const cardImage = "https://source.unsplash.com/random";
 
@@ -35,6 +34,7 @@ const useStyles = makeStyles({
 
 const FeaturedPost = (props: any) => {
   const classes = useStyles();
+  const [favorite, setFavorite] = useState(false);
   const { post } = props;
 
   const state = {
@@ -43,9 +43,21 @@ const FeaturedPost = (props: any) => {
     editMode: false
   };
 
+  const isInFavorites = () => {
+    if (favorite) {
+      return (<StarIcon onClick={toggleFavorites}/>)
+    } else {
+      return (<StarOutlineIcon onClick={toggleFavorites}/>)
+    }
+  }
+  const toggleFavorites = () => {
+    setFavorite(!favorite);
+  }
 
   return (
     <Grid item xs={12} md={6}>
+            {isInFavorites()}
+
       <Link to={state} style={{ textDecoration: "none" }}>
         <CardActionArea component="a">
           <Card className={classes.card}>

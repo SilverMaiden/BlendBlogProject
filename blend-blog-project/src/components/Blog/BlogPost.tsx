@@ -12,6 +12,8 @@ import FormikEditPostForm from '../EditBlogPost/FormikEditPostForm';
 import EditIcon from "@material-ui/icons/Edit";
 import { deleteBlogPost } from "../../redux/actions/blogpostActions";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
+import StarIcon from '@material-ui/icons/Star';
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
