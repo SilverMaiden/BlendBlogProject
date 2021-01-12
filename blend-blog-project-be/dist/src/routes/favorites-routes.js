@@ -14,7 +14,17 @@ router.get('/', (req, res) => {
         res.json(resources);
     })
         .catch((err) => {
-        res.status(500).json({ message: 'Failed to get Favorite' });
+        res.status(500).json({ message: 'Failed to get Favorites' });
+    });
+});
+router.get('/:user_id', (req, res) => {
+    const userId = parseInt(req.params.user_id, 10);
+    Favorite.find(userId)
+        .then((resources) => {
+        res.json(resources);
+    })
+        .catch((err) => {
+        res.status(500).json({ message: 'Failed to get Favorites' });
     });
 });
 router.post('/', (req, res) => {

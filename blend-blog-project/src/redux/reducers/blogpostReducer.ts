@@ -20,6 +20,64 @@ export const blogpostReducer = (state = BlogPostsInitialState, action: any) => {
         addBlogPostError: true,
       };
 
+
+// GET FAVORITES
+case ActionTypes.GET_FAVORITES_START:
+  return { ...state, getFavoritesStart: true };
+
+case ActionTypes.GET_FAVORITES_SUCCESS:
+  return {
+    ...state,
+    getFavoriteStart: false,
+    favorites: action.payload,
+  };
+
+case ActionTypes.GET_FAVORITES_ERROR:
+  return {
+    ...state,
+    getFavoritesStart: false,
+    getFavoritesError: true,
+  };
+
+
+  // GET FAVORITES
+case ActionTypes.GET_FAVORITES_START:
+  return { ...state, getFavoritesStart: true };
+
+case ActionTypes.GET_FAVORITES_SUCCESS:
+  return {
+    ...state,
+    getFavoriteStart: false,
+    favorites: action.payload,
+  };
+
+case ActionTypes.GET_FAVORITES_ERROR:
+  return {
+    ...state,
+    getFavoritesStart: false,
+    getFavoritesError: true,
+  };
+
+
+
+// ADD FAVORITE 
+      case ActionTypes.ADD_FAVORITE_START:
+        return { ...state, addFavoriteStart: true };
+  
+      case ActionTypes.ADD_FAVORITE_SUCCESS:
+        return {
+          ...state,
+          addFavoriteStart: false,
+          favorites: [...state.favorites, action.payload],
+        };
+  
+      case ActionTypes.ADD_FAVORITE_ERROR:
+        return {
+          ...state,
+          addFavoriteStart: false,
+          addFavoriteError: true,
+        };
+  
     case ActionTypes.EDIT_BLOGPOST_START:
       return {
         ...state,
@@ -49,7 +107,7 @@ export const blogpostReducer = (state = BlogPostsInitialState, action: any) => {
       return {
         ...state,
         deleteBlogPostStart: false,
-        blogposts: [],
+        singleBlogPost: [],
       };
     case ActionTypes.DELETE_BLOGPOST_ERROR:
       return {

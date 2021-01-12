@@ -54,7 +54,7 @@ export const editBlogPost = (postInfo, history) => (dispatch) => {
   export const getFavorites = (userId) => (dispatch) => {
     dispatch({ type: ActionTypes.GET_FAVORITES_START });
     axiosWithAuth()
-      .get("/favorites")
+      .get(`/favorites/${userId}`)
       .then((response) => {
         //let responsePayload = [response.data]
 
