@@ -4,6 +4,7 @@ export const UserInitialState = {
   id: localStorage.getItem("id"),
   blogposts: [],
   locations: [],
+  favorites: [],
   registerUserStart: false,
   registerUserError: false,
   loginUserStart: false,

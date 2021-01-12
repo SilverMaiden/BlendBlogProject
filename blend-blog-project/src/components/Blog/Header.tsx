@@ -51,9 +51,11 @@ const Header = (props: any) => {
         <Link to="/createblogpost">
           <Button size="small">Create New Post +</Button>
         </Link>
-        {/* Using this button as a temporary spacer for createpost and mypost buttons*/}
         <Link to="/myposts">
           <Button size="small">My Posts</Button>
+        </Link>
+        <Link to="/favorites">
+          <Button size="small">Favorites</Button>
         </Link>
 
         <Typography

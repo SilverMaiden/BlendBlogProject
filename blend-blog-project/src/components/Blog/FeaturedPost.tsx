@@ -13,6 +13,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
+import StarIcon from '@material-ui/icons/Star';
 import EditIcon from "@material-ui/icons/Edit";
 import { useDispatch } from "react-redux";
 import { deleteBlogPost, getSingleBlogPost } from "../../redux/actions/blogpostActions";
