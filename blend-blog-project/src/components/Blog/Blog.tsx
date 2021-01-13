@@ -25,7 +25,7 @@ const mainBlogHeroBanner: object = {
   imgText: "main image description",
 };
 
-const Blog = (props: {user: string} ) => {
+const Blog = (props: any ) => {
   const dispatch = useDispatch();
   const history = useHistory();
   let blogposts = useSelector(
