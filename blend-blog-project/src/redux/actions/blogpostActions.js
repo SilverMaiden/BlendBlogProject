@@ -51,20 +51,28 @@ export const editBlogPost = (postInfo, history) => (dispatch) => {
 
   export const getFavorites = (userId) => (dispatch) => {
     dispatch({ type: ActionTypes.GET_FAVORITES_START });
+
     axiosWithAuth()
       .get(`/favorites/${userId}`)
       .then((response) => {
         //let responsePayload = [response.data]
+
         // Need code here to make get requests for the users favorite posts.
-        dispatch({
-          type: ActionTypes.GET_FAVORITES_SUCCESS,
-          payload: response.data,
-        });
-      })
-      .catch((err) => {
-        dispatch({ type: ActionTypes.GET_FAVORITES_ERROR, payload: err });
-      });
-  };
+        let data = [];
+
+        response.data.map((favorite) => (
+          axiosWithAuth()
+          .get(`/blogposts/${favorite.blogpost_id}`)
+          .then((response) => {
+            data.push(response.data)
+          }).catch((err) => {
+              dispatch({ type: ActionTypes.GET_FAVORITES_ERROR, payload: err });
+            })
+        ))
+        dispatch({ type: ActionTypes.GET_FAVORITES_SUCCESS, payload: data})
+          })
+        };
+  
 
 export const addFavorite = (userId, blogpostId, history) => async (dispatch) => {
     dispatch({ type: ActionTypes.ADD_FAVORITE_START });
