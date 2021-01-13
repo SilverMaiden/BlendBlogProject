@@ -60,4 +60,10 @@ const FormikRegisterForm = withFormik<FormikUserFormProps, FormValues>({
   },
 })(Register);
 
-export default FormikRegisterForm;
+// Connecting will allow FormikLogInForm to access loginUser dispatch function
+const ConnectedRegisterForm = connect(
+  null,
+  mapDispatchToProps
+)(FormikRegisterForm);
+
+export default ConnectedRegisterForm;
