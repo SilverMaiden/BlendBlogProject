@@ -25,9 +25,9 @@ const Home = (props: any) => {
     dispatch(getFilteredBlogPosts("", history));
     if (string_id) {
       let id = parseInt(string_id, 10);
-      dispatch(getBlogPostsByUser(user));
-      dispatch(getFavorites(user));
-
+      dispatch(getUser(id));
+      dispatch(getBlogPostsByUser(id));
+      //dispatch(getFavorites(user));
     }
   }, [dispatch]);
 

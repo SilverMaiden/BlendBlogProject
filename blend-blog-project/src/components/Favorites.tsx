@@ -7,8 +7,11 @@ import Container from "@material-ui/core/Container";
 import { useSelector } from "react-redux";
 import FeaturedPost from "./Blog/FeaturedPost";
 import Grid from "@material-ui/core/Grid";
+import {useDispatch} from 'react-redux';
+import {getFavorites} from '../redux/actions/blogpostActions';
 
 const Favorites = (props: any) => {
+  let dispatch = useDispatch();
   const mainFeaturedPost = {
     title: "View Your Favorites",
     description: "Here you can view all your favorite blog posts.",
@@ -17,13 +20,13 @@ const Favorites = (props: any) => {
     imgText: "main image description",
   };
 
-  // May need to possible dispatch an action to get all user blogs...?
-  //Or just filter through all blogs in state, makes more sense.
+  useEffect(() => {
+    //dispatch(getFavorites(userId));
 
- /* useEffect(() => {
-    dispatch()
-  })*/
-  //let id = window.localStorage.getItem("id");
+  }, [])
+
+  let id = window.localStorage.getItem("id");
+  let userId = useSelector((state: any) => state.userReducer.id);
   let userFavorites = useSelector((state: any) => state.blogpostReducer.favorites);
 
   return (

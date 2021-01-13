@@ -89,8 +89,6 @@ const BlogPost = (props: any) => {
         <Container>
         <FormikEditPostForm />
         </Container>
-
-        
       )
     } else {
       return (

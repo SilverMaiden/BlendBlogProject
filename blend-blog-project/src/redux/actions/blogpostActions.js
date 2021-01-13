@@ -180,9 +180,11 @@ export const getBlogPostsByUser = (userId) => (dispatch) => {
   axiosWithAuth()
     .get("/blogposts/")
     .then((response) => {
+      console.log("HIIII", response)
       const filteredPosts = response.data.filter(
         (post) => post.user_id === userId
       );
+      console.log(filteredPosts)
       dispatch({
         type: ActionTypes.GET_BLOGPOSTS_BY_USER_SUCCESS,
         payload: filteredPosts,
