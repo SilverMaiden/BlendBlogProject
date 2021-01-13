@@ -59,7 +59,7 @@ const BlogCard = (props: any) => {
 
   // To be passed to the Blog card
   const state = {
-    pathname: `/blog/${userId}`,
+    pathname: `/blog/${post.id}`,
     blogpost: post,
     editMode: false,
   };

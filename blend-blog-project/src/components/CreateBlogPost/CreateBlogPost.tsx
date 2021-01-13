@@ -2,6 +2,9 @@ import React from "react";
 import Header from "../Blog/Header";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import ConnectedNewPostForm from "./FormikNewPostForm";
+// Trying without Conected wrapper to avoid errors
+//import FormikNewPostForm from "./FormikNewPostForm";
+
 import Footer from "../Blog/Footer";
 import HeroBanner from "../Blog/HeroBanner";
 import Container from "@material-ui/core/Container";

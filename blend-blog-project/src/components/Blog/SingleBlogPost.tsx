@@ -12,7 +12,7 @@ import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import Header from "./Header";
 import Footer from "./Footer";
 import HeroBanner from "./HeroBanner";
-import FormikEditPostForm from "../EditBlogPost/FormikEditPostForm";
+import ConnectedEditPostForm from "../EditBlogPost/FormikEditPostForm";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
@@ -21,6 +21,9 @@ import {
   deleteBlogPost,
   getSingleBlogPost,
 } from "../../redux/actions/blogpostActions";
+import {
+  getUser
+} from "../../redux/actions/userActions";
 
 // Typescript interface definition for a single blog post.
 interface SingleBlogPost {
@@ -41,6 +44,7 @@ const SingleBlogPost = () => {
   const history = useHistory();
   const [editMode, setEditMode] = useState<boolean | null>(false);
 
+  const id = window.localStorage.getItem("id");
   const url: string = window.location.pathname;
   const postId: number = parseInt(url.substring(url.lastIndexOf("/") + 1));
   console.log(postId);
@@ -50,8 +54,10 @@ const SingleBlogPost = () => {
   //const user: Author = useSelector((state))
   useEffect(() => {
     console.log(postId);
-    dispatch(getSingleBlogPost(postId));
-    //dispatch(getUser(userPost.user_id));
+    if (id === "") {
+      dispatch(getUser(userPost.user_id))
+    }
+      dispatch(getSingleBlogPost(postId));
   }, []);
 
   const post = {
@@ -96,7 +102,7 @@ const SingleBlogPost = () => {
     if (editMode) {
       return (
         <Container>
-          <FormikEditPostForm />
+          <ConnectedEditPostForm />
         </Container>
       );
     } else {
