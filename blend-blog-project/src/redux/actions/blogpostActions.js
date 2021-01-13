@@ -18,6 +18,7 @@ export const addBlogPost = (postInfo, history) => async (dispatch) => {
         type: ActionTypes.ADD_BLOGPOST_SUCCESS,
         payload: { ...response.data },
       });
+      //let history = useHistory()
       //history.push('/myposts/')
       return response;
     })
