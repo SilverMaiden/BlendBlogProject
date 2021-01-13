@@ -24,6 +24,15 @@ const cardImage = "https://source.unsplash.com/random";
 
 const defaultFavoriteVal: boolean = false;
 
+/*
+interface propVals {
+  id: number,
+  blogpost_title: string,
+  blogpost_content: string,
+  key: any,
+  post: any
+}*/
+
 const useStyles = makeStyles({
   card: {
     display: "flex",
@@ -36,6 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
+// Need to replace type 'any' 
 const BlogCard = (props: any) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -82,9 +92,6 @@ const BlogCard = (props: any) => {
               <CardContent>
                 <Typography component="h2" variant="h5">
                   {post.blogpost_title}
-                </Typography>
-                <Typography variant="subtitle1" color="textSecondary">
-                  {post.date}
                 </Typography>
                 <Typography variant="subtitle1" paragraph>
                   {post.blogpost_content}

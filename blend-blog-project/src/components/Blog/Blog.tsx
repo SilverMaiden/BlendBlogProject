@@ -17,7 +17,7 @@ import Footer from "./Footer";
 // Actions Import
 import { getFilteredBlogPosts } from "../../redux/actions/blogpostActions";
 
-const mainBlogHeroBanner = {
+const mainBlogHeroBanner: object = {
   title: "Welcome to TheBlogTm",
   description: "Enjoy reading our super interesting content!",
   image:
@@ -25,7 +25,7 @@ const mainBlogHeroBanner = {
   imgText: "main image description",
 };
 
-const Blog = (props: any) => {
+const Blog = (props: {user: string} ) => {
   const dispatch = useDispatch();
   const history = useHistory();
   let blogposts = useSelector(
@@ -69,7 +69,7 @@ const Blog = (props: any) => {
               </Container>
             ) : (
               blogposts.map((post: any) => (
-                <BlogCard key={post.blogpost_title} post={post} />
+                <BlogCard key={post.id} post={post} />
               ))
             )}
           </Grid>

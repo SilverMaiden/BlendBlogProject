@@ -11,7 +11,7 @@ import {
 } from "../redux/actions/blogpostActions";
 import { getUser } from "../redux/actions/userActions";
 
-const Home = (props: any) => {
+const Home = () => {
   const dispatch = useDispatch(); /*
   const mapDispatchToProps = (dispatch: any) => {
     dispatch(getAllBlogPosts)
