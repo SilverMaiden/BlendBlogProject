@@ -49,15 +49,13 @@ export const editBlogPost = (postInfo, history) => (dispatch) => {
     });
   };
 
-
-
   export const getFavorites = (userId) => (dispatch) => {
     dispatch({ type: ActionTypes.GET_FAVORITES_START });
     axiosWithAuth()
       .get(`/favorites/${userId}`)
       .then((response) => {
         //let responsePayload = [response.data]
-
+        // Need code here to make get requests for the users favorite posts.
         dispatch({
           type: ActionTypes.GET_FAVORITES_SUCCESS,
           payload: response.data,

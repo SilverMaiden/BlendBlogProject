@@ -15,10 +15,16 @@ export class Favorites {
     }
 }
 
-    findByUser(userId: number, blogpostId: number) {
+    findByUserAndBlogPost(userId: number, blogpostId: number) {
         return db('favorites')
         .where('favorites.user_id', userId)
         .where('favorites.blogpost_id', blogpostId)
+    }
+
+
+    findByUser(userId: number) {
+        return db('favorites')
+        .where('favorites.user_id', userId)
     }
 
     add(favorites: any) {

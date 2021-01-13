@@ -18,10 +18,14 @@ class Favorites {
             return db_config_js_1.default('favorites');
         }
     }
-    findByUser(userId, blogpostId) {
+    findByUserAndBlogPost(userId, blogpostId) {
         return db_config_js_1.default('favorites')
             .where('favorites.user_id', userId)
             .where('favorites.blogpost_id', blogpostId);
+    }
+    findByUser(userId) {
+        return db_config_js_1.default('favorites')
+            .where('favorites.user_id', userId);
     }
     add(favorites) {
         return db_config_js_1.default('favorites')

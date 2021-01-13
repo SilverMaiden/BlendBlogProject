@@ -39,24 +39,24 @@ case ActionTypes.GET_FAVORITES_ERROR:
     getFavoritesError: true,
   };
 
+  case ActionTypes.DELETE_FAVORITE_START:
+    return {
+      ...state,
+      deleteFavoriteStart: true,
+    };
+  case ActionTypes.DELETE_FAVORITE_SUCCESS:
+    return {
+      ...state,
+      deleteFavoriteStart: false
+      };
+  case ActionTypes.DELETE_FAVORITE_ERROR:
+    return {
+      ...state,
+      deleteFavoriteStart: false,
+      deleteFavoriteError: true,
+    };
 
-  // GET FAVORITES
-case ActionTypes.GET_FAVORITES_START:
-  return { ...state, getFavoritesStart: true };
 
-case ActionTypes.GET_FAVORITES_SUCCESS:
-  return {
-    ...state,
-    getFavoriteStart: false,
-    favorites: action.payload,
-  };
-
-case ActionTypes.GET_FAVORITES_ERROR:
-  return {
-    ...state,
-    getFavoritesStart: false,
-    getFavoritesError: true,
-  };
 
 
 
@@ -107,7 +107,7 @@ case ActionTypes.GET_FAVORITES_ERROR:
       return {
         ...state,
         deleteBlogPostStart: false,
-        singleBlogPost: [],
+        blogposts: [],
       };
     case ActionTypes.DELETE_BLOGPOST_ERROR:
       return {

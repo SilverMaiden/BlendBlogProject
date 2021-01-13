@@ -6,8 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 // const Favorite = require('../models/favorites-model.js');
 const favorites_model_1 = require("../models/favorites-model");
+const blogposts_model_1 = require("../models/blogposts-model");
 const router = express_1.default.Router();
 const Favorite = new favorites_model_1.Favorites();
+const BlogPost = new blogposts_model_1.BlogPosts();
 router.get('/', (req, res) => {
     Favorite.find()
         .then((resources) => {
@@ -19,28 +21,25 @@ router.get('/', (req, res) => {
 });
 router.get('/:user_id', (req, res) => {
     const userId = parseInt(req.params.user_id, 10);
-    Favorite.find(userId)
+    Favorite.findByUser(userId)
         .then((resources) => {
+        // Need code here to make get requests for the users favorite posts.
+        // Favorite.findBlogs()
         res.json(resources);
     })
         .catch((err) => {
-        res.status(500).json({ message: 'Failed to get Favorites' });
+        res.status(500).json({ message: 'Failed to get Favorites', err });
     });
 });
 router.post('/', (req, res) => {
-    // tslint:disable-next-line:no-console
-    console.log(req.body.userId, req.body.blogpostId, req.body);
-    Favorite.findByUser(req.body.user_id, req.body.blogpost_id)
+    Favorite.findByUserAndBlogPost(req.body.user_id, req.body.blogpost_id)
         .first()
         .then((post) => {
         if (post) {
-            // tslint:disable-next-line:no-console
-            console.log("post is already in favorites/relation already exists");
             // This post is already in this users favorites.
             res.status(409).json({ message: `Blog with with id ${post.blogpostId} is already in this users favorites.` });
         }
         else {
-            // tslint:disable-next-line:no-console
             Favorite.add(req.body)
                 .then((response) => {
                 // tslint:disable-next-line:no-console
@@ -55,11 +54,9 @@ router.post('/', (req, res) => {
     });
 });
 router.delete('/:user_id/:blogpost_id', (req, res) => {
-    // tslint:disable-next-line:no-console
-    console.log(req.body);
     const userId = parseInt(req.params.user_id, 10);
     const blogpostId = parseInt(req.params.blogpost_id, 10);
-    Favorite.findByUser(userId, blogpostId)
+    Favorite.findByUserAndBlogPost(userId, blogpostId)
         .first()
         .then((favorite) => {
         Favorite.delete(favorite.id)

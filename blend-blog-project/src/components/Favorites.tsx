@@ -34,7 +34,6 @@ const Favorites = (props: any) => {
         <MainFeaturedPost post={mainFeaturedPost} />
         <Grid container spacing={4}>
           {console.log(userFavorites)}
-
           {userFavorites.map((post: any) => (
             <FeaturedPost key={post.id} post={post} />
           ))}

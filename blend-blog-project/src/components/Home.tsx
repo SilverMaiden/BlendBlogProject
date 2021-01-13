@@ -23,16 +23,14 @@ const Home = (props: any) => {
   React.useEffect(() => {
     // Axios get request for blogs, for now users
     dispatch(getFilteredBlogPosts("", history));
-    dispatch(getFavorites);
     if (string_id) {
       let id = parseInt(string_id, 10);
-      dispatch(getBlogPostsByUser(id));
+      dispatch(getBlogPostsByUser(user));
+      dispatch(getFavorites(user));
+
     }
   }, [dispatch]);
 
-  const allBlogs = useSelector(
-    (state: any) => state.blogpostReducer.allBlogPosts
-  );
   const user = useSelector((state: any) => state.userReducer.id);
   console.log(user);
   return (

@@ -18,10 +18,6 @@ class BlogPosts {
             return db_config_js_1.default('blogposts');
         }
     }
-    findBy(filter) {
-        return db_config_js_1.default('blogposts').where(filter)
-            .limit(10);
-    }
     edit(blogpost) {
         return db_config_js_1.default('blogposts')
             .where('blogposts.id', blogpost.id)
