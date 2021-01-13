@@ -66,6 +66,9 @@ In order for the app to function correctly, the user must set up their own envir
 
 Testing was attempted using the @testing-library/jest-dom -- unfortunately due to starting implementation of tests extremely late in the project, they do not currently run correctly. Exisiting tests are grouped into files by component. 
 
+## Best Practices
+
+I tried to keep my code clean and readable, but in the rush there were definitely times when it wasn't as neat and organized as I'd have liked! However, when coding/developing I would do so on different, descriptive branches for each different feature of the application and I made sure my files were linted. I also followed REST guidelines for creating the backend API.
 
 ## Some Current Issues/Bugs 
 Routing for the front end is not 100% functional as of now - at some point, some of the components don't seem to recognize the blogpost id, therefore sending the user to /blog/undefined.
