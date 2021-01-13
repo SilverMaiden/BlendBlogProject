@@ -7,13 +7,11 @@ import {
   getAllBlogPosts,
   getBlogPostsByUser,
   getFilteredBlogPosts,
-  getFavorites
+  getFavorites,
 } from "../redux/actions/blogpostActions";
 import { getUser } from "../redux/actions/userActions";
 
-
-
-const Home = (props: any) => {
+const Home = () => {
   const dispatch = useDispatch(); /*
   const mapDispatchToProps = (dispatch: any) => {
     dispatch(getAllBlogPosts)
@@ -39,7 +37,6 @@ const Home = (props: any) => {
       <Blog props={user} />
     </div>
   );
-}
-
+};
 
 export default Home;

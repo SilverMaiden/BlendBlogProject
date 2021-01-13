@@ -2,14 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import Header from "./Blog/Header";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Footer from "./Blog/Footer";
-import MainFeaturedPost from "./Blog/MainFeaturedPost";
+import HeroBanner from "./Blog/HeroBanner";
 import Container from "@material-ui/core/Container";
 import { useSelector } from "react-redux";
-import FeaturedPost from "./Blog/FeaturedPost";
+import BlogCard from "./Blog/BlogCard";
 import Grid from "@material-ui/core/Grid";
 
-const ViewUserPosts = (props: any) => {
-  const mainFeaturedPost = {
+const ViewUserPosts = () => {
+  const viewUserPostsHeroBanner = {
     title: "View Your Blog Posts",
     description: "Here you can view all the blog posts you have created.",
     image:
@@ -20,7 +20,7 @@ const ViewUserPosts = (props: any) => {
   // May need to possible dispatch an action to get all user blogs...?
   //Or just filter through all blogs in state, makes more sense.
 
- /* useEffect(() => {
+  /* useEffect(() => {
     dispatch()
   })*/
   //let id = window.localStorage.getItem("id");
@@ -31,12 +31,12 @@ const ViewUserPosts = (props: any) => {
       <CssBaseline />
       <Container maxWidth="lg">
         <Header />
-        <MainFeaturedPost post={mainFeaturedPost} />
+        <HeroBanner post={viewUserPostsHeroBanner} />
         <Grid container spacing={4}>
           {console.log(userPosts)}
 
           {userPosts.map((post: any) => (
-            <FeaturedPost key={post.id} post={post} />
+            <BlogCard key={post.id} post={post} />
           ))}
         </Grid>
       </Container>

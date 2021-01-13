@@ -47,19 +47,11 @@ interface FormValues {
   content: string;
 }
 
-
-
-
 export default function NewPostForm(props: FormikProps<FormValues>) {
   const classes = useStyles();
   const history = useHistory();
-  const {
-    errors,
-    touched,
-    handleSubmit,
-    ...rest
-  } = props;
-  console.log(props)
+  const { errors, touched, handleSubmit, ...rest } = props;
+  console.log(props);
 
   return (
     <React.Fragment>
@@ -96,18 +88,18 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
             />
           </Grid>
           <Grid item xs={12}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                className={classes.submit}
-                onClick={(() => {
-                  history.push('/myposts')
-                  handleSubmit()
-                })}
-              >
-                Submit Post
-              </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}
+              onClick={() => {
+                history.push("/myposts");
+                handleSubmit();
+              }}
+            >
+              Submit Post
+            </Button>
           </Grid>
         </Grid>
       </Form>

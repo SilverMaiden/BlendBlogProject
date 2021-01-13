@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { Fragment } from "react";
 import Header from "./Blog/Header";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Footer from "./Blog/Footer";
-import MainFeaturedPost from "./Blog/MainFeaturedPost";
+import HeroBanner from "./Blog/HeroBanner";
 import Container from "@material-ui/core/Container";
 import { useSelector } from "react-redux";
-import FeaturedPost from "./Blog/FeaturedPost";
+import BlogCard from "./Blog/BlogCard";
 import Grid from "@material-ui/core/Grid";
-import {useDispatch} from 'react-redux';
-import {getFavorites} from '../redux/actions/blogpostActions';
+import { useDispatch } from "react-redux";
+//import { getFavorites } from "../redux/actions/blogpostActions";
 
 const Favorites = (props: any) => {
   let dispatch = useDispatch();
-  const mainFeaturedPost = {
+  const heroBanner = {
     title: "View Your Favorites",
     description: "Here you can view all your favorite blog posts.",
     image:
@@ -20,25 +20,24 @@ const Favorites = (props: any) => {
     imgText: "main image description",
   };
 
-  useEffect(() => {
-    //dispatch(getFavorites(userId));
+  //useEffect(() => {
+  //dispatch(getFavorites(userId));
+  //}, []);
 
-  }, [])
-
-  let id = window.localStorage.getItem("id");
-  let userId = useSelector((state: any) => state.userReducer.id);
-  let userFavorites = useSelector((state: any) => state.blogpostReducer.favorites);
+  let userFavorites = useSelector(
+    (state: any) => state.blogpostReducer.favorites
+  );
 
   return (
-    <React.Fragment>
+    <Fragment>
       <CssBaseline />
       <Container maxWidth="lg">
         <Header />
-        <MainFeaturedPost post={mainFeaturedPost} />
+        <HeroBanner post={heroBanner} />
         <Grid container spacing={4}>
           {console.log(userFavorites)}
           {userFavorites.map((post: any) => (
-            <FeaturedPost key={post.id} post={post} />
+            <BlogCard key={post.id} post={post} />
           ))}
         </Grid>
       </Container>
@@ -46,7 +45,7 @@ const Favorites = (props: any) => {
         title="Footer"
         description="Something here to give the footer a purpose!"
       />
-    </React.Fragment>
+    </Fragment>
   );
 };
 

@@ -3,11 +3,11 @@ import Header from "../Blog/Header";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import ConnectedNewPostForm from "./FormikNewPostForm";
 import Footer from "../Blog/Footer";
-import MainFeaturedPost from "../Blog/MainFeaturedPost";
+import HeroBanner from "../Blog/HeroBanner";
 import Container from "@material-ui/core/Container";
 
 export default function CreateBlogPost() {
-  const mainFeaturedPost = {
+  const createBlogHeroBanner = {
     title: "Title of a longer featured blog post",
     description:
       "Multiple lines of text what's most interesting in this post's contents.",
@@ -22,7 +22,7 @@ export default function CreateBlogPost() {
       <CssBaseline />
       <Container maxWidth="lg">
         <Header />
-        <MainFeaturedPost post={mainFeaturedPost} />
+        <HeroBanner post={createBlogHeroBanner} />
         <ConnectedNewPostForm />
       </Container>
       <Footer

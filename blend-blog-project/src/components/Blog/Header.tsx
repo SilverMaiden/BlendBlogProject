@@ -1,16 +1,13 @@
 import React from "react";
-
 import { useHistory, Link } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/userActions";
 import { useSelector, useDispatch, connect } from "react-redux";
 import PropTypes from "prop-types";
+
+// Material-UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-
-import IconButton from "@material-ui/core/IconButton";
-import Icon from "@material-ui/core/Icon";
-import SearchIcon from "@material-ui/icons/Search";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({

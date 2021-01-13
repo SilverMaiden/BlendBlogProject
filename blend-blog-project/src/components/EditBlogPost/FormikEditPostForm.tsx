@@ -27,7 +27,9 @@ const mapDispatchToProps = {
   useHistory,
 };
 
-const mapStateToProps = ((state: any) => ({currentPost: state.blogpostReducer.singleBlogPost}))
+const mapStateToProps = (state: any) => ({
+  currentPost: state.blogpostReducer.singleBlogPost,
+});
 
 const FormikEditPostForm = withFormik({
   mapPropsToValues: (props: any) => ({
@@ -41,18 +43,18 @@ const FormikEditPostForm = withFormik({
     content: Yup.string().required("Content Required"),
   }),
   handleSubmit(values: NewPostFormValues, { props }: any) {
-    console.log(props)
+    console.log(props);
     let userId = window.localStorage.getItem("id");
-    console.log(props)
+    console.log(props);
     let postData: object = {
       blogpost_title: values.title,
       blogpost_content: values.content,
-      id: values.id
+      id: values.id,
     };
     console.log(props.editBlogPost);
     console.log(props);
 
-    props.editBlogPost(postData, props.history) ;
+    props.editBlogPost(postData, props.history);
   },
 })(EditPostForm);
 

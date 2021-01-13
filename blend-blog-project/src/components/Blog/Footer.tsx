@@ -33,7 +33,6 @@ export default function Footer(props: any) {
   return (
     <footer className={classes.footer}>
       <Container maxWidth="lg">
-
         <Typography
           variant="subtitle1"
           align="center"
