@@ -16,11 +16,6 @@ export class BlogPosts {
         }
     }
 
-    findBy(filter: any) {
-        return db('blogposts').where(filter)
-        .limit(10);
-  }
-
 
     edit(blogpost: any) {
         return db('blogposts')

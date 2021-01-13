@@ -46,7 +46,7 @@ router.get('/search/:searchterm', (req, res) => {
         }
     })
         .catch((err) => {
-        res.status(500).json({ message: 'Failed to get filtered BlogPost' });
+        res.status(500).json({ message: 'Failed to get filtered BlogPost: ', err });
     });
 });
 router.get('/:id', (req, res) => {

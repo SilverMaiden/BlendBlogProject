@@ -61,18 +61,19 @@ const Blog = (props: any) => {
               handleSearch()
             })
           }
-            
-            />
+           />
           </Container>
           <br />
 
+          <h2> Blogs: </h2>
           <Grid container spacing={4}>
             {console.log(blogposts)}
-            {blogposts.length > 0
-              ? blogposts.map((post: any) => (
-                  <FeaturedPost key={post.blogpost_title} post={post} />
-                ))
-              : null}
+            {blogposts.length === 0
+          ? <Container><h4> There are currently no blogs available for you to view. </h4></Container>
+          : blogposts.map((post: any) => (
+        <FeaturedPost key={post.blogpost_title} post={post} />
+      ))}
+
           </Grid>
         </main>
       </Container>

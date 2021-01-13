@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Form, FormikProps } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,9 +52,11 @@ interface FormValues {
 
 export default function NewPostForm(props: FormikProps<FormValues>) {
   const classes = useStyles();
+  const history = useHistory();
   const {
     errors,
     touched,
+    handleSubmit,
     ...rest
   } = props;
   console.log(props)
@@ -99,6 +101,10 @@ export default function NewPostForm(props: FormikProps<FormValues>) {
                 fullWidth
                 variant="contained"
                 className={classes.submit}
+                onClick={(() => {
+                  history.push('/myposts')
+                  handleSubmit()
+                })}
               >
                 Submit Post
               </Button>

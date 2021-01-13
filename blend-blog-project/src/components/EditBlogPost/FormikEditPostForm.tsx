@@ -33,7 +33,7 @@ const FormikEditPostForm = withFormik({
   mapPropsToValues: (props: any) => ({
     title: props.currentPost.blogpost_title,
     content: props.currentPost.blogpost_content,
-    id: props.currentPost.id
+    id: props.currentPost.id,
   }),
   enableReinitialize: true,
   validationSchema: Yup.object().shape({

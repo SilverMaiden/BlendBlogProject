@@ -6,23 +6,37 @@ export class Favorites {
         this.thing = '';
     }
 
-    find() {
+    find(id?:number) {
+        if (id) {
+            return db('favorites')
+            .where('favorites.id', id)
+        } else {
         return db('favorites');
     }
+}
 
-    findByUser(userId: number, blogpostId: number) {
+    findByUserAndBlogPost(userId: number, blogpostId: number) {
         return db('favorites')
-        .where('favorites.user_id', userId && 'favorites.blogpost_id', blogpostId)
+        .where('favorites.user_id', userId)
+        .where('favorites.blogpost_id', blogpostId)
     }
 
-    add(favorites: string) {
+
+    findByUser(userId: number) {
+        return db('favorites')
+        .where('favorites.user_id', userId)
+    }
+
+    add(favorites: any) {
         return db('favorites')
         .insert(favorites, "id")
+        .then(([id]: number[]) => this.find(id));
+
     }
 
     delete(id: number) {
         return db('favorites')
-        .where("favorite.id", id)
+        .where("favorites.id", id)
         .del()
     }
 }

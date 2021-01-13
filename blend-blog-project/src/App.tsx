@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./components/Home";
 import CreateBlogPost from "./components/CreateBlogPost/CreateBlogPost";
 import ViewUserPosts from "./components/ViewUserPosts";
+import Favorites from "./components/Favorites";
 import FormikRegisterForm from "./components/Register/FormikRegisterForm";
 import Header from './components/Blog/Header';
 
@@ -23,6 +24,7 @@ const App = () => {
           <PrivateRoute path="/home" component={Home} />
           <PrivateRoute path="/createblogpost" component={CreateBlogPost} />
           <PrivateRoute path="/myposts" component={ViewUserPosts} />
+          <PrivateRoute path="/favorites" component={Favorites} />
           <PrivateRoute path="/blog/:id" component={BlogPost} />
         </Switch>
       </div>

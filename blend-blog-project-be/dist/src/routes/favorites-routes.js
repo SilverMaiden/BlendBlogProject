@@ -6,19 +6,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 // const Favorite = require('../models/favorites-model.js');
 const favorites_model_1 = require("../models/favorites-model");
+const blogposts_model_1 = require("../models/blogposts-model");
 const router = express_1.default.Router();
 const Favorite = new favorites_model_1.Favorites();
+const BlogPost = new blogposts_model_1.BlogPosts();
 router.get('/', (req, res) => {
     Favorite.find()
         .then((resources) => {
         res.json(resources);
     })
         .catch((err) => {
-        res.status(500).json({ message: 'Failed to get Favorite' });
+        res.status(500).json({ message: 'Failed to get Favorites' });
+    });
+});
+router.get('/:user_id', (req, res) => {
+    const userId = parseInt(req.params.user_id, 10);
+    Favorite.findByUser(userId)
+        .then((resources) => {
+        // Need code here to make get requests for the users favorite posts.
+        // Favorite.findBlogs()
+        res.json(resources);
+    })
+        .catch((err) => {
+        res.status(500).json({ message: 'Failed to get Favorites', err });
     });
 });
 router.post('/', (req, res) => {
-    Favorite.findByUser(req.body.userId, req.body.blogpostId)
+    Favorite.findByUserAndBlogPost(req.body.user_id, req.body.blogpost_id)
         .first()
         .then((post) => {
         if (post) {
@@ -28,17 +42,29 @@ router.post('/', (req, res) => {
         else {
             Favorite.add(req.body)
                 .then((response) => {
+                // tslint:disable-next-line:no-console
+                console.log("response is ", response);
                 res.status(201).json(response);
             }).catch((err) => {
-                res.status(500).json({ message: "failed to add new user." });
+                res.status(500).json({ message: "failed to add new favorite." });
             });
         }
+    }).catch((err) => {
+        res.status(500).json({ message: "failed to add new favorite." });
     });
-    Favorite.add(req.body)
-        .then((response) => {
-        res.status(201).json(response);
-    }).catch((error) => {
-        res.status(500).json({ message: error.message });
+});
+router.delete('/:user_id/:blogpost_id', (req, res) => {
+    const userId = parseInt(req.params.user_id, 10);
+    const blogpostId = parseInt(req.params.blogpost_id, 10);
+    Favorite.findByUserAndBlogPost(userId, blogpostId)
+        .first()
+        .then((favorite) => {
+        Favorite.delete(favorite.id)
+            .then(() => {
+            res.status(201).json();
+        }).catch((err) => {
+            res.status(500).json({ message: err.message });
+        });
     });
 });
 module.exports = router;
