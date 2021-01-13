@@ -1,10 +1,13 @@
 /* eslint-disable import/prefer-default-export */
 import { UserInitialState } from "./initialState";
 import * as ActionTypes from "../actions/actionTypes";
+import { ACTIONTYPE } from "./ACTIONTYPES";
 
-// Need to replace any type with correct type
+// Need to replace 'any' type with correct type
+// 'payload' definition needs to be described in ACTIONTYPES.ts
 export const userReducer = (state = UserInitialState, action: any) => {
   switch (action.type) {
+    // REGISTER USER
     case ActionTypes.REGISTER_USER_START:
       return { ...state, registerUserStart: true };
 
@@ -20,6 +23,7 @@ export const userReducer = (state = UserInitialState, action: any) => {
     case ActionTypes.REGISTER_USER_ERROR:
       return { ...state, registerUserStart: false, registerUserError: true };
 
+    // LOGIN USER
     case ActionTypes.LOGIN_USER_START:
       return { ...state, loginUserStart: true };
 
@@ -44,6 +48,7 @@ export const userReducer = (state = UserInitialState, action: any) => {
     case ActionTypes.LOGOUT_USER_ERROR:
       return { ...state, logoutUserStart: false, logoutUserError: true };
 
+    // GET USER
     case ActionTypes.GET_USER_START:
       return {
         ...state,

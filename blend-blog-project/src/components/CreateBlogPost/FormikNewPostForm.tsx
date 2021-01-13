@@ -15,22 +15,21 @@ interface FormikUserFormProps {
 }
 // Shape of form values
 interface NewPostFormValues {
-  title: string,
-  content: string
+  title: string;
+  content: string;
 }
 
 const mapDispatchToProps = {
   addBlogPost,
   useHistory,
 };
-const mapStateToProps = ((state: any) => ({user_id: state.userReducer.id}))
-
+const mapStateToProps = (state: any) => ({ user_id: state.userReducer.id });
 
 const FormikNewPostForm = withFormik<FormikUserFormProps, NewPostFormValues>({
   mapPropsToValues: (props: any) => ({
     user_id: props.user_id,
     title: props.title,
-    content: props.content
+    content: props.content,
   }),
   validationSchema: Yup.object().shape({
     title: Yup.string().required("Title is required"),

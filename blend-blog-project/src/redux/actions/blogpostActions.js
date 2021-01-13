@@ -1,7 +1,8 @@
 import * as ActionTypes from "./actionTypes";
 import axiosWithAuth from "../../utils/axiosWithAuth";
-import { useHistory } from "react-router-dom";
 
+// Request to add a new blog post.
+// history parameter not currently in use.
 export const addBlogPost = (postInfo, history) => async (dispatch) => {
   dispatch({ type: ActionTypes.ADD_BLOGPOST_START });
 
@@ -31,10 +32,10 @@ export const addBlogPost = (postInfo, history) => async (dispatch) => {
     });
 };
 
-
+// Request to edit an existing post. It currently is not user-locked.
 export const editBlogPost = (postInfo, history) => (dispatch) => {
   dispatch({ type: ActionTypes.EDIT_BLOGPOST_START });
-  console.log(history)
+  console.log(history);
 
   axiosWithAuth()
     .put(`/blogposts/${postInfo.id}`, postInfo)
@@ -43,65 +44,67 @@ export const editBlogPost = (postInfo, history) => (dispatch) => {
         type: ActionTypes.EDIT_BLOGPOST_SUCCESS,
         payload: response.data,
       });
-      history.push('/myposts')
+      history.push("/myposts");
     })
     .catch((err) => {
       dispatch({ type: ActionTypes.EDIT_BLOGPOST_ERROR, payload: err });
     });
-  };
+};
 
-  export const getFavorites = (userId) => (dispatch) => {
-    dispatch({ type: ActionTypes.GET_FAVORITES_START });
+// Request to get all of the users favorite posts.
+export const getFavorites = (userId) => (dispatch) => {
+  dispatch({ type: ActionTypes.GET_FAVORITES_START });
 
-    axiosWithAuth()
-      .get(`/favorites/${userId}`)
-      .then((response) => {
-        //let responsePayload = [response.data]
-
-        // Need code here to make get requests for the users favorite posts.
-        let data = [];
-
-        response.data.map((favorite) => (
-          axiosWithAuth()
+  axiosWithAuth()
+    .get(`/favorites/${userId}`)
+    .then((response) => {
+      //let responsePayload = [response.data]
+      // Need code here to make get requests for the users favorite posts.
+      // Once Knex syntax is working, use an innerJoin on two tables.
+      let data = [];
+      response.data.map((favorite) =>
+        axiosWithAuth()
           .get(`/blogposts/${favorite.blogpost_id}`)
           .then((response) => {
-            data.push(response.data)
-          }).catch((err) => {
-              dispatch({ type: ActionTypes.GET_FAVORITES_ERROR, payload: err });
-            })
-        ))
-        dispatch({ type: ActionTypes.GET_FAVORITES_SUCCESS, payload: data})
+            data.push(response.data);
           })
-        };
-  
+          .catch((err) => {
+            dispatch({ type: ActionTypes.GET_FAVORITES_ERROR, payload: err });
+          })
+      );
+      dispatch({ type: ActionTypes.GET_FAVORITES_SUCCESS, payload: data });
+    });
+};
 
-export const addFavorite = (userId, blogpostId, history) => async (dispatch) => {
-    dispatch({ type: ActionTypes.ADD_FAVORITE_START });
-  
-    const postToSubmit = {
-      blogpost_id: blogpostId,
-      user_id: userId,
-    };
-  
-    axiosWithAuth()
-      .post("/favorites", postToSubmit)
-      .then((response) => {
-        dispatch({
-          type: ActionTypes.ADD_FAVORITE_SUCCESS,
-          payload: { ...response.data },
-        });
-        //history.push('/myposts/')
-        return response;
-      })
-      .catch((err) => {
-        dispatch({
-          type: ActionTypes.ADD_FAVORITE_ERROR,
-          payload: err,
-        });
-        return err;
-      });
+// Adding a post to the users list of favorites.
+export const addFavorite = (userId, blogpostId, history) => async (
+  dispatch
+) => {
+  dispatch({ type: ActionTypes.ADD_FAVORITE_START });
+
+  const postToSubmit = {
+    blogpost_id: blogpostId,
+    user_id: userId,
   };
 
+  axiosWithAuth()
+    .post("/favorites", postToSubmit)
+    .then((response) => {
+      dispatch({
+        type: ActionTypes.ADD_FAVORITE_SUCCESS,
+        payload: { ...response.data },
+      });
+      //history.push('/myposts/')
+      return response;
+    })
+    .catch((err) => {
+      dispatch({
+        type: ActionTypes.ADD_FAVORITE_ERROR,
+        payload: err,
+      });
+      return err;
+    });
+};
 
 export const deleteFavorite = (userId, postId, history) => (dispatch) => {
   dispatch({ type: ActionTypes.DELETE_FAVORITE_START });
@@ -116,49 +119,49 @@ export const deleteFavorite = (userId, postId, history) => (dispatch) => {
     });
 };
 
-  
-
 export const getFilteredBlogPosts = (value, history) => (dispatch) => {
   dispatch({ type: ActionTypes.GET_FILTERED_BLOGPOSTS_START });
-  console.log(history)
+  console.log(history);
   if (value.length === 0) {
-    console.log("HII")
+    console.log("HII");
     axiosWithAuth()
-    .get('/blogposts')
-    .then((response) => {
-      dispatch({
-        type: ActionTypes.GET_FILTERED_BLOGPOSTS_SUCCESS,
-        payload: response.data
+      .get("/blogposts")
+      .then((response) => {
+        dispatch({
+          type: ActionTypes.GET_FILTERED_BLOGPOSTS_SUCCESS,
+          payload: response.data,
+        });
       })
-    }).catch((err) => {
-      dispatch({type: ActionTypes.GET_FILTERED_BLOGPOSTS_ERROR})
-    }) 
-  } else {
-
-  // Action for search has not been created yet
-  // Need to go into action types and create GET_FILTERED_BLOGPOSTS
-  // Also need to create reducers for this 
-  // Steps:
-  // 1. Dispatch search term to this action
-  // 2. This action makes an axiosWithAuth request to the endpoint
-  //    with /searchterm
-  // 3. return search filtered results
-
-  axiosWithAuth()
-    .get(`/blogposts/search/${value}`)
-    .then((response) => {
-      dispatch({
-        type: ActionTypes.GET_FILTERED_BLOGPOSTS_SUCCESS,
-        payload: response.data,
+      .catch((err) => {
+        dispatch({ type: ActionTypes.GET_FILTERED_BLOGPOSTS_ERROR });
       });
-      //history.push(`/${value.searchTerm}`)
-    })
-    .catch((err) => {
-      dispatch({ type: ActionTypes.GET_FILTERED_BLOGPOSTS_ERROR, payload: err });
-    });
+  } else {
+    // Action for search has not been created yet
+    // Need to go into action types and create GET_FILTERED_BLOGPOSTS
+    // Also need to create reducers for this
+    // Steps:
+    // 1. Dispatch search term to this action
+    // 2. This action makes an axiosWithAuth request to the endpoint
+    //    with /searchterm
+    // 3. return search filtered results
+
+    axiosWithAuth()
+      .get(`/blogposts/search/${value}`)
+      .then((response) => {
+        dispatch({
+          type: ActionTypes.GET_FILTERED_BLOGPOSTS_SUCCESS,
+          payload: response.data,
+        });
+        //history.push(`/${value.searchTerm}`)
+      })
+      .catch((err) => {
+        dispatch({
+          type: ActionTypes.GET_FILTERED_BLOGPOSTS_ERROR,
+          payload: err,
+        });
+      });
   }
 };
-
 
 export const deleteBlogPost = (postId, history) => (dispatch) => {
   dispatch({ type: ActionTypes.DELETE_BLOGPOST_START });
@@ -180,11 +183,11 @@ export const getBlogPostsByUser = (userId) => (dispatch) => {
   axiosWithAuth()
     .get("/blogposts/")
     .then((response) => {
-      console.log("HIIII", response)
+      console.log("HIIII", response);
       const filteredPosts = response.data.filter(
         (post) => post.user_id === userId
       );
-      console.log(filteredPosts)
+      console.log(filteredPosts);
       dispatch({
         type: ActionTypes.GET_BLOGPOSTS_BY_USER_SUCCESS,
         payload: filteredPosts,
@@ -200,7 +203,7 @@ export const getSingleBlogPost = (postId) => (dispatch) => {
   axiosWithAuth()
     .get(`/blogposts/${postId}`)
     .then((response) => {
-      console.log(response.data)
+      console.log(response.data);
       dispatch({
         type: ActionTypes.GET_SINGLE_BLOGPOST_SUCCESS,
         payload: response.data,

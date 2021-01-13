@@ -7,7 +7,7 @@ dotenv.config();
 interface PrivateRouteProps {
   path: RouteProps["path"];
   component: React.ElementType;
-};
+}
 const PrivateRoute: React.FunctionComponent<PrivateRouteProps> = ({
   component: Component,
   ...routeProps

@@ -57,7 +57,9 @@ interface SingleBlogPost {
 export default function EditPostForm(props: FormikProps<FormValues>) {
   const classes = useStyles();
   let history = useHistory();
-  const currentPost = useSelector((state: any) => state.blogpostReducer.singleBlogPost);
+  const currentPost = useSelector(
+    (state: any) => state.blogpostReducer.singleBlogPost
+  );
   //console.log(currentPost)
   const {
     errors,
@@ -71,9 +73,9 @@ export default function EditPostForm(props: FormikProps<FormValues>) {
     ...rest
   } = props;
   useEffect(() => {
-    getFieldProps("title").value=currentPost.blogpost_title
-    setFieldValue("title", currentPost.blogpost_title)
-  },[])
+    getFieldProps("title").value = currentPost.blogpost_title;
+    setFieldValue("title", currentPost.blogpost_title);
+  }, []);
   //console.log(props)
   return (
     <React.Fragment>
@@ -113,14 +115,14 @@ export default function EditPostForm(props: FormikProps<FormValues>) {
             />
           </Grid>
           <Grid item xs={12}>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                className={classes.submit}
-              >
-                Submit Post
-              </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}
+            >
+              Submit Post
+            </Button>
           </Grid>
         </Grid>
       </Form>

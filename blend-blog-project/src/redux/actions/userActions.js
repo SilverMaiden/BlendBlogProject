@@ -27,6 +27,8 @@ export const loginUser = (userInfo, history) => (dispatch) => {
     });
 };
 
+// User registration request - on a successful register,
+// the application then attempts to log the user in.
 export const registerUser = (infoNeeded, history) => (dispatch) => {
   dispatch({ type: ActionTypes.REGISTER_USER_START });
   axiosWithAuth()
@@ -38,7 +40,7 @@ export const registerUser = (infoNeeded, history) => (dispatch) => {
         payload: response.data,
       });
 
-      // login user after registering
+      // --login the user after registering
       dispatch({ type: ActionTypes.LOGIN_USER_START });
       axiosWithAuth()
         .post("/login/", infoNeeded)
@@ -48,7 +50,7 @@ export const registerUser = (infoNeeded, history) => (dispatch) => {
             type: ActionTypes.LOGIN_USER_SUCCESS,
             payload: response.data,
           });
-          localStorage.setItem("id", response.data.id)
+          localStorage.setItem("id", response.data.id);
           if (history.location.pathname === "/") {
             history.push("/home");
           }
@@ -57,13 +59,14 @@ export const registerUser = (infoNeeded, history) => (dispatch) => {
           dispatch({ type: ActionTypes.LOGIN_USER_ERROR, payload: err });
         });
 
-      // end of login user
+      // end of login request section.
     })
     .catch((err) => {
       dispatch({ type: ActionTypes.REGISTER_USER_ERROR, payload: err });
     });
 };
 
+// Request to logout the user, clearing the JWT from local storage.
 export const logoutUser = (history) => (dispatch) => {
   dispatch({ type: ActionTypes.LOGOUT_USER_START });
   if (localStorage.getItem("token")) {
@@ -79,7 +82,7 @@ export const logoutUser = (history) => (dispatch) => {
   }
 };
 
-// Need to set up backend routes for '/user/:id
+// Request to get user information from the backend given a user id.
 export const getUser = (id) => (dispatch) => {
   dispatch({ type: ActionTypes.GET_USER_START });
   axiosWithAuth()

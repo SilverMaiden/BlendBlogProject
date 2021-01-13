@@ -7,11 +7,9 @@ import {
   getAllBlogPosts,
   getBlogPostsByUser,
   getFilteredBlogPosts,
-  getFavorites
+  getFavorites,
 } from "../redux/actions/blogpostActions";
 import { getUser } from "../redux/actions/userActions";
-
-
 
 const Home = (props: any) => {
   const dispatch = useDispatch(); /*
@@ -39,7 +37,6 @@ const Home = (props: any) => {
       <Blog props={user} />
     </div>
   );
-}
-
+};
 
 export default Home;

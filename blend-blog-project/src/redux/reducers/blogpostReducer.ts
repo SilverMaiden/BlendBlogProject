@@ -1,8 +1,12 @@
 import { BlogPostsInitialState } from "./initialState";
 import * as ActionTypes from "../actions/actionTypes";
+import { ACTIONTYPE } from "./ACTIONTYPES";
 
+// Need to replace 'any' type with correct type
+// 'payload' definition needs to be described in ACTIONTYPES.ts
 export const blogpostReducer = (state = BlogPostsInitialState, action: any) => {
   switch (action.type) {
+    // ADD BLOG
     case ActionTypes.ADD_BLOGPOST_START:
       return { ...state, addBlogPostStart: true };
 
@@ -20,64 +24,67 @@ export const blogpostReducer = (state = BlogPostsInitialState, action: any) => {
         addBlogPostError: true,
       };
 
-
-// GET FAVORITES
-case ActionTypes.GET_FAVORITES_START:
-  return { ...state, getFavoritesStart: true };
-
-case ActionTypes.GET_FAVORITES_SUCCESS:
-  return {
-    ...state,
-    getFavoriteStart: false,
-    favorites: action.payload,
-  };
-
-case ActionTypes.GET_FAVORITES_ERROR:
-  return {
-    ...state,
-    getFavoritesStart: false,
-    getFavoritesError: true,
-  };
-
-  case ActionTypes.DELETE_FAVORITE_START:
-    return {
-      ...state,
-      deleteFavoriteStart: true,
-    };
-  case ActionTypes.DELETE_FAVORITE_SUCCESS:
-    return {
-      ...state,
-      deleteFavoriteStart: false
+    // GET FAVORITES
+    case ActionTypes.GET_FAVORITES_START:
+      return {
+        ...state,
+        getFavoritesStart: true,
       };
-  case ActionTypes.DELETE_FAVORITE_ERROR:
-    return {
-      ...state,
-      deleteFavoriteStart: false,
-      deleteFavoriteError: true,
-    };
 
+    case ActionTypes.GET_FAVORITES_SUCCESS:
+      return {
+        ...state,
+        getFavoriteStart: false,
+        favorites: action.payload,
+      };
 
+    case ActionTypes.GET_FAVORITES_ERROR:
+      return {
+        ...state,
+        getFavoritesStart: false,
+        getFavoritesError: true,
+      };
 
+    // DELETE FAVORITE
+    case ActionTypes.DELETE_FAVORITE_START:
+      return {
+        ...state,
+        deleteFavoriteStart: true,
+      };
+    case ActionTypes.DELETE_FAVORITE_SUCCESS:
+      return {
+        ...state,
+        deleteFavoriteStart: false,
+      };
+    case ActionTypes.DELETE_FAVORITE_ERROR:
+      return {
+        ...state,
+        deleteFavoriteStart: false,
+        deleteFavoriteError: true,
+      };
 
+    // ADD FAVORITE
+    case ActionTypes.ADD_FAVORITE_START:
+      return {
+        ...state,
+        addFavoriteStart: true,
+      };
 
-// ADD FAVORITE 
-      case ActionTypes.ADD_FAVORITE_START:
-        return { ...state, addFavoriteStart: true };
-  
-      case ActionTypes.ADD_FAVORITE_SUCCESS:
-        return {
-          ...state,
-          addFavoriteStart: false,
-          favorites: [...state.favorites, action.payload],
-        };
-  
-      case ActionTypes.ADD_FAVORITE_ERROR:
-        return {
-          ...state,
-          addFavoriteStart: false,
-          addFavoriteError: true,
-        };
-  
+    case ActionTypes.ADD_FAVORITE_SUCCESS:
+      return {
+        ...state,
+        addFavoriteStart: false,
+        favorites: [...state.favorites, action.payload],
+      };
+
+    case ActionTypes.ADD_FAVORITE_ERROR:
+      return {
+        ...state,
+        addFavoriteStart: false,
+        addFavoriteError: true,
+      };
+
+    //  EDIT BLOGPOST
     case ActionTypes.EDIT_BLOGPOST_START:
       return {
         ...state,
@@ -98,6 +105,7 @@ case ActionTypes.GET_FAVORITES_ERROR:
         editBlogPostStart: false,
         editBlogPostError: true,
       };
+    // DELETE BLOGPOST
     case ActionTypes.DELETE_BLOGPOST_START:
       return {
         ...state,
@@ -116,13 +124,12 @@ case ActionTypes.GET_FAVORITES_ERROR:
         deleteBlogPostError: true,
       };
 
-
+    // GET FILTERED
     case ActionTypes.GET_FILTERED_BLOGPOSTS_START:
       return {
         ...state,
         getFilteredBlogPostsStart: true,
       };
-
 
     case ActionTypes.GET_FILTERED_BLOGPOSTS_SUCCESS:
       return {
@@ -132,13 +139,13 @@ case ActionTypes.GET_FAVORITES_ERROR:
       };
 
     case ActionTypes.GET_FILTERED_BLOGPOSTS_ERROR:
-        return {
-          ...state,
-          getFilteredBlogPostsError: true,
-          getFilteredBlogPostsStart: false,
-        };
-  
+      return {
+        ...state,
+        getFilteredBlogPostsError: true,
+        getFilteredBlogPostsStart: false,
+      };
 
+    // GET BLOGPOST BY USER
     case ActionTypes.GET_BLOGPOSTS_BY_USER_START:
       return {
         ...state,
@@ -159,6 +166,7 @@ case ActionTypes.GET_FAVORITES_ERROR:
         getBlogPostsByUserStart: false,
       };
 
+    // GET SINGLE BLOGPOST
     case ActionTypes.GET_SINGLE_BLOGPOST_START:
       return {
         ...state,
@@ -179,6 +187,7 @@ case ActionTypes.GET_FAVORITES_ERROR:
         getSingleBlogPostStart: false,
       };
 
+    // GET ALL BLOGPOSTS
     case ActionTypes.GET_ALL_BLOGPOSTS_START:
       return {
         ...state,
