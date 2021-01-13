@@ -10,6 +10,7 @@
 ## Project Overview
 
 A RESTful fullstack blogpost application with CRUD functionality.
+Screenshots of the application in use, along with a screengrab video of the functionality can be found here: https://drive.google.com/drive/folders/1jVjhpZ6rHHPvBf4jlaMBvE6snmnrN6u0?usp=sharing
 
 ### Key Features
 
@@ -66,13 +67,18 @@ In order for the app to function correctly, the user must set up their own envir
 Testing was attempted using the @testing-library/jest-dom -- unfortunately due to starting implementation of tests extremely late in the project, they do not currently run correctly. Exisiting tests are grouped into files by component. 
 
 
-## Current Issues/Bugs 
+## Some Current Issues/Bugs 
 Routing for the front end is not 100% functional as of now - at some point, some of the components don't seem to recognize the blogpost id, therefore sending the user to /blog/undefined.
 Favorites button does not remain coloured in once it has been added to favorites. 
 Some post requests will fail on the first attempt before succeeding once the user clicks again.
 
 
 # Installation Instructions
+
+To get the DB running locally:
+
+Follow these instructions with the blogappdb_pg_dum.txtp file: https://www.postgresql.org/docs/9.1/backup-dump.html
+
 
 To get the app BACKEND running locally:
 
@@ -122,12 +128,6 @@ To get the app FRONTEND running locally:
   - Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
   - The page will reload if you make edits.
-
-
-
-
-
-
 
   - You will also see any lint errors in the console.
 
