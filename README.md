@@ -30,7 +30,7 @@ Screenshots of the application in use, along with a screengrab video of the func
 
 #### Architecture Pattern
 
-The architecture pattern I chose for this project was MVC (Model View Controller), with the React front end being the view, Redux and it's associated actions being the controller, and the Postgress DB being the model.
+The architecture pattern I chose for this project was the Redux Architecture.
 
 ## Tech Stack
 
